@@ -1212,7 +1212,16 @@
       .photo-item:nth-child(13) { grid-column: 4 / span 3; grid-row: 22 / span 3; }
       .about-image::after { display: none; }
       section { padding: 5rem 0; }
-      .footer-grid { flex-direction: column; align-items: flex-start; }
+
+      /* Contact visual : masqué sur mobile (logo déjà présent dans le footer) */
+      .contact-visual { display: none; }
+
+      /* Footer : centré, liens sans coupure de mot */
+      .footer-grid { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem 1.5rem; }
+      .footer-links a { white-space: nowrap; }
+      .footer-social { justify-content: center; }
+      .footer-copy { margin-top: 1.5rem; padding-top: 1.5rem; }
     }
 
     /* video tabs : scroll horizontal sur mobile */
