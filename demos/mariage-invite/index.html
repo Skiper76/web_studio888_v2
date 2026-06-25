@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sophie & Thomas — 12.07.2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:  #F5EFE6;
+      --beige:  #E8DECE;
+      --gold:   #B89A6A;
+      --gold2:  #9A7D52;
+      --dark:   #1E1A17;
+      --mid:    #6B5F55;
+      --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--dark); color: var(--dark); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      mix-blend-mode: normal;
+      transition: background 0.6s, padding 0.6s;
+    }
+    nav.solid {
+      background: rgba(245,239,230,0.95);
+      backdrop-filter: blur(12px);
+      padding: 1rem 4rem;
+      border-bottom: 1px solid rgba(184,154,106,0.2);
+    }
+    .nav-mono {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.1rem; color: rgba(255,255,255,0.9); letter-spacing: 0.04em;
+      transition: color 0.4s;
+    }
+    nav.solid .nav-mono { color: var(--dark); }
+    .nav-links {
+      display: flex; gap: 2.5rem;
+      font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.4s;
+    }
+    nav.solid .nav-links { color: var(--mid); }
+    .nav-links a { transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO FULLSCREEN ─── */
+    .hero {
+      position: relative; width: 100vw; height: 100vh;
+      display: flex; align-items: flex-end; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 110%;
+      object-fit: cover; object-position: center 20%;
+      transform: translateY(0);
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(20,16,14,0.15) 0%,
+        rgba(20,16,14,0.05) 30%,
+        rgba(20,16,14,0.55) 75%,
+        rgba(20,16,14,0.85) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 0 2rem 7vh;
+      width: 100%;
+    }
+    .hero-tag {
+      font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+    }
+    .hero-tag::before, .hero-tag::after {
+      content: ''; display: inline-block; width: 40px; height: 1px; background: var(--gold);
+    }
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+      font-size: clamp(4rem, 9vw, 8rem); line-height: 0.95;
+      color: #fff; letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+    }
+    .hero-date {
+      font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 0.6rem;
+    }
+    .hero-lieu {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1rem; color: rgba(255,255,255,0.5);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+      animation: scrollPulse 2.5s ease-in-out infinite;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:0.4;transform:translateX(-50%) translateY(0)} 50%{opacity:1;transform:translateX(-50%) translateY(4px)} }
+
+    /* ─── COUNTDOWN ─── */
+    .countdown-bar {
+      background: var(--dark);
+      display: flex; justify-content: center; gap: 0;
+    }
+    .cd-item {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 2.5rem 4rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .cd-item:last-child { border-right: none; }
+    .cd-n {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 3.5rem; line-height: 1; color: #fff; letter-spacing: -0.02em;
+    }
+    .cd-l {
+      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-top: 0.4rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: 8rem 4rem; max-width: 1200px; margin: 0 auto;
+      background: var(--cream);
+    }
+    .section-full { background: var(--cream); }
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 8rem 4rem; }
+    .eyebrow {
+      font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .eyebrow::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
+    .section-h {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+      font-size: clamp(2.5rem, 4vw, 4rem); color: var(--dark); line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+    .section-text { color: var(--mid); line-height: 2; font-size: 0.875rem; max-width: 540px; font-weight: 300; }
+
+    /* ─── SPLIT ─── */
+    .split {
+      display: grid; grid-template-columns: 5fr 7fr;
+      background: var(--cream);
+    }
+    .split-img { aspect-ratio: 4/5; overflow: hidden; max-height: 600px; }
+    .split-body {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 5rem 5rem 6rem;
+    }
+
+    /* ─── PROGRAMME ─── */
+    .prog-section { background: var(--dark); }
+    .prog-inner {
+      display: grid; grid-template-columns: 340px 1fr;
+      gap: 0 6rem; max-width: 1200px; margin: 0 auto; padding: 8rem 4rem;
+      align-items: start;
+    }
+    .prog-inner .eyebrow { color: var(--gold); }
+    .prog-inner .section-h { color: #fff; margin-bottom: 0; }
+    .prog-left { position: sticky; top: 6rem; }
+    .prog-grid {
+      display: flex; flex-direction: column;
+      gap: 0; border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .prog-card {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 0 2rem; align-items: start;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.3s;
+    }
+    .prog-card:hover { background: rgba(255,255,255,0.02); }
+    .prog-time {
+      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); padding-top: 0.35rem;
+    }
+    .prog-title {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+      font-size: 1.6rem; color: #fff; margin-bottom: 0.25rem; line-height: 1.1;
+    }
+    .prog-place { font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+
+    /* ─── GALERIE ─── */
+    .galerie-section { background: var(--cream); }
+    .galerie-header { max-width: 1200px; margin: 0 auto; padding: 8rem 4rem 3rem; }
+    .galerie-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 200px;
+      gap: 4px;
+      max-width: 100%;
+    }
+    .g-cell { overflow: hidden; position: relative; }
+    .g-cell img { transition: transform 0.7s var(--ease); }
+    .g-cell:hover img { transform: scale(1.04); }
+    .g-c1 { grid-column: span 5; grid-row: span 2; }
+    .g-c2 { grid-column: span 4; grid-row: span 1; }
+    .g-c3 { grid-column: span 3; grid-row: span 2; }
+    .g-c4 { grid-column: span 4; grid-row: span 1; }
+    .g-c5 { grid-column: span 3; grid-row: span 1; }
+    .g-c6 { grid-column: span 3; grid-row: span 1; }
+    .g-c7 { grid-column: span 3; grid-row: span 1; }
+    .g-c8 { grid-column: span 3; grid-row: span 1; }
+
+    /* ─── LIEU ─── */
+    .lieu-split {
+      display: grid; grid-template-columns: 1fr 1fr; background: var(--beige);
+    }
+    .lieu-map { position: relative; overflow: hidden; min-height: 500px; }
+    .lieu-map img { position: absolute; inset: 0; }
+    .lieu-body {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem;
+    }
+    .lieu-body .section-h { margin-bottom: 1.5rem; }
+    .lieu-address {
+      font-size: 0.85rem; color: var(--mid); line-height: 2; margin-bottom: 2rem; font-weight: 300;
+    }
+    .lieu-note {
+      font-size: 0.75rem; color: var(--mid); line-height: 1.8; padding-top: 1.5rem;
+      border-top: 1px solid rgba(184,154,106,0.3); font-weight: 300;
+    }
+
+    /* ─── RSVP ─── */
+    .rsvp-section { background: var(--dark); }
+    .rsvp-inner {
+      max-width: 800px; margin: 0 auto; padding: 8rem 4rem;
+      text-align: center;
+    }
+    .rsvp-inner .eyebrow { justify-content: center; }
+    .rsvp-inner .eyebrow::before { display: none; }
+    .rsvp-inner .section-h { color: #fff; text-align: center; }
+    .rsvp-lead {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      line-height: 1.9; margin-bottom: 3rem; font-weight: 300;
+    }
+    .rsvp-form { display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,0.05); text-align: left; }
+    .rsvp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.05); }
+    .rsvp-field {
+      background: var(--dark);
+      display: flex; flex-direction: column;
+      padding: 1.2rem 1.5rem;
+    }
+    .rsvp-field label {
+      font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .rsvp-field input, .rsvp-field select, .rsvp-field textarea {
+      background: transparent; border: none; outline: none;
+      color: #fff; font-size: 0.9rem; font-family: 'Montserrat', sans-serif; font-weight: 300;
+      padding: 0; width: 100%;
+    }
+    .rsvp-field input::placeholder { color: rgba(255,255,255,0.2); }
+    .rsvp-field select option { background: #1a1614; }
+    .rsvp-field textarea { resize: none; height: 60px; }
+    .rsvp-submit-wrap { margin-top: 3rem; }
+    .rsvp-btn {
+      background: transparent; border: 1px solid var(--gold); cursor: pointer;
+      padding: 1.1rem 4rem; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif; font-weight: 400; color: var(--gold);
+      transition: background 0.3s, color 0.3s;
+    }
+    .rsvp-btn:hover { background: var(--gold); color: var(--dark); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+      font-size: 1.4rem; color: rgba(255,255,255,0.6);
+    }
+    .footer-credit {
+      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+    .footer-credit a { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-mono">S & T</div>
+    <div class="nav-links">
+      <a href="#about">À propos</a>
+      <a href="#programme">Programme</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#lieu">Lieu</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
+  </nav>
+
+  <!-- HERO FULLSCREEN -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg">
+      <img src="../../assets/images/wedding/00013035-009.jpg" alt="Sophie & Thomas">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Vous êtes cordialement invités</div>
+      <div class="hero-names">Sophie<br>&amp; Thomas</div>
+      <div class="hero-date">12 · 07 · 2025</div>
+      <div class="hero-lieu">Château de Fontaine · Normandie</div>
+    </div>
+    <div class="hero-scroll">Défiler</div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-bar">
+    <div class="cd-item"><span class="cd-n" id="cd-j">--</span><span class="cd-l">Jours</span></div>
+    <div class="cd-item"><span class="cd-n" id="cd-h">--</span><span class="cd-l">Heures</span></div>
+    <div class="cd-item"><span class="cd-n" id="cd-m">--</span><span class="cd-l">Minutes</span></div>
+    <div class="cd-item"><span class="cd-n" id="cd-s">--</span><span class="cd-l">Secondes</span></div>
+  </div>
+
+  <!-- À PROPOS -->
+  <div class="split" id="about">
+    <div class="split-img">
+      <img src="../../assets/images/wedding/00013035-001.jpg" alt="">
+    </div>
+    <div class="split-body">
+      <div class="eyebrow">Notre histoire</div>
+      <h2 class="section-h">Deux vies<br>qui n'en font qu'une.</h2>
+      <p class="section-text">
+        C'est avec une immense joie que nous vous convions à célébrer avec nous le plus beau jour de notre vie.
+        Votre présence à nos côtés signifie tout pour nous et nous avons hâte de partager ce moment unique ensemble.
+      </p>
+    </div>
+  </div>
+
+  <!-- PROGRAMME -->
+  <div class="prog-section" id="programme">
+    <div class="prog-inner">
+      <div class="prog-left">
+        <div class="eyebrow">Déroulé de la journée</div>
+        <h2 class="section-h" style="color:#fff;margin-top:0.8rem;">Programme.</h2>
+      </div>
+      <div class="prog-grid">
+        <div class="prog-card">
+          <div class="prog-time">11h00</div>
+          <div><div class="prog-title">Cérémonie civile</div><div class="prog-place">Mairie de Fécamp</div></div>
+        </div>
+        <div class="prog-card">
+          <div class="prog-time">14h00</div>
+          <div><div class="prog-title">Cérémonie laïque</div><div class="prog-place">Château de Fontaine</div></div>
+        </div>
+        <div class="prog-card">
+          <div class="prog-time">15h30</div>
+          <div><div class="prog-title">Vin d'honneur</div><div class="prog-place">Jardins du château</div></div>
+        </div>
+        <div class="prog-card">
+          <div class="prog-time">19h30</div>
+          <div><div class="prog-title">Dîner & soirée</div><div class="prog-place">Grande salle du château</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALERIE -->
+  <div class="galerie-section" id="galerie">
+    <div class="galerie-header">
+      <div class="eyebrow">Quelques souvenirs</div>
+      <h2 class="section-h">Galerie.</h2>
+    </div>
+    <div class="galerie-grid">
+      <div class="g-cell g-c1"><img src="../../assets/images/wedding/00013035-008.jpg" alt=""></div>
+      <div class="g-cell g-c2"><img src="../../assets/images/wedding/00013035-011.jpg" alt=""></div>
+      <div class="g-cell g-c3"><img src="../../assets/images/wedding/00013035-013.jpg" alt=""></div>
+      <div class="g-cell g-c4"><img src="../../assets/images/wedding/00013035-014.jpg" alt=""></div>
+      <div class="g-cell g-c5"><img src="../../assets/images/wedding/00013035-016.jpg" alt=""></div>
+      <div class="g-cell g-c6"><img src="../../assets/images/wedding/00013035-022.jpg" alt=""></div>
+      <div class="g-cell g-c7"><img src="../../assets/images/wedding/00013035-024.jpg" alt=""></div>
+      <div class="g-cell g-c8"><img src="../../assets/images/wedding/00013035-026.jpg" alt=""></div>
+    </div>
+  </div>
+
+  <!-- LIEU -->
+  <div class="lieu-split" id="lieu">
+    <div class="lieu-map">
+      <img src="../../assets/images/wedding/00013035-029.jpg" alt="Lieu">
+    </div>
+    <div class="lieu-body">
+      <div class="eyebrow">Comment venir</div>
+      <h2 class="section-h">Le lieu.</h2>
+      <p class="lieu-address">
+        <strong>Château de Fontaine</strong><br>
+        Route de Fontaine — 76400 Fécamp<br>
+        Normandie, France
+      </p>
+      <p class="lieu-note">
+        À 1h30 de Paris via l'A13 puis l'A29.<br>
+        Parking gratuit sur place.<br>
+        Navette depuis la gare de Fécamp sur réservation.
+      </p>
+    </div>
+  </div>
+
+  <!-- RSVP -->
+  <div class="rsvp-section" id="rsvp">
+    <div class="rsvp-inner">
+      <div class="eyebrow">Confirmez votre présence</div>
+      <h2 class="section-h">RSVP.</h2>
+      <p class="rsvp-lead">Merci de confirmer votre présence avant le 15 juin 2025.</p>
+      <form class="rsvp-form" onsubmit="handleRsvp(event)">
+        <div class="rsvp-row">
+          <div class="rsvp-field"><label>Prénom</label><input type="text" placeholder="Sophie" required></div>
+          <div class="rsvp-field"><label>Nom</label><input type="text" placeholder="Dupont" required></div>
+        </div>
+        <div class="rsvp-row">
+          <div class="rsvp-field"><label>Email</label><input type="email" placeholder="sophie@email.com" required></div>
+          <div class="rsvp-field">
+            <label>Présence</label>
+            <select>
+              <option>Présent(e) avec joie</option>
+              <option>Je ne pourrai pas venir</option>
+            </select>
+          </div>
+        </div>
+        <div class="rsvp-row">
+          <div class="rsvp-field"><label>Accompagnants</label><input type="number" min="0" max="5" placeholder="0"></div>
+          <div class="rsvp-field"><label>Régime alimentaire</label><input type="text" placeholder="Végétarien, allergies..."></div>
+        </div>
+        <div class="rsvp-field"><label>Un mot pour les mariés</label><textarea placeholder="Votre message..."></textarea></div>
+        <div class="rsvp-submit-wrap">
+          <button class="rsvp-btn" type="submit">Confirmer ma présence</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Sophie &amp; Thomas · 12.07.2025</div>
+    <div class="footer-credit">Site réalisé par <a href="../../index.html">Studio 888</a></div>
+  </footer>
+
+  <script>
+    // Countdown
+    const target = new Date('2025-07-12T14:00:00');
+    function tick() {
+      const diff = target - Date.now();
+      const pad = n => String(Math.max(0, n)).padStart(2, '0');
+      if (diff > 0) {
+        document.getElementById('cd-j').textContent = Math.floor(diff / 86400000);
+        document.getElementById('cd-h').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+        document.getElementById('cd-m').textContent = pad(Math.floor((diff % 3600000) / 60000));
+        document.getElementById('cd-s').textContent = pad(Math.floor((diff % 60000) / 1000));
+      }
+    }
+    tick(); setInterval(tick, 1000);
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('solid', window.scrollY > 80);
+    });
+
+    // Parallax hero
+    const heroBg = document.getElementById('hero-bg');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < window.innerHeight) {
+        heroBg.querySelector('img').style.transform = `translateY(${window.scrollY * 0.3}px)`;
+      }
+    }, { passive: true });
+
+    // RSVP
+    function handleRsvp(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.rsvp-btn');
+      btn.textContent = 'Merci ! À bientôt ✦';
+      btn.style.background = 'var(--gold)';
+      btn.style.color = 'var(--dark)';
+    }
+  </script>
+</body>
+</html>
