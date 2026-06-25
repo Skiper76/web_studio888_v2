@@ -1488,26 +1488,13 @@
       <h2 class="section-title reveal">Vidéos</h2>
       <div style="height: 3rem;"></div>
 
-      <div class="video-tab-groups reveal">
-        <div class="video-tab-group">
-          <div class="video-tab-group-label">Caméra</div>
-          <div class="video-tabs">
-            <div class="video-tab active" data-tab="0">Stabilisé</div>
-            <div class="video-tab" data-tab="1">Ralenti</div>
-            <div class="video-tab" data-tab="2">Cinématique</div>
-          </div>
-        </div>
-        <div class="video-tab-group">
-          <div class="video-tab-group-label">Drone</div>
-          <div class="video-tabs">
-            <div class="video-tab" data-tab="3">Stabilisé</div>
-            <div class="video-tab" data-tab="4">FPV</div>
-          </div>
-        </div>
+      <div class="video-tabs reveal">
+        <div class="video-tab active" data-tab="0">Stabilisé</div>
+        <div class="video-tab" data-tab="1">Ralenti</div>
+        <div class="video-tab" data-tab="2">Cinématique</div>
       </div>
 
-      <!-- Setup info — visible sur les tabs caméra -->
-      <div class="video-setup-info" id="video-setup-info">
+      <div class="video-setup-info">
         <div class="video-setup-gear">Fujifilm X100VI</div>
         <div class="video-setup-desc">Rendu cinématique obtenu avec un filtre de diffusion anamorphique, simulation de film personnalisée et paramètres couleurs chauds — tons dorés, ombres légèrement teintées. Un setup compact pensé pour une esthétique immédiate, sans post-traitement lourd.</div>
       </div>
@@ -1547,10 +1534,24 @@
           <div class="video-caption-tag">Fujifilm X100VI</div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="video-slides" data-slide="3">
+  <!-- Drone Portfolio -->
+  <section id="drones">
+    <div class="container">
+      <div class="section-label reveal">Portfolio</div>
+      <h2 class="section-title reveal">Drone</h2>
+      <div style="height: 3rem;"></div>
+
+      <div class="video-tabs reveal">
+        <div class="video-tab active" data-tab="0">Stabilisé</div>
+        <div class="video-tab" data-tab="1">FPV</div>
+      </div>
+
+      <div class="video-slides active" data-slide="0">
         <div class="video-main">
-          <video muted loop playsinline>
+          <video muted loop autoplay playsinline>
             <source src="assets/videos/drone_ballon.mp4" type="video/mp4">
           </video>
         </div>
@@ -1560,10 +1561,10 @@
         </div>
       </div>
 
-      <div class="video-slides" data-slide="4">
+      <div class="video-slides" data-slide="1">
         <div class="video-main">
           <video muted loop playsinline>
-            <source src="assets/videos/drone_hauteur.mp4" type="video/mp4">
+            <source src="assets/videos/drone_fpv.mp4" type="video/mp4">
           </video>
         </div>
         <div class="video-caption-bar">
@@ -1571,31 +1572,10 @@
           <div class="video-caption-tag">First Person View</div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Drone section -->
-  <section id="drones">
-    <div class="container">
-      <div class="drone-grid">
-        <div class="drone-embed reveal">
-          <iframe src="https://www.youtube.com/embed/OEO_pDRnKLw?si=_8OV3gpN3M-oeTXm"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="drone-text">
-          <div class="section-label reveal">Démonstration</div>
-          <h2 class="section-title reveal">Pilote<br>de Drone</h2>
-          <div style="height: 2rem;"></div>
-          <p class="lead reveal">En tant que pilote de drone professionnel certifié par la DGAC et exploitant enregistré, je vous propose des prestations de qualité pour des prises de vue aériennes exceptionnelles.</p>
-          <p class="lead reveal reveal-delay-1">Que ce soit avec des drones stabilisés ou FPV, je mets à votre disposition mon expertise et ma maîtrise des différents types de drones pour répondre à vos besoins spécifiques.</p>
-          <div class="drone-badge reveal reveal-delay-2">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L8 6H4l2 4-4 2 4 2-2 4h4l4 4 4-4h4l-2-4 4-2-4-2 2-4h-4z"/></svg>
-            Certifié DGAC — Exploitant enregistré
-          </div>
-        </div>
+      <div class="drone-badge reveal" style="margin-top: 2rem;">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L8 6H4l2 4-4 2 4 2-2 4h4l4 4 4-4h4l-2-4 4-2-4-2 2-4h-4z"/></svg>
+        Certifié DGAC — Exploitant enregistré
       </div>
     </div>
   </section>
@@ -1784,21 +1764,20 @@
     });
 
     // ── Video tabs ──────────────────────────────────────────────────
-    const videoSetupInfo = document.getElementById('video-setup-info');
     document.querySelectorAll('.video-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         const idx = parseInt(tab.dataset.tab);
-        document.querySelectorAll('.video-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.video-slides').forEach(s => {
+        const section = tab.closest('section');
+        section.querySelectorAll('.video-tab').forEach(t => t.classList.remove('active'));
+        section.querySelectorAll('.video-slides').forEach(s => {
           s.classList.remove('active');
           s.querySelectorAll('video').forEach(v => v.pause());
         });
         tab.classList.add('active');
-        const slide = document.querySelector(`.video-slides[data-slide="${idx}"]`);
+        const slide = section.querySelector(`.video-slides[data-slide="${idx}"]`);
         slide.classList.add('active');
         const vid = slide.querySelector('video');
         if (vid) { vid.currentTime = 0; vid.play(); }
-        if (videoSetupInfo) videoSetupInfo.style.display = idx <= 2 ? 'flex' : 'none';
       });
     });
 
