@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarifs — Studio 888 · Kevin Hermand</title>
+  <meta name="description" content="Tarifs photographie, vidéographie et drone — Studio 888, Kevin Hermand. Portraits, mariages, événementiel, immobilier, drone FPV.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #050505;
+      --bg-2:    #0e0e0e;
+      --bg-3:    #1a1a1a;
+      --fg:      #f0f0f0;
+      --fg-dim:  #555555;
+      --accent:  #ffffff;
+      --accent2: #d8d8d8;
+      --red:     #e8001d;
+      --silver:  #888888;
+      --border:  rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.14);
+      --ff-head: 'Oswald', sans-serif;
+      --ff-serif:'Cormorant Garamond', serif;
+      --ff-body: 'Inter', sans-serif;
+      --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--ff-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.5rem 3rem;
+      background: rgba(5,5,5,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; height: 52px; }
+    .nav-logo img { height: 52px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--fg-dim); position: relative; transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right;
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .nav-cta {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 0.55rem 1.3rem;
+      border: 1px solid rgba(255,255,255,0.3); color: var(--fg);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.07); border-color: var(--accent); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { width: 24px; height: 1px; background: var(--fg); transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-mobile {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: var(--ff-head); font-size: clamp(2rem, 7vw, 4rem); letter-spacing: 0.05em; color: var(--fg-dim); transition: color 0.3s; }
+    .nav-mobile a:hover { color: var(--accent); }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 9rem 0 5rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+    .page-header .label {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem;
+    }
+    .page-header .label::before { content: ''; width: 36px; height: 1px; background: var(--accent); }
+    .page-header h1 {
+      font-family: var(--ff-head); font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 700; line-height: 0.95; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--fg);
+    }
+    .page-header h1::after { content: '.'; color: var(--red); }
+    .page-header p {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: 1.15rem; font-weight: 300; color: rgba(240,240,240,0.55);
+      margin-top: 1.5rem; max-width: 580px; line-height: 1.8;
+    }
+
+    /* ─── TABS NAV ─── */
+    .tabs-nav {
+      position: sticky; top: 62px; z-index: 100;
+      background: rgba(5,5,5,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .tabs-nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 3rem;
+      display: flex; gap: 0; overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs-nav-inner::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 1.1rem 1.8rem;
+      font-family: var(--ff-head); font-size: 0.8rem;
+      font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--fg-dim);
+      cursor: pointer; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; white-space: nowrap;
+      transition: color 0.3s, border-color 0.3s; background: none; border-top: none; border-left: none; border-right: none;
+    }
+    .tab-btn.active { color: var(--fg); border-bottom-color: var(--accent); }
+    .tab-btn:hover:not(.active) { color: var(--fg); }
+
+    /* ─── CONTENT PANELS ─── */
+    .tab-panel { display: none; padding: 5rem 0; }
+    .tab-panel.active { display: block; }
+
+    /* ─── SECTION HEADING ─── */
+    .section-head { margin-bottom: 3rem; }
+    .section-head .label {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;
+    }
+    .section-head .label::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+    .section-head h2 {
+      font-family: var(--ff-head); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fg);
+    }
+    .section-head h2::after { content: '.'; color: var(--red); }
+    .section-head p {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: 1rem; color: rgba(240,240,240,0.5); margin-top: 0.8rem; line-height: 1.75;
+    }
+
+    /* ─── PRICING SUB-SECTION ─── */
+    .price-block { margin-bottom: 5rem; }
+    .price-block-title {
+      font-family: var(--ff-head); font-size: 0.72rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--fg-dim); margin-bottom: 1.2rem;
+      padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .price-block-title span {
+      color: var(--red); font-size: 0.6rem;
+      background: rgba(232,0,29,0.1); border: 1px solid rgba(232,0,29,0.2);
+      padding: 0.2rem 0.5rem; letter-spacing: 0.18em;
+    }
+
+    /* ─── TABLE ─── */
+    .price-table { width: 100%; border-collapse: collapse; }
+    .price-table th {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fg-dim); font-weight: 500; padding: 0.7rem 1.2rem;
+      border-bottom: 1px solid var(--border2); text-align: left;
+    }
+    .price-table th:last-child { text-align: right; }
+    .price-table td {
+      padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border);
+      font-size: 0.9rem; vertical-align: top; color: var(--fg);
+    }
+    .price-table td:last-child { text-align: right; white-space: nowrap; font-family: var(--ff-head); letter-spacing: 0.06em; }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .td-name { font-weight: 500; color: var(--fg); }
+    .td-sub { font-size: 0.78rem; color: var(--fg-dim); margin-top: 0.2rem; font-family: var(--ff-serif); font-style: italic; }
+    .td-price { font-size: 1.05rem; color: var(--accent); }
+    .td-price-muted { font-size: 0.88rem; color: var(--fg-dim); }
+    .variant-row td { padding-top: 0.5rem; padding-bottom: 0.5rem; background: rgba(255,255,255,0.01); }
+    .variant-row td:first-child { padding-left: 2.5rem; }
+    .variant-dot::before { content: '—'; color: var(--fg-dim); margin-right: 0.5rem; font-size: 0.75rem; }
+
+    /* ─── WEDDING CARDS ─── */
+    .forfait-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .forfait-card {
+      background: var(--bg); padding: 2.5rem 2rem;
+      position: relative; transition: background 0.3s;
+    }
+    .forfait-card:hover { background: var(--bg-2); }
+    .forfait-card.featured {
+      background: var(--bg-3);
+    }
+    .forfait-card.featured::before {
+      content: 'Populaire'; position: absolute; top: 1.2rem; right: 1.2rem;
+      font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+      background: var(--red); color: white; padding: 0.25rem 0.6rem;
+    }
+    .forfait-tier {
+      font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--fg-dim); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .forfait-tier::before { content: ''; width: 18px; height: 1px; background: var(--fg-dim); }
+    .forfait-name {
+      font-family: var(--ff-head); font-size: 1.6rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; color: var(--fg);
+      margin-bottom: 0.25rem;
+    }
+    .forfait-price {
+      font-family: var(--ff-head); font-size: 2.6rem; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.02em; line-height: 1;
+      margin: 1rem 0;
+    }
+    .forfait-price sup { font-size: 1.2rem; vertical-align: super; font-weight: 400; }
+    .forfait-duration {
+      font-size: 0.72rem; color: var(--fg-dim); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 1.6rem;
+      padding-bottom: 1.4rem; border-bottom: 1px solid var(--border);
+    }
+    .forfait-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .forfait-features li {
+      font-size: 0.87rem; color: rgba(240,240,240,0.72); line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 0.65rem;
+    }
+    .forfait-features li::before {
+      content: ''; width: 12px; height: 1px; background: var(--accent);
+      flex-shrink: 0; margin-top: 0.62rem;
+    }
+    .forfait-features li strong { color: var(--fg); font-weight: 500; }
+    .forfait-features li.bonus { color: var(--accent); }
+    .forfait-features li.bonus::before { background: var(--red); }
+
+    /* Drone option cards */
+    .drone-options {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .drone-opt-card {
+      background: var(--bg-2); padding: 2rem 1.8rem;
+    }
+    .drone-opt-card .name {
+      font-family: var(--ff-head); font-size: 1rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--fg); margin-bottom: 0.4rem;
+    }
+    .drone-opt-card .price {
+      font-family: var(--ff-head); font-size: 1.8rem; color: var(--accent); margin-bottom: 1rem;
+    }
+    .drone-opt-card .feats { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .drone-opt-card .feats li {
+      font-size: 0.83rem; color: rgba(240,240,240,0.65);
+      display: flex; align-items: flex-start; gap: 0.55rem;
+    }
+    .drone-opt-card .feats li::before { content: '—'; color: var(--fg-dim); font-size: 0.7rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    /* ─── OPTIONS TABLE ─── */
+    .options-table { width: 100%; border-collapse: collapse; }
+    .options-table tr { border-bottom: 1px solid var(--border); }
+    .options-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .options-table tr:last-child { border-bottom: none; }
+    .options-table td { padding: 1rem 1.2rem; font-size: 0.9rem; vertical-align: middle; }
+    .options-table td:first-child { font-weight: 500; white-space: nowrap; width: 30%; }
+    .options-table td:nth-child(2) { color: rgba(240,240,240,0.55); font-size: 0.83rem; font-family: var(--ff-serif); font-style: italic; }
+    .options-table td:last-child { text-align: right; font-family: var(--ff-head); letter-spacing: 0.06em; color: var(--accent); white-space: nowrap; }
+    .options-table .opt-variant td:first-child { font-weight: 400; font-size: 0.83rem; color: var(--fg-dim); padding-left: 2.5rem; }
+    .options-table .opt-variant td:last-child { font-size: 0.9rem; }
+
+    /* ─── NOTICE BOX ─── */
+    .notice {
+      border: 1px solid var(--border2); background: rgba(255,255,255,0.02);
+      padding: 1.5rem 2rem; margin-bottom: 4rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .notice-icon { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); white-space: nowrap; padding-top: 0.1rem; }
+    .notice p { font-size: 0.83rem; color: rgba(240,240,240,0.5); line-height: 1.7; }
+    .notice ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.6rem; }
+    .notice ul li { font-size: 0.82rem; color: rgba(240,240,240,0.45); display: flex; align-items: center; gap: 0.5rem; }
+    .notice ul li::before { content: ''; width: 14px; height: 1px; background: rgba(255,255,255,0.2); flex-shrink: 0; }
+
+    /* ─── CTA BANNER ─── */
+    .cta-banner {
+      border-top: 1px solid var(--border);
+      padding: 5rem 0; text-align: center; background: var(--bg-2);
+    }
+    .cta-banner h3 {
+      font-family: var(--ff-head); font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--fg); margin-bottom: 1rem;
+    }
+    .cta-banner p { font-family: var(--ff-serif); font-style: italic; color: rgba(240,240,240,0.5); margin-bottom: 2.5rem; font-size: 1.05rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.9rem 2.2rem;
+      background: var(--accent); color: var(--bg);
+      transition: background 0.3s, transform 0.3s var(--ease);
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+
+    /* ─── FOOTER ─── */
+    footer { padding: 3rem 0; border-top: 1px solid var(--border); }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-inner img { height: 38px; width: auto; }
+    .footer-copy { font-size: 0.68rem; color: var(--fg-dim); letter-spacing: 0.08em; }
+    .footer-back { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); transition: color 0.3s; display: flex; align-items: center; gap: 0.4rem; }
+    .footer-back:hover { color: var(--fg); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0.6rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .container { padding: 0 1.5rem; }
+      .page-header { padding: 7rem 0 3.5rem; }
+      .tabs-nav-inner { padding: 0 1.5rem; }
+      .tab-btn { padding: 0.9rem 1.1rem; font-size: 0.72rem; }
+      .tab-panel { padding: 3.5rem 0; }
+    }
+    @media (max-width: 600px) {
+      .forfait-grid { grid-template-columns: 1fr; }
+      .drone-options { grid-template-columns: 1fr; }
+      .price-table { display: block; overflow-x: auto; }
+      .notice { flex-direction: column; gap: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo-white-rmbg.png" alt="Studio 888">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">À propos</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#photos">Photos</a></li>
+      <li><a href="index.html#videos">Vidéos</a></li>
+      <li><a href="index.html#drones">Drone</a></li>
+      <li><a href="mariage/">Mariage</a></li>
+      <li><a href="web.html">Web</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Contact</a>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="index.html#about" class="mobile-link">À propos</a>
+    <a href="index.html#services" class="mobile-link">Services</a>
+    <a href="index.html#photos" class="mobile-link">Photos</a>
+    <a href="index.html#videos" class="mobile-link">Vidéos</a>
+    <a href="index.html#drones" class="mobile-link">Drone</a>
+    <a href="mariage/" class="mobile-link">Mariage</a>
+    <a href="web.html" class="mobile-link">Web</a>
+    <a href="index.html#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="label">Studio 888 — Kevin Hermand</div>
+      <h1>Tarifs</h1>
+      <p>Tous les tarifs sont indicatifs et peuvent évoluer selon la complexité du projet. Un devis personnalisé est toujours disponible sur demande.</p>
+    </div>
+  </div>
+
+  <!-- Tabs nav -->
+  <div class="tabs-nav">
+    <div class="tabs-nav-inner">
+      <button class="tab-btn active" data-tab="mariage">Mariage</button>
+      <button class="tab-btn" data-tab="photo">Photographie</button>
+      <button class="tab-btn" data-tab="video">Vidéographie</button>
+      <button class="tab-btn" data-tab="drone">Drone</button>
+      <button class="tab-btn" data-tab="formules">Formules</button>
+      <button class="tab-btn" data-tab="options">Options</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       MARIAGE
+  ══════════════════════════════════════════════════ -->
+  <div class="tab-panel active" id="panel-mariage">
+    <div class="container">
+
+      <div class="notice">
+        <div class="notice-icon">Inclus</div>
+        <div>
+          <p>Tous les forfaits mariage comprennent :</p>
+          <ul>
+            <li>Rendez-vous préparatoire, conseils et suivi personnalisé</li>
+            <li>Livraison par lien sécurisé ou clé USB</li>
+            <li>Galerie privée en ligne (formules Sérénité et au-dessus)</li>
+            <li>Déplacement inclus jusqu'à 50 km · Au-delà : 0,50 €/km</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PHOTO -->
+      <div class="section-head">
+        <div class="label">Forfaits Photo</div>
+        <h2>Photographie</h2>
+        <p>Fujifilm X100VI · 40 mégapixels · Haute résolution JPEG</p>
+      </div>
+
+      <div class="forfait-grid" style="margin-bottom:4rem">
+
+        <div class="forfait-card">
+          <div class="forfait-tier">Essentiel</div>
+          <div class="forfait-name">Essentiel</div>
+          <div class="forfait-price"><sup>€</sup>690</div>
+          <div class="forfait-duration">3h · Cérémonie + couple</div>
+          <ul class="forfait-features">
+            <li>3h de couverture — cérémonie + séance couple</li>
+            <li>~150 photos haute résolution (JPEG, 40 MP)</li>
+            <li>Pré-traitement couleur Fujifilm, pas de retouche individuelle</li>
+            <li>Livraison sous <strong>1 semaine</strong></li>
+          </ul>
+        </div>
+
+        <div class="forfait-card featured">
+          <div class="forfait-tier">Populaire</div>
+          <div class="forfait-name">Sérénité</div>
+          <div class="forfait-price"><sup>€</sup>1 090</div>
+          <div class="forfait-duration">6h · Préparatifs → vin d'honneur</div>
+          <ul class="forfait-features">
+            <li>6h de couverture — préparatifs, cérémonie, couple, vin d'honneur</li>
+            <li>~300 photos haute résolution (JPEG, 40 MP)</li>
+            <li>Galerie privée en ligne</li>
+            <li>Livraison sous <strong>1 semaine</strong></li>
+          </ul>
+        </div>
+
+        <div class="forfait-card">
+          <div class="forfait-tier">Prestige</div>
+          <div class="forfait-name">Prestige</div>
+          <div class="forfait-price"><sup>€</sup>1 790</div>
+          <div class="forfait-duration">10h · Préparatifs → première danse</div>
+          <ul class="forfait-features">
+            <li>10h de couverture complète</li>
+            <li>500+ photos haute résolution (JPEG, 40 MP)</li>
+            <li>50 photos avec retouches personnalisées</li>
+            <li>Galerie privée en ligne</li>
+            <li>Livraison sous <strong>2 semaines</strong></li>
+            <li class="bonus">Plan drone stabilisé offert*</li>
+          </ul>
+        </div>
+
+        <div class="forfait-card">
+          <div class="forfait-tier">Luxe</div>
+          <div class="forfait-name">Luxe</div>
+          <div class="forfait-price"><sup>€</sup>2 490</div>
+          <div class="forfait-duration">14h · Journée + brunch J+1</div>
+          <ul class="forfait-features">
+            <li>14h de couverture — journée complète + brunch du lendemain</li>
+            <li>600+ photos haute résolution (JPEG, 40 MP)</li>
+            <li>100 photos avec retouches personnalisées</li>
+            <li>Impression instantanée — 20 photos Instax Wide sur place</li>
+            <li>Album photo premium</li>
+            <li>Galerie privée en ligne</li>
+            <li>Livraison sous <strong>2 semaines</strong></li>
+            <li class="bonus">Plan drone stabilisé offert*</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VIDÉO -->
+      <div class="section-head">
+        <div class="label">Forfaits Vidéo</div>
+        <h2>Vidéographie</h2>
+        <p>Tournage, montage cinématique et étalonnage professionnel</p>
+      </div>
+
+      <div class="forfait-grid" style="margin-bottom:4rem">
+
+        <div class="forfait-card">
+          <div class="forfait-tier">Essentiel</div>
+          <div class="forfait-name">Essentiel</div>
+          <div class="forfait-price"><sup>€</sup>950</div>
+          <div class="forfait-duration">4h · Film 3–5 min</div>
+          <ul class="forfait-features">
+            <li>4h de captation — cérémonie, couple, vin d'honneur</li>
+            <li>Film monté de <strong>3 à 5 minutes</strong></li>
+            <li>Livraison en HD</li>
+          </ul>
+        </div>
+
+        <div class="forfait-card featured">
+          <div class="forfait-tier">Populaire</div>
+          <div class="forfait-name">Prestige</div>
+          <div class="forfait-price"><sup>€</sup>1 490</div>
+          <div class="forfait-duration">8h · Film 6–8 min · 4K</div>
+          <ul class="forfait-features">
+            <li>8h de captation — préparatifs à la première danse</li>
+            <li>Film monté de <strong>6 à 8 minutes</strong></li>
+            <li>Livraison jusqu'en <strong>4K</strong></li>
+            <li class="bonus">Courte séquence drone offerte*</li>
+          </ul>
+        </div>
+
+        <div class="forfait-card">
+          <div class="forfait-tier">Luxe</div>
+          <div class="forfait-name">Luxe</div>
+          <div class="forfait-price"><sup>€</sup>2 290</div>
+          <div class="forfait-duration">12h · Film 10–12 min + teaser · 6.2K</div>
+          <ul class="forfait-features">
+            <li>12h de captation — journée complète + brunch J+1</li>
+            <li>Film monté de <strong>10 à 12 minutes</strong> + teaser 1 min</li>
+            <li>Livraison jusqu'en <strong>6.2K</strong></li>
+            <li class="bonus">Drone inclus — stabilisé ou FPV*</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- DRONE OPTIONS -->
+      <div class="section-head">
+        <div class="label">Options Drone</div>
+        <h2>Ajout Drone</h2>
+        <p>À ajouter à n'importe quel forfait photo ou vidéo</p>
+      </div>
+
+      <div class="drone-options" style="margin-bottom:4rem">
+        <div class="drone-opt-card">
+          <div class="name">Drone Stabilisé</div>
+          <div class="price">390 €</div>
+          <ul class="feats">
+            <li>Vues aériennes stabilisées des lieux et des mariés</li>
+            <li>Séquences intégrées au film de mariage</li>
+          </ul>
+        </div>
+        <div class="drone-opt-card">
+          <div class="name">Drone FPV</div>
+          <div class="price">590 €</div>
+          <ul class="feats">
+            <li>Vol immersif FPV cinematic — rendu spectaculaire</li>
+            <li>Prises dynamiques du lieu, des mariés et des animations</li>
+            <li>Séquences intégrées au film de mariage</li>
+          </ul>
+        </div>
+        <div class="drone-opt-card" style="border-left:2px solid var(--accent)">
+          <div class="name">Pack Drone Complet</div>
+          <div class="price">890 €</div>
+          <ul class="feats">
+            <li>Mix drone stabilisé + FPV cinematic</li>
+            <li>Meilleure couverture aérienne possible</li>
+            <li>Séquences intégrées au film de mariage</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- COMPLETS -->
+      <div class="section-head">
+        <div class="label">Forfaits Complets</div>
+        <h2>Photo + Vidéo</h2>
+        <p>La solution tout-en-un pour une couverture complète de votre journée</p>
+      </div>
+
+      <div class="forfait-grid" style="margin-bottom:4rem">
+
+        <div class="forfait-card">
+          <div class="forfait-tier">Essentiel</div>
+          <div class="forfait-name">Complet Essentiel</div>
+          <div class="forfait-price"><sup>€</sup>1 450</div>
+          <div class="forfait-duration">4h · Photo + Vidéo</div>
+          <ul class="forfait-features">
+            <li>4h de couverture — cérémonie + séance couple</li>
+            <li>~100 photos haute résolution</li>
+            <li>Film monté <strong>3 à 5 min</strong> en HD</li>
+            <li>Livraison sous <strong>2 semaines</strong></li>
+          </ul>
+        </div>
+
+        <div class="forfait-card featured">
+          <div class="forfait-tier">Populaire</div>
+          <div class="forfait-name">Complet Prestige</div>
+          <div class="forfait-price"><sup>€</sup>2 590</div>
+          <div class="forfait-duration">10h · Photo + Vidéo 4K</div>
+          <ul class="forfait-features">
+            <li>10h de couverture complète — préparatifs → première danse</li>
+            <li>400+ photos haute résolution</li>
+            <li>30 photos avec retouches personnalisées</li>
+            <li>Film monté <strong>6 à 8 min</strong> jusqu'en <strong>4K</strong></li>
+            <li>Galerie privée en ligne</li>
+            <li>Livraison sous <strong>3 semaines</strong></li>
+            <li class="bonus">Courte séquence drone offerte*</li>
+          </ul>
+        </div>
+
+        <div class="forfait-card">
+          <div class="forfait-tier">Luxe</div>
+          <div class="forfait-name">Complet Luxe</div>
+          <div class="forfait-price"><sup>€</sup>3 290</div>
+          <div class="forfait-duration">14h · Photo + Vidéo 6.2K + Drone</div>
+          <ul class="forfait-features">
+            <li>14h de couverture — journée + brunch J+1</li>
+            <li>500+ photos haute résolution (40 MP)</li>
+            <li>80 photos avec retouches personnalisées</li>
+            <li>Impression Instax Wide sur place — 20 photos</li>
+            <li>Film monté <strong>10–12 min</strong> + teaser 1 min jusqu'en <strong>6.2K</strong></li>
+            <li>Drone inclus — stabilisé ou FPV*</li>
+            <li>Album photo premium</li>
+            <li>Galerie privée en ligne</li>
+            <li>Livraison sous <strong>4 semaines</strong></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- OPTIONS MARIAGE -->
+      <div class="section-head">
+        <div class="label">À la carte</div>
+        <h2>Options supplémentaires</h2>
+      </div>
+      <table class="options-table" style="margin-bottom:3rem">
+        <tr>
+          <td>Séance Engagement / After Day</td>
+          <td>2h, ~50 photos retouchées</td>
+          <td>290 €</td>
+        </tr>
+        <tr>
+          <td>Album photo premium</td>
+          <td>Album relié haute qualité</td>
+          <td>280 €</td>
+        </tr>
+        <tr>
+          <td>Impressions Instax Wide</td>
+          <td>20 tirages immédiats pour vos invités</td>
+          <td>80 €</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Tirages supplémentaires</td>
+          <td>Par tranche de 20 photos</td>
+          <td>50 €</td>
+        </tr>
+        <tr>
+          <td>Déplacement</td>
+          <td>Au-delà de 50 km</td>
+          <td>0,50 €/km</td>
+        </tr>
+      </table>
+
+      <div class="notice">
+        <div class="notice-icon">Note</div>
+        <p>* Les plans drone offerts sont soumis aux conditions météo, aux autorisations préfectorales et à la réglementation DGAC en vigueur. En cas d'impossibilité, une alternative terrestre équivalente est proposée.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PHOTOGRAPHIE
+  ══════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-photo">
+    <div class="container">
+
+      <div class="notice">
+        <div class="notice-icon">Inclus</div>
+        <div>
+          <p>Tous les tarifs incluent la prise de vue, la retouche et la livraison en haute résolution.</p>
+          <ul>
+            <li>Retouche Lightroom / Photoshop selon la formule</li>
+            <li>Déplacement Paris et proche banlieue inclus</li>
+            <li>Livraison via galerie privée en ligne ou lien de téléchargement</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 1. Portraits -->
+      <div class="price-block">
+        <div class="price-block-title">01 <span>Portraits & Lifestyle</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Détails</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td><div class="td-name">Portrait solo</div></td><td><div class="td-sub">1h de shooting · 10 photos retouchées</div></td><td class="td-price">120 €</td></tr>
+            <tr><td><div class="td-name">Portrait premium</div></td><td><div class="td-sub">1h30 de shooting · 15 photos retouchées</div></td><td class="td-price">180 €</td></tr>
+            <tr><td><div class="td-name">Portrait Business / LinkedIn</div></td><td><div class="td-sub">1h · 8 photos retouchées · livraison web optimisée</div></td><td class="td-price">120 €</td></tr>
+            <tr><td><div class="td-name">Séance couple</div></td><td><div class="td-sub">1h30 de shooting · 20 photos retouchées</div></td><td class="td-price">200 €</td></tr>
+            <tr><td><div class="td-name">Séance famille</div></td><td><div class="td-sub">2h de shooting · 25 photos retouchées</div></td><td class="td-price">250 €</td></tr>
+            <tr><td><div class="td-name">Événement privé</div></td><td><div class="td-sub">3h de reportage (anniversaire, baptême…)</div></td><td class="td-price">350 €</td></tr>
+            <tr><td><div class="td-name">Événement corporate</div></td><td><div class="td-sub">3h de reportage entreprise</div></td><td class="td-price">450 €</td></tr>
+            <tr><td><div class="td-name">Reportage journée complète</div></td><td><div class="td-sub">8h de reportage · 50 photos retouchées</div></td><td class="td-price">900 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 2. Cérémonies hors mariage -->
+      <div class="price-block">
+        <div class="price-block-title">02 <span>Cérémonies & Fiançailles</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">EVJF / EVG</div><div class="td-sub">150 photos · livraison web</div></td><td>En journée — 3h</td><td class="td-price">450 €</td></tr>
+            <tr class="variant-row"><td>Soirée</td><td class="td-price-muted">550 €</td></tr>
+            <tr class="variant-row"><td>Journée complète</td><td class="td-price-muted">750 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Fiançailles</div><div class="td-sub">2h · 30 photos retouchées</div></td><td>Urbain</td><td class="td-price">350 €</td></tr>
+            <tr class="variant-row"><td>Nature</td><td class="td-price-muted">380 €</td></tr>
+            <tr class="variant-row"><td>Lieu symbolique</td><td class="td-price-muted">450 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3. Événementiel -->
+      <div class="price-block">
+        <div class="price-block-title">03 <span>Événementiel</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Événement d'entreprise</div><div class="td-sub">150 photos · livraison web</div></td><td>Demi-journée (4h)</td><td class="td-price">600 €</td></tr>
+            <tr class="variant-row"><td>Journée complète (8h)</td><td class="td-price-muted">1 000 €</td></tr>
+            <tr class="variant-row"><td>2 jours</td><td class="td-price-muted">1 800 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Conférence / Séminaire</div><div class="td-sub">200 photos · livraison web</div></td><td>1 jour</td><td class="td-price">900 €</td></tr>
+            <tr class="variant-row"><td>2 jours</td><td class="td-price-muted">1 600 €</td></tr>
+            <tr class="variant-row"><td>3 jours</td><td class="td-price-muted">2 200 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Soirée privée</div><div class="td-sub">120 photos · livraison web</div></td><td>Jusqu'à 50 invités</td><td class="td-price">500 €</td></tr>
+            <tr class="variant-row"><td>50–100 invités</td><td class="td-price-muted">650 €</td></tr>
+            <tr class="variant-row"><td>> 100 invités</td><td class="td-price-muted">800 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Concert / Spectacle</div><div class="td-sub">100 photos · livraison web</div></td><td>Amateur (1 artiste)</td><td class="td-price">400 €</td></tr>
+            <tr class="variant-row"><td>Semi-pro (groupe)</td><td class="td-price-muted">600 €</td></tr>
+            <tr class="variant-row"><td>Professionnel</td><td class="td-price-muted">900 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 4. Commercial -->
+      <div class="price-block">
+        <div class="price-block-title">04 <span>Photographie Commerciale</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Photo produit e-commerce</div><div class="td-sub">Fond blanc/uni · plusieurs angles · retouche</div></td><td>1–5 produits</td><td class="td-price">60 €/prod.</td></tr>
+            <tr class="variant-row"><td>6–20 produits</td><td class="td-price-muted">50 €/prod.</td></tr>
+            <tr class="variant-row"><td>> 20 produits</td><td class="td-price-muted">40 €/prod.</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Photo produit créative</div><div class="td-sub">Mise en scène · retouche avancée</div></td><td>1–5 produits</td><td class="td-price">90 €/prod.</td></tr>
+            <tr class="variant-row"><td>6–20 produits</td><td class="td-price-muted">80 €/prod.</td></tr>
+            <tr class="variant-row"><td>> 20 produits</td><td class="td-price-muted">70 €/prod.</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Photos d'équipe</div><div class="td-sub">Portraits individuels + photo de groupe</div></td><td>Jusqu'à 5 personnes</td><td class="td-price">400 €</td></tr>
+            <tr class="variant-row"><td>6–15 personnes</td><td class="td-price-muted">600 €</td></tr>
+            <tr class="variant-row"><td>> 15 personnes</td><td class="td-price-muted">800 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Personal Branding</div><div class="td-sub">2h · 20 photos retouchées · optimisation réseaux</div></td><td>Basique</td><td class="td-price">450 €</td></tr>
+            <tr class="variant-row"><td>Premium</td><td class="td-price-muted">650 €</td></tr>
+            <tr class="variant-row"><td>VIP — lieux multiples</td><td class="td-price-muted">950 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 5. Immobilier -->
+      <div class="price-block">
+        <div class="price-block-title">05 <span>Photographie Immobilière</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Standard</div><div class="td-sub">15 photos HDR · retouche · livraison web</div></td><td>Appartement < 80 m²</td><td class="td-price">250 €</td></tr>
+            <tr class="variant-row"><td>Maison / Appart. 80–150 m²</td><td class="td-price-muted">350 €</td></tr>
+            <tr class="variant-row"><td>> 150 m²</td><td class="td-price-muted">450 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Premium</div><div class="td-sub">25 photos HDR · retouche avancée · livraison express · licence commerciale</div></td><td>Appartement < 80 m²</td><td class="td-price">350 €</td></tr>
+            <tr class="variant-row"><td>Maison / Appart. 80–150 m²</td><td class="td-price-muted">450 €</td></tr>
+            <tr class="variant-row"><td>> 150 m²</td><td class="td-price-muted">550 €</td></tr>
+            <tr><td rowspan="2"><div class="td-name">Photos crépusculaires</div><div class="td-sub">8 photos extérieures au coucher du soleil</div></td><td>Résidentiel</td><td class="td-price">+150 €</td></tr>
+            <tr class="variant-row"><td>Commercial</td><td class="td-price-muted">+200 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Architecture</div><div class="td-sub">20 photos HDR · retouche avancée · licence commerciale</div></td><td>Bâtiment standard</td><td class="td-price">500 €</td></tr>
+            <tr class="variant-row"><td>Projet architectural</td><td class="td-price-muted">800 €</td></tr>
+            <tr class="variant-row"><td>Monument historique</td><td class="td-price-muted">1 000 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 6. Projets spéciaux -->
+      <div class="price-block">
+        <div class="price-block-title">06 <span>Projets Spéciaux</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Shooting Mode</div><div class="td-sub">3h · 20 photos retouchées</div></td><td>Lookbook simple</td><td class="td-price">600 €</td></tr>
+            <tr class="variant-row"><td>Éditorial</td><td class="td-price-muted">900 €</td></tr>
+            <tr class="variant-row"><td>Campagne</td><td class="td-price-muted">1 500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Shooting Artistique</div><div class="td-sub">4h · 15 photos · retouche avancée</div></td><td>Concept simple</td><td class="td-price">700 €</td></tr>
+            <tr class="variant-row"><td>Concept élaboré</td><td class="td-price-muted">1 000 €</td></tr>
+            <tr class="variant-row"><td>Haute complexité</td><td class="td-price-muted">1 500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Patrimoine</div><div class="td-sub">30 photos · licence commerciale</div></td><td>Demi-journée</td><td class="td-price">600 €</td></tr>
+            <tr class="variant-row"><td>Journée complète</td><td class="td-price-muted">1 000 €</td></tr>
+            <tr class="variant-row"><td>Projet multi-sites</td><td class="td-price-muted">1 500 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       VIDÉOGRAPHIE
+  ══════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-video">
+    <div class="container">
+
+      <div class="price-block">
+        <div class="price-block-title">01 <span>Vidéos Personnelles</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Clip vidéo personnel</div><div class="td-sub">2h · montage simple · 1–2 min</div></td><td>Basique</td><td class="td-price">350 €</td></tr>
+            <tr class="variant-row"><td>Avec scénario</td><td class="td-price-muted">450 €</td></tr>
+            <tr class="variant-row"><td>Multi-lieux</td><td class="td-price-muted">550 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Film de vacances</div><div class="td-sub">Montage de rushes fournis · musique · étalonnage</div></td><td>Jusqu'à 3 min</td><td class="td-price">300 €</td></tr>
+            <tr class="variant-row"><td>3–5 min</td><td class="td-price-muted">450 €</td></tr>
+            <tr class="variant-row"><td>5–10 min</td><td class="td-price-muted">600 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-block">
+        <div class="price-block-title">02 <span>Vidéos Commerciales</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Vidéo produit</div><div class="td-sub">Tournage · montage · 30s–1 min</div></td><td>Standard</td><td class="td-price">700 €</td></tr>
+            <tr class="variant-row"><td>Avec script</td><td class="td-price-muted">900 €</td></tr>
+            <tr class="variant-row"><td>Premium (effets)</td><td class="td-price-muted">1 200 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Vidéo corporate</div><div class="td-sub">Tournage · montage · 2–3 min</div></td><td>Présentation simple</td><td class="td-price">1 000 €</td></tr>
+            <tr class="variant-row"><td>Avec interviews</td><td class="td-price-muted">1 500 €</td></tr>
+            <tr class="variant-row"><td>Premium — multi-lieux</td><td class="td-price-muted">2 000 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Publicité</div><div class="td-sub">Tournage · montage · 15–60s</div></td><td>Concept simple</td><td class="td-price">1 500 €</td></tr>
+            <tr class="variant-row"><td>Narratif</td><td class="td-price-muted">2 000 €</td></tr>
+            <tr class="variant-row"><td>Haut de gamme</td><td class="td-price-muted">3 000 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Événement d'entreprise</div><div class="td-sub">Couverture vidéo · montage · 3–5 min</div></td><td>Demi-journée</td><td class="td-price">900 €</td></tr>
+            <tr class="variant-row"><td>Journée complète</td><td class="td-price-muted">1 500 €</td></tr>
+            <tr class="variant-row"><td>Multi-jours</td><td class="td-price-muted">2 500 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-block">
+        <div class="price-block-title">03 <span>Contenus Réseaux Sociaux</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Pack mensuel réseaux sociaux</div><div class="td-sub">Montage · optimisation formats</div></td><td>Standard — 4 vidéos</td><td class="td-price">800 €/mois</td></tr>
+            <tr class="variant-row"><td>Premium — 8 vidéos</td><td class="td-price-muted">1 400 €/mois</td></tr>
+            <tr class="variant-row"><td>Pro — 12 vidéos</td><td class="td-price-muted">1 800 €/mois</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Teaser Instagram / TikTok</div><div class="td-sub">Tournage · montage · format vertical · 15–60s</div></td><td>Simple</td><td class="td-price">200 €</td></tr>
+            <tr class="variant-row"><td>Créatif</td><td class="td-price-muted">300 €</td></tr>
+            <tr class="variant-row"><td>Premium</td><td class="td-price-muted">500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Interview / Témoignage</div><div class="td-sub">Tournage · montage · 1–3 min</div></td><td>1 personne</td><td class="td-price">400 €</td></tr>
+            <tr class="variant-row"><td>2–3 personnes</td><td class="td-price-muted">600 €</td></tr>
+            <tr class="variant-row"><td>> 3 personnes</td><td class="td-price-muted">900 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-block">
+        <div class="price-block-title">04 <span>Culturel & Événementiel</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Captation concert / spectacle</div><div class="td-sub">Tournage · montage · mixage audio</div></td><td>Jusqu'à 1h</td><td class="td-price">1 200 €</td></tr>
+            <tr class="variant-row"><td>1–2h</td><td class="td-price-muted">1 800 €</td></tr>
+            <tr class="variant-row"><td>> 2h</td><td class="td-price-muted">2 500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Aftermovie événement</div><div class="td-sub">Tournage · montage dynamique · 3–5 min</div></td><td>Petit événement</td><td class="td-price">1 000 €</td></tr>
+            <tr class="variant-row"><td>Événement moyen</td><td class="td-price-muted">1 500 €</td></tr>
+            <tr class="variant-row"><td>Grand événement</td><td class="td-price-muted">2 500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Documentaire</div><div class="td-sub">Tournage · montage · narration · 10–15 min</div></td><td>Sujet simple</td><td class="td-price">2 000 €</td></tr>
+            <tr class="variant-row"><td>Complexité moyenne</td><td class="td-price-muted">3 000 €</td></tr>
+            <tr class="variant-row"><td>Complexité élevée</td><td class="td-price-muted">5 000 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       DRONE
+  ══════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-drone">
+    <div class="container">
+
+      <div class="notice">
+        <div class="notice-icon">DGAC</div>
+        <p>Kevin Hermand est pilote de drone certifié DGAC et exploitant enregistré. Toutes les opérations sont conformes à la réglementation européenne UAS. Les autorisations préfectorales nécessaires sont prises en charge.</p>
+      </div>
+
+      <div class="price-block">
+        <div class="price-block-title">01 <span>Photographie Aérienne</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Pack Découverte</div><div class="td-sub">1h de vol · 15 photos · retouche</div></td><td>Standard</td><td class="td-price">350 €</td></tr>
+            <tr class="variant-row"><td>Avec repérages</td><td class="td-price-muted">450 €</td></tr>
+            <tr class="variant-row"><td>Premium — 25 photos</td><td class="td-price-muted">500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Immobilier</div><div class="td-sub">45 min de vol · 10 photos · retouche</div></td><td>Résidentiel</td><td class="td-price">300 €</td></tr>
+            <tr class="variant-row"><td>Commercial</td><td class="td-price-muted">400 €</td></tr>
+            <tr class="variant-row"><td>Domaine / Propriété</td><td class="td-price-muted">500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Architecture</div><div class="td-sub">1h de vol · 15 photos · licence commerciale</div></td><td>Standard</td><td class="td-price">450 €</td></tr>
+            <tr class="variant-row"><td>Complexe</td><td class="td-price-muted">600 €</td></tr>
+            <tr class="variant-row"><td>Monument historique</td><td class="td-price-muted">800 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-block">
+        <div class="price-block-title">02 <span>Vidéographie Aérienne</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Séquences aériennes</div><div class="td-sub">1h de vol · rushes bruts 3–5 min</div></td><td>Rushes seuls</td><td class="td-price">400 €</td></tr>
+            <tr class="variant-row"><td>Avec montage basique</td><td class="td-price-muted">600 €</td></tr>
+            <tr class="variant-row"><td>Avec montage élaboré</td><td class="td-price-muted">800 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Film cinématique</div><div class="td-sub">2h de vol · montage · étalonnage · 2–3 min</div></td><td>Standard</td><td class="td-price">800 €</td></tr>
+            <tr class="variant-row"><td>Avec scénario</td><td class="td-price-muted">1 100 €</td></tr>
+            <tr class="variant-row"><td>Premium — multi-sites</td><td class="td-price-muted">1 500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Immobilier</div><div class="td-sub">45 min de vol · montage · 1–2 min</div></td><td>Résidentiel</td><td class="td-price">500 €</td></tr>
+            <tr class="variant-row"><td>Commercial</td><td class="td-price-muted">650 €</td></tr>
+            <tr class="variant-row"><td>Domaine / Propriété</td><td class="td-price-muted">850 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-block">
+        <div class="price-block-title">03 <span>Projets Spéciaux FPV</span></div>
+        <table class="price-table">
+          <thead><tr><th>Prestation</th><th>Variante</th><th>Prix</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><div class="td-name">Film FPV immersif</div><div class="td-sub">DJI Avata 2 · montage · 1–2 min</div></td><td>Intérieur / Extérieur simple</td><td class="td-price">700 €</td></tr>
+            <tr class="variant-row"><td>Parcours complexe</td><td class="td-price-muted">1 000 €</td></tr>
+            <tr class="variant-row"><td>Haute technicité</td><td class="td-price-muted">1 500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Patrimoine vu du ciel</div><div class="td-sub">Vol cinématique · monuments · sites historiques</div></td><td>1 site</td><td class="td-price">800 €</td></tr>
+            <tr class="variant-row"><td>2–3 sites</td><td class="td-price-muted">1 200 €</td></tr>
+            <tr class="variant-row"><td>Projet complet (5+ sites)</td><td class="td-price-muted">2 500 €</td></tr>
+            <tr><td rowspan="3"><div class="td-name">Suivi de chantier</div><div class="td-sub">Vol régulier · photos/vidéos · rapport mensuel</div></td><td>Mensuel</td><td class="td-price">400 €/mois</td></tr>
+            <tr class="variant-row"><td>Bimensuel</td><td class="td-price-muted">700 €/mois</td></tr>
+            <tr class="variant-row"><td>Hebdomadaire</td><td class="td-price-muted">1 200 €/mois</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       FORMULES COMBINÉES
+  ══════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-formules">
+    <div class="container">
+      <div class="section-head">
+        <div class="label">Packs</div>
+        <h2>Formules combinées</h2>
+        <p>Des solutions complètes réunissant photo, vidéo et drone pour une prise en charge globale de votre projet.</p>
+      </div>
+
+      <table class="price-table" style="margin-bottom:5rem">
+        <thead><tr><th>Formule</th><th>Contenu</th><th style="text-align:right">Prix</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="3"><div class="td-name">Pack Mariage Complet</div><div class="td-sub">Photos formule complète + vidéo highlights + drone</div></td><td>Essentiel</td><td class="td-price">2 800 €</td></tr>
+          <tr class="variant-row"><td>Premium</td><td class="td-price-muted">3 500 €</td></tr>
+          <tr class="variant-row"><td>Luxe</td><td class="td-price-muted">4 500 €</td></tr>
+          <tr><td rowspan="3"><div class="td-name">Pack Immobilier Pro</div><div class="td-sub">Photos intérieures + photos drone + vidéo visite</div></td><td>Appartement</td><td class="td-price">900 €</td></tr>
+          <tr class="variant-row"><td>Maison</td><td class="td-price-muted">1 200 €</td></tr>
+          <tr class="variant-row"><td>Propriété d'exception</td><td class="td-price-muted">1 800 €</td></tr>
+          <tr><td rowspan="3"><div class="td-name">Pack Lancement Produit</div><div class="td-sub">10 photos produit + vidéo promo + réseaux sociaux</div></td><td>Startup</td><td class="td-price">1 500 €</td></tr>
+          <tr class="variant-row"><td>Business</td><td class="td-price-muted">2 200 €</td></tr>
+          <tr class="variant-row"><td>Enterprise</td><td class="td-price-muted">3 000 €</td></tr>
+          <tr><td rowspan="3"><div class="td-name">Pack Événementiel Total</div><div class="td-sub">Photos + vidéo + drone + réseaux sociaux</div></td><td>Petit événement</td><td class="td-price">2 000 €</td></tr>
+          <tr class="variant-row"><td>Événement moyen</td><td class="td-price-muted">3 000 €</td></tr>
+          <tr class="variant-row"><td>Grand événement</td><td class="td-price-muted">4 500 €</td></tr>
+          <tr><td rowspan="3"><div class="td-name">Pack Personal Branding</div><div class="td-sub">Photos portrait + mini-vidéo présentation + réseaux</div></td><td>Débutant</td><td class="td-price">1 000 €</td></tr>
+          <tr class="variant-row"><td>Professionnel</td><td class="td-price-muted">1 800 €</td></tr>
+          <tr class="variant-row"><td>Influenceur</td><td class="td-price-muted">2 500 €</td></tr>
+          <tr><td rowspan="3"><div class="td-name">Pack Patrimoine & Culture</div><div class="td-sub">Photos + vidéo cinématique + drone + textes</div></td><td>1 site</td><td class="td-price">1 800 €</td></tr>
+          <tr class="variant-row"><td>2–3 sites</td><td class="td-price-muted">2 800 €</td></tr>
+          <tr class="variant-row"><td>Route culturelle complète</td><td class="td-price-muted">4 500 €</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       OPTIONS
+  ══════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-options">
+    <div class="container">
+      <div class="section-head">
+        <div class="label">À la carte</div>
+        <h2>Options & suppléments</h2>
+        <p>À ajouter à n'importe quelle prestation.</p>
+      </div>
+
+      <table class="options-table">
+        <tr>
+          <td><strong>Livraison express</strong></td>
+          <td>Délai sous 48h</td>
+          <td>+30 %</td>
+        </tr>
+        <tr>
+          <td><strong>Album photo</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Premium — 20 pages</td>
+          <td></td>
+          <td>200 €</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Luxe — 30 pages</td>
+          <td></td>
+          <td>300 €</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Prestige — 40 pages</td>
+          <td></td>
+          <td>450 €</td>
+        </tr>
+        <tr>
+          <td><strong>Tirages Fine Art</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="opt-variant">
+          <td>20 × 30 cm</td>
+          <td></td>
+          <td>30 €/unité</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>30 × 45 cm</td>
+          <td></td>
+          <td>50 €/unité</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>50 × 75 cm</td>
+          <td></td>
+          <td>90 €/unité</td>
+        </tr>
+        <tr>
+          <td><strong>Retouche avancée</strong></td>
+          <td>Retouche beauté, compositing</td>
+          <td>30 €/photo</td>
+        </tr>
+        <tr>
+          <td><strong>Location studio</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Demi-journée</td>
+          <td></td>
+          <td>150 €</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Journée</td>
+          <td></td>
+          <td>250 €</td>
+        </tr>
+        <tr>
+          <td><strong>Déplacement</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Paris & proche banlieue</td>
+          <td></td>
+          <td>Inclus</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Île-de-France</td>
+          <td></td>
+          <td>50 €</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Province / International</td>
+          <td></td>
+          <td>Sur devis</td>
+        </tr>
+        <tr>
+          <td><strong>2ème opérateur</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Demi-journée</td>
+          <td></td>
+          <td>250 €</td>
+        </tr>
+        <tr class="opt-variant">
+          <td>Journée</td>
+          <td></td>
+          <td>400 €</td>
+        </tr>
+        <tr>
+          <td><strong>Musique sous licence</strong></td>
+          <td>Pour utilisation commerciale</td>
+          <td>100 €</td>
+        </tr>
+        <tr>
+          <td><strong>Voix off professionnelle</strong></td>
+          <td>Par minute finalisée</td>
+          <td>120 €</td>
+        </tr>
+        <tr>
+          <td><strong>Maquillage professionnel</strong></td>
+          <td>Par personne</td>
+          <td>120 €</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <div class="container">
+      <h3>Un projet en tête ?</h3>
+      <p>Chaque projet est unique — contactez-moi pour un devis personnalisé.</p>
+      <a href="index.html#contact" class="btn-primary">
+        Me contacter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <img src="assets/logo-white-rmbg.png" alt="Studio 888">
+        <span class="footer-copy">© 2025 Studio 888 — Kevin Hermand</span>
+        <a href="index.html" class="footer-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Retour au site
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }));
+
+    // Tabs
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+        window.scrollTo({ top: document.querySelector('.tabs-nav').offsetTop - 62, behavior: 'smooth' });
+      });
+    });
+
+    // URL hash → tab
+    const hash = location.hash.slice(1);
+    if (hash && document.getElementById('panel-' + hash)) {
+      document.querySelector(`[data-tab="${hash}"]`)?.click();
+    }
+  </script>
+</body>
+</html>
