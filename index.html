@@ -888,12 +888,28 @@
     }
     .video-tab.active { color: var(--fg); border-bottom-color: var(--accent); }
     .video-tab:hover:not(.active) { color: var(--fg); }
-    .video-gear-line {
-      font-size: 0.68rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--fg-dim);
-      opacity: 0.45; font-family: var(--ff-head);
-      padding: 0.8rem 0 1.8rem;
+    .video-info-bar {
+      display: flex; align-items: flex-start; gap: 2rem;
+      padding: 1.4rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
       transition: opacity 0.25s;
+    }
+    .video-info-camera {
+      display: flex; align-items: center; gap: 0.55rem;
+      font-family: var(--ff-head); font-size: 0.72rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); white-space: nowrap; flex-shrink: 0;
+      padding-top: 0.1rem;
+    }
+    .video-info-camera::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--red); border-radius: 50%; flex-shrink: 0;
+    }
+    .video-info-desc {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: 0.95rem; color: rgba(240,240,240,0.55);
+      line-height: 1.65; transition: opacity 0.25s;
     }
     .video-slider-wrap {
       position: relative; overflow: hidden;
@@ -1546,7 +1562,10 @@
           data-desc="Stabilisation 3 axes pour des plans fluides même en déplacement. Idéal pour les travellings urbains, les suivis de sujet et les panoramiques aériens. Zéro tremblement, rendu professionnel.">Stabilisé</div>
       </div>
 
-      <div class="video-gear-line" id="video-gear-line">Fujifilm X100VI · filtre de diffusion · couleurs chaudes</div>
+      <div class="video-info-bar" id="video-info-bar">
+        <div class="video-info-camera" id="video-info-camera">Fujifilm X100VI</div>
+        <div class="video-info-desc" id="video-info-desc">Rendu cinématique obtenu avec un filtre de diffusion anamorphique, simulation de film personnalisée et paramètres couleurs chauds — tons dorés, ombres légèrement teintées. Un setup compact pensé pour une esthétique immédiate, sans post-traitement lourd.</div>
+      </div>
 
       <div class="video-slides active" data-slide="0">
         <div class="video-main">
@@ -1833,14 +1852,16 @@
 
     // ── Video tabs ──────────────────────────────────────────────────
     function updateVideoSetup(tab) {
-      const gearLine = document.getElementById('video-gear-line');
-      if (gearLine && tab.dataset.gear) {
-        gearLine.style.opacity = '0';
-        setTimeout(() => {
-          gearLine.textContent = tab.dataset.gear;
-          gearLine.style.opacity = '0.45';
-        }, 150);
-      }
+      const bar = document.getElementById('video-info-bar');
+      const cam = document.getElementById('video-info-camera');
+      const desc = document.getElementById('video-info-desc');
+      if (!bar) return;
+      bar.style.opacity = '0';
+      setTimeout(() => {
+        if (tab.dataset.gear) cam.textContent = tab.dataset.gear;
+        if (tab.dataset.desc) desc.textContent = tab.dataset.desc;
+        bar.style.opacity = '1';
+      }, 200);
     }
 
     document.querySelectorAll('.video-tab').forEach(tab => {
