@@ -1971,13 +1971,17 @@
       document.getElementById('cine-prev').addEventListener('click', () => goTo(idx - 1));
       document.getElementById('cine-next').addEventListener('click', () => goTo(idx + 1));
 
-      // Lecture de la 1re vidéo dès qu'elle entre dans le viewport
+      // Lecture de la vidéo active uniquement quand le slider est visible
+      let started = false;
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-          if (e.isIntersecting) { goTo(0); io.disconnect(); }
+          const v = slides[idx].querySelector('video');
+          if (!v) return;
+          if (e.isIntersecting) { started = true; v.play().catch(() => {}); }
+          else if (started) { v.pause(); }
         });
-      }, { threshold: 0.35 });
-      io.observe(track);
+      }, { threshold: 0.2 });
+      io.observe(document.getElementById('cine-slider'));
 
       // Swipe tactile
       let startX = 0, dragging = false;
