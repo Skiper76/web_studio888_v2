@@ -886,21 +886,12 @@
     }
     .video-tab.active { color: var(--fg); border-bottom-color: var(--accent); }
     .video-tab:hover:not(.active) { color: var(--fg); }
-    .video-setup-info {
-      display: flex; gap: 2rem; align-items: flex-start;
-      padding: 1.2rem 0 2rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0;
-    }
-    .video-setup-gear {
-      font-family: var(--ff-head);
-      font-size: 0.65rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent);
-      white-space: nowrap; padding-top: 0.1rem;
-    }
-    .video-setup-desc {
-      font-size: 0.82rem; color: rgba(240,240,240,0.5);
-      line-height: 1.6; font-family: var(--ff-serif); font-style: italic;
+    .video-gear-line {
+      font-size: 0.68rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--fg-dim);
+      opacity: 0.45; font-family: var(--ff-head);
+      padding: 0.8rem 0 1.8rem;
+      transition: opacity 0.25s;
     }
     .video-slider-wrap {
       position: relative; overflow: hidden;
@@ -978,22 +969,18 @@
     .yt-facade:hover img { transform: scale(1.03); opacity: 0.8; }
     .yt-play {
       position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+      bottom: 1.4rem; right: 1.6rem;
     }
     .yt-play-btn {
       display: flex; align-items: center; justify-content: center;
-      width: 64px; height: 64px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.45);
-      background: rgba(0,0,0,0.35);
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+      opacity: 0.6;
     }
     .yt-facade:hover .yt-play-btn {
-      border-color: rgba(255,255,255,0.85);
-      background: rgba(0,0,0,0.2);
-      transform: scale(1.09);
+      transform: scale(1.15);
+      opacity: 1;
     }
-    .yt-play-btn svg { margin-left: 4px; }
+    .yt-play-btn svg { display: block; }
     .yt-facade iframe {
       position: absolute; inset: 0;
       width: 100%; height: 100%; border: none;
@@ -1238,7 +1225,6 @@
       }
       .video-tabs::-webkit-scrollbar { display: none; }
       .video-tab { white-space: nowrap; flex-shrink: 0; padding: 0.6rem 1rem; }
-      .video-setup-info { flex-direction: column; gap: 0.5rem; }
       /* lightbox touch targets */
       .lb-nav { width: 52px; height: 52px; }
       .lb-close { width: 44px; height: 44px; top: 0.75rem; right: 0.75rem; font-size: 1.4rem; }
@@ -1544,15 +1530,18 @@
       <div style="height: 3rem;"></div>
 
       <div class="video-tabs reveal">
-        <div class="video-tab active" data-tab="0">Cinématique</div>
-        <div class="video-tab" data-tab="1">Ralenti</div>
-        <div class="video-tab" data-tab="2">Stabilisé</div>
+        <div class="video-tab active" data-tab="0"
+          data-gear="Fujifilm X100VI"
+          data-desc="Rendu cinématique obtenu avec un filtre de diffusion anamorphique, simulation de film personnalisée et paramètres couleurs chauds — tons dorés, ombres légèrement teintées. Un setup compact pensé pour une esthétique immédiate, sans post-traitement lourd.">Cinématique</div>
+        <div class="video-tab" data-tab="1"
+          data-gear="Fujifilm X100VI · 240 fps"
+          data-desc="Ralenti capturé à 240 images par seconde. Chaque mouvement décomposé dans ses détails les plus fins — gouttes, gestes, matières. La vitesse révèle ce que l'œil nu ne perçoit pas.">Ralenti</div>
+        <div class="video-tab" data-tab="2"
+          data-gear="DJI Mini 4 Pro · Gimbal 3 axes"
+          data-desc="Stabilisation 3 axes pour des plans fluides même en déplacement. Idéal pour les travellings urbains, les suivis de sujet et les panoramiques aériens. Zéro tremblement, rendu professionnel.">Stabilisé</div>
       </div>
 
-      <div class="video-setup-info">
-        <div class="video-setup-gear">Fujifilm X100VI</div>
-        <div class="video-setup-desc">Rendu cinématique obtenu avec un filtre de diffusion anamorphique, simulation de film personnalisée et paramètres couleurs chauds — tons dorés, ombres légèrement teintées. Un setup compact pensé pour une esthétique immédiate, sans post-traitement lourd.</div>
-      </div>
+      <div class="video-gear-line" id="video-gear-line">Fujifilm X100VI · filtre de diffusion · couleurs chaudes</div>
 
       <div class="video-slides active" data-slide="0">
         <div class="video-main">
@@ -1589,7 +1578,7 @@
             <img src="https://i.ytimg.com/vi/OEO_pDRnKLw/maxresdefault.jpg" alt="Drone FPV — Falaises de Fécamp" loading="lazy">
             <div class="yt-play">
               <div class="yt-play-btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polygon points="7,4 21,12 7,20" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                <svg width="28" height="28" viewBox="0 0 24 24"><polygon points="6,3 22,12 6,21" fill="white"/></svg>
               </div>
             </div>
           </div>
@@ -1834,6 +1823,17 @@
     });
 
     // ── Video tabs ──────────────────────────────────────────────────
+    function updateVideoSetup(tab) {
+      const gearLine = document.getElementById('video-gear-line');
+      if (gearLine && tab.dataset.gear) {
+        gearLine.style.opacity = '0';
+        setTimeout(() => {
+          gearLine.textContent = tab.dataset.gear;
+          gearLine.style.opacity = '0.45';
+        }, 150);
+      }
+    }
+
     document.querySelectorAll('.video-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         const idx = parseInt(tab.dataset.tab);
@@ -1844,6 +1844,7 @@
           s.querySelectorAll('video').forEach(v => v.pause());
         });
         tab.classList.add('active');
+        updateVideoSetup(tab);
         const slide = section.querySelector(`.video-slides[data-slide="${idx}"]`);
         slide.classList.add('active');
         const vid = slide.querySelector('video');
