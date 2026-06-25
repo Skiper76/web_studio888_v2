@@ -5,6 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>STUDIO 888 — Kevin Hermand</title>
 
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Studio 888 — Kevin Hermand, photographe, vidéaste et pilote de drone certifié DGAC basé en Normandie. Portrait, événementiel, immobilier, drone FPV.">
+  <meta name="author" content="Kevin Hermand">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://studio888.vercel.app/">
+  <meta property="og:title" content="STUDIO 888 — Kevin Hermand">
+  <meta property="og:description" content="Photographe · Vidéaste · Pilote de drone certifié DGAC. Prenez de la hauteur dans vos créations.">
+  <meta property="og:image" content="https://studio888.vercel.app/assets/Select-Compress/DSCF0312.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="800">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="STUDIO 888 — Kevin Hermand">
+  <meta name="twitter:description" content="Photographe · Vidéaste · Pilote de drone certifié DGAC.">
+  <meta name="twitter:image" content="https://studio888.vercel.app/assets/Select-Compress/DSCF0312.jpg">
+
+  <!-- Données structurées JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Studio 888",
+    "description": "Photographe, vidéaste et pilote de drone certifié DGAC basé en Normandie.",
+    "url": "https://studio888.vercel.app/",
+    "logo": "https://studio888.vercel.app/assets/logo-white-rmbg.png",
+    "image": "https://studio888.vercel.app/assets/Select-Compress/DSCF0312.jpg",
+    "telephone": "+33762151873",
+    "email": "ke.hermand76@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Normandie",
+      "addressCountry": "FR"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Kevin Hermand",
+      "jobTitle": "Photographe · Vidéaste · Pilote de drone",
+      "sameAs": [
+        "https://www.instagram.com/kev.pics8/",
+        "https://www.linkedin.com/in/kevin-hermand/"
+      ]
+    },
+    "serviceArea": ["Normandie", "Île-de-France"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Services photo & vidéo",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Photographie"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vidéographie"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Drone certifié DGAC"}}
+      ]
+    }
+  }
+  </script>
+
+  <!-- Préchargement ressources critiques -->
+  <link rel="preload" href="assets/logo-white-rmbg.png" as="image">
+  <link rel="preload" href="assets/Select-Compress/DSCF0312.webp" as="image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
@@ -797,13 +856,23 @@
 
     /* ─── VIDEO SECTION ─────────────────────────────────────────────── */
     #videos { background: var(--bg-2); padding: 7rem 0; }
-    .video-tabs {
-      display: flex; gap: 0;
+    .video-tab-groups {
+      display: flex; gap: 3rem; align-items: flex-end;
       border-bottom: 1px solid var(--border);
       margin-bottom: 4rem;
     }
+    .video-tab-group { display: flex; flex-direction: column; gap: 0; }
+    .video-tab-group-label {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fg-dim); opacity: 0.5;
+      padding: 0 1.5rem 0.4rem;
+      font-family: var(--ff-head);
+    }
+    .video-tabs {
+      display: flex; gap: 0;
+    }
     .video-tab {
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.5rem;
       font-size: 0.78rem;
       font-weight: 500;
       letter-spacing: 0.12em;
@@ -816,6 +885,22 @@
     }
     .video-tab.active { color: var(--fg); border-bottom-color: var(--accent); }
     .video-tab:hover:not(.active) { color: var(--fg); }
+    .video-setup-info {
+      display: flex; gap: 2rem; align-items: flex-start;
+      padding: 1.2rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+    .video-setup-gear {
+      font-family: var(--ff-head);
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      white-space: nowrap; padding-top: 0.1rem;
+    }
+    .video-setup-desc {
+      font-size: 0.82rem; color: rgba(240,240,240,0.5);
+      line-height: 1.6; font-family: var(--ff-serif); font-style: italic;
+    }
     .video-slider-wrap {
       position: relative; overflow: hidden;
     }
@@ -1086,14 +1171,19 @@
 
     /* video tabs : scroll horizontal sur mobile */
     @media (max-width: 600px) {
+      .video-tab-groups { flex-direction: column; gap: 0; border-bottom: 1px solid var(--border); }
+      .video-tab-group { border-bottom: none; }
+      .video-tab-group-label { padding: 0.8rem 1rem 0.2rem; }
       .video-tabs {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         flex-wrap: nowrap;
         scrollbar-width: none;
+        border-bottom: none;
       }
       .video-tabs::-webkit-scrollbar { display: none; }
-      .video-tab { white-space: nowrap; flex-shrink: 0; padding: 0.8rem 1.2rem; }
+      .video-tab { white-space: nowrap; flex-shrink: 0; padding: 0.6rem 1rem; }
+      .video-setup-info { flex-direction: column; gap: 0.5rem; }
       /* lightbox touch targets */
       .lb-nav { width: 52px; height: 52px; }
       .lb-close { width: 44px; height: 44px; top: 0.75rem; right: 0.75rem; font-size: 1.4rem; }
@@ -1167,8 +1257,8 @@
 
   <!-- Hero -->
   <section id="hero">
-    <video id="hero-video" autoplay muted loop playsinline>
-      <source src="assets/trailer/Portfolio_trailer.mp4" type="video/mp4">
+    <video id="hero-video" muted loop playsinline poster="assets/Select-Compress/DSCF0312.jpg" preload="none">
+      <source data-src="assets/trailer/Portfolio_trailer.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
 
@@ -1230,7 +1320,10 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-image reveal">
-          <img src="assets/images/photo_profil.JPEG" alt="Kevin Hermand">
+          <picture>
+            <source srcset="assets/images/photo_profil.webp" type="image/webp">
+            <img src="assets/images/photo_profil.JPEG" alt="Kevin Hermand">
+          </picture>
         </div>
         <div class="about-text">
           <div class="section-label reveal">À propos</div>
@@ -1305,31 +1398,57 @@
       </div>
       <div class="photo-grid">
         <div class="photo-item reveal" data-index="0" data-title="Verrière" data-desc="Distorsion architecturale sous une coupole de verre. La symétrie brisée par une silhouette." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF0312.jpg" alt="Verrière" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF0312.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF0312.jpg" alt="Verrière" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-1" data-index="1" data-title="Regards" data-desc="Curiosité naturelle. Ces yeux qui fixent l'objectif sans artifice ni détournement." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF2565.jpg" alt="Regards" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF2565.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF2565.jpg" alt="Regards" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-2" data-index="2" data-title="Vertiges" data-desc="Les escaliers en colimaçon dessinent une spirale infinie. L'architecture comme vertige." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF0452.jpg" alt="Vertiges" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF0452.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF0452.jpg" alt="Vertiges" loading="lazy"></picture></div>
         <div class="photo-item reveal" data-index="3" data-title="Altitude" data-desc="Un oiseau seul dans l'immensité grise. La liberté dans sa forme la plus pure." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF1939.jpg" alt="Altitude" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF1939.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF1939.jpg" alt="Altitude" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-1" data-index="4" data-title="Structure" data-desc="Géométrie et contre-jour. L'architecture comme sculpture abstraite." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF6297.jpg" alt="Structure" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF6297.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF6297.jpg" alt="Structure" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-2" data-index="5" data-title="Crépuscule" data-desc="Le soleil fond dans l'horizon. Une silhouette d'arbre contre le ciel embrasé." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF6542.jpg" alt="Crépuscule" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF6542.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF6542.jpg" alt="Crépuscule" loading="lazy"></picture></div>
         <div class="photo-item reveal" data-index="6" data-title="Réseau" data-desc="La ville en mouvement. Les trams tracent leurs routes entre les feuillages dense." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF6546.jpg" alt="Réseau" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF6546.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF6546.jpg" alt="Réseau" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-1" data-index="7" data-title="Automne doré" data-desc="Une figure traverse le parc. Les ginkgos transforment le sol en or liquide." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF5762.jpg" alt="Automne doré" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF5762.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF5762.jpg" alt="Automne doré" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-2" data-index="8" data-title="Temple" data-desc="Les toits s'emboîtent et se répondent. L'architecture millénaire dialogue avec le ciel." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF8429.jpg" alt="Temple" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF8429.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF8429.jpg" alt="Temple" loading="lazy"></picture></div>
         <div class="photo-item reveal" data-index="9" data-title="Heure bleue" data-desc="La lumière des fenêtres réchauffe la nuit normande. Un colombage se découpe sur le ciel de cobalt." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF2657.jpg" alt="Heure bleue" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF2657.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF2657.jpg" alt="Heure bleue" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-1" data-index="10" data-title="Canopée" data-desc="La tour perce le feuillage doré. L'acier et l'automne se disputent le ciel." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF5790.jpg" alt="Canopée" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF5790.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF5790.jpg" alt="Canopée" loading="lazy"></picture></div>
         <div class="photo-item reveal reveal-delay-2" data-index="11" data-title="Reflets d'or" data-desc="Une silhouette rame vers la lumière. Le soleil couchant embrase la surface du lac entre les tours." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF5827.jpg" alt="Reflets d'or" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF5827.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF5827.jpg" alt="Reflets d'or" loading="lazy"></picture></div>
         <div class="photo-item reveal" data-index="12" data-title="Passage" data-desc="Les arcades se répètent à l'infini. Deux silhouettes traversent ce couloir suspendu au-dessus du vide." data-camera="Fujifilm X100VI · 23mm f/2">
-          <img src="assets/Select-Compress/DSCF6863.jpg" alt="Passage" loading="lazy"></div>
+          <picture>
+          <source srcset="assets/Select-Compress/DSCF6863.webp" type="image/webp">
+          <img src="assets/Select-Compress/DSCF6863.jpg" alt="Passage" loading="lazy"></picture></div>
       </div>
       <div class="portfolio-more reveal">
         <a href="https://adobe.ly/4g62LNX" target="_blank" rel="noopener" class="btn-primary">
@@ -1369,47 +1488,87 @@
       <h2 class="section-title reveal">Vidéos</h2>
       <div style="height: 3rem;"></div>
 
-      <div class="video-tabs reveal">
-        <div class="video-tab active" data-tab="0">Drone Ballon</div>
-        <div class="video-tab" data-tab="1">Drone Altitude</div>
-        <div class="video-tab" data-tab="2">Démonstration</div>
+      <div class="video-tab-groups reveal">
+        <div class="video-tab-group">
+          <div class="video-tab-group-label">Caméra</div>
+          <div class="video-tabs">
+            <div class="video-tab active" data-tab="0">Stabilisé</div>
+            <div class="video-tab" data-tab="1">Ralenti</div>
+            <div class="video-tab" data-tab="2">Cinématique</div>
+          </div>
+        </div>
+        <div class="video-tab-group">
+          <div class="video-tab-group-label">Drone</div>
+          <div class="video-tabs">
+            <div class="video-tab" data-tab="3">Stabilisé</div>
+            <div class="video-tab" data-tab="4">FPV</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Setup info — visible sur les tabs caméra -->
+      <div class="video-setup-info" id="video-setup-info">
+        <div class="video-setup-gear">Fujifilm X100VI</div>
+        <div class="video-setup-desc">Rendu cinématique obtenu avec un filtre de diffusion anamorphique, simulation de film personnalisée et paramètres couleurs chauds — tons dorés, ombres légèrement teintées. Un setup compact pensé pour une esthétique immédiate, sans post-traitement lourd.</div>
       </div>
 
       <div class="video-slides active" data-slide="0">
         <div class="video-main">
           <video muted loop autoplay playsinline>
-            <source src="assets/videos/drone_ballon.mp4" type="video/mp4">
+            <source src="assets/videos/camera_stabilise.mp4" type="video/mp4">
           </video>
         </div>
         <div class="video-caption-bar">
-          <div class="video-caption-title">Drone — Ballon</div>
-          <div class="video-caption-tag">Vue Aérienne</div>
+          <div class="video-caption-title">Vidéo stabilisée</div>
+          <div class="video-caption-tag">Caméra</div>
         </div>
       </div>
 
       <div class="video-slides" data-slide="1">
         <div class="video-main">
           <video muted loop playsinline>
-            <source src="assets/videos/drone_hauteur.mp4" type="video/mp4">
+            <source src="assets/videos/camera_ralenti.mp4" type="video/mp4">
           </video>
         </div>
         <div class="video-caption-bar">
-          <div class="video-caption-title">Drone — Altitude</div>
-          <div class="video-caption-tag">Vue en hauteur</div>
+          <div class="video-caption-title">Vidéo au ralenti</div>
+          <div class="video-caption-tag">Slow Motion</div>
         </div>
       </div>
 
       <div class="video-slides" data-slide="2">
         <div class="video-main">
-          <iframe src="https://www.youtube.com/embed/OEO_pDRnKLw?si=_8OV3gpN3M-oeTXm&autoplay=0"
-            title="Démonstration Drone"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
+          <video muted loop playsinline>
+            <source src="assets/videos/camera_cinematique.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="video-caption-bar">
-          <div class="video-caption-title">Démonstration complète</div>
-          <div class="video-caption-tag">YouTube</div>
+          <div class="video-caption-title">Vidéo cinématique</div>
+          <div class="video-caption-tag">Fujifilm X100VI</div>
+        </div>
+      </div>
+
+      <div class="video-slides" data-slide="3">
+        <div class="video-main">
+          <video muted loop playsinline>
+            <source src="assets/videos/drone_ballon.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-caption-bar">
+          <div class="video-caption-title">Drone stabilisé</div>
+          <div class="video-caption-tag">Vue Aérienne</div>
+        </div>
+      </div>
+
+      <div class="video-slides" data-slide="4">
+        <div class="video-main">
+          <video muted loop playsinline>
+            <source src="assets/videos/drone_hauteur.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-caption-bar">
+          <div class="video-caption-title">Drone FPV</div>
+          <div class="video-caption-tag">First Person View</div>
         </div>
       </div>
     </div>
@@ -1537,12 +1696,22 @@
   </footer>
 
   <script>
-    // ── Loader ──────────────────────────────────────────────────────
+    // ── Loader + lazy-load vidéo hero ───────────────────────────────
+    const heroVideoEl = document.getElementById('hero-video');
+
+    function loadHeroVideo() {
+      const source = heroVideoEl.querySelector('source[data-src]');
+      if (!source || source.src) return;
+      source.src = source.dataset.src;
+      heroVideoEl.load();
+      heroVideoEl.play().catch(() => {});
+    }
+
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('loader').classList.add('hidden');
-        // trigger hero reveals
         document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+        loadHeroVideo();
       }, 1500);
     });
 
@@ -1615,9 +1784,10 @@
     });
 
     // ── Video tabs ──────────────────────────────────────────────────
+    const videoSetupInfo = document.getElementById('video-setup-info');
     document.querySelectorAll('.video-tab').forEach(tab => {
       tab.addEventListener('click', () => {
-        const idx = tab.dataset.tab;
+        const idx = parseInt(tab.dataset.tab);
         document.querySelectorAll('.video-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.video-slides').forEach(s => {
           s.classList.remove('active');
@@ -1628,6 +1798,7 @@
         slide.classList.add('active');
         const vid = slide.querySelector('video');
         if (vid) { vid.currentTime = 0; vid.play(); }
+        if (videoSetupInfo) videoSetupInfo.style.display = idx <= 2 ? 'flex' : 'none';
       });
     });
 
