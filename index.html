@@ -983,6 +983,18 @@
       margin-top: 2rem;
     }
     .drone-badge svg { width: 12px; height: 12px; fill: var(--accent); }
+    .drone-slides { display: none; }
+    .drone-slides.active { display: block; }
+    .drone-video-tab {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--fg-dim); cursor: pointer;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .drone-video-tab.active { color: var(--fg); border-bottom-color: var(--accent); }
+    .drone-video-tab:hover:not(.active) { color: var(--fg); }
 
     /* ─── CONTACT ───────────────────────────────────────────────────── */
     #contact { background: var(--bg-2); }
@@ -1537,19 +1549,45 @@
     </div>
   </section>
 
-  <!-- Drone Portfolio -->
+  <!-- Pilote de Drone -->
   <section id="drones">
+    <div class="container">
+      <div class="drone-grid">
+        <div class="drone-embed reveal">
+          <iframe src="https://www.youtube.com/embed/OEO_pDRnKLw?si=_8OV3gpN3M-oeTXm"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="drone-text">
+          <div class="section-label reveal">Démonstration</div>
+          <h2 class="section-title reveal">Pilote<br>de Drone</h2>
+          <div style="height: 2rem;"></div>
+          <p class="lead reveal">En tant que pilote de drone professionnel certifié par la DGAC et exploitant enregistré, je vous propose des prestations de qualité pour des prises de vue aériennes exceptionnelles.</p>
+          <p class="lead reveal reveal-delay-1">Que ce soit avec des drones stabilisés ou FPV, je mets à votre disposition mon expertise et ma maîtrise des différents types de drones pour répondre à vos besoins spécifiques.</p>
+          <div class="drone-badge reveal reveal-delay-2">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L8 6H4l2 4-4 2 4 2-2 4h4l4 4 4-4h4l-2-4 4-2-4-2 2-4h-4z"/></svg>
+            Certifié DGAC — Exploitant enregistré
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Drone -->
+  <section id="drone-portfolio">
     <div class="container">
       <div class="section-label reveal">Portfolio</div>
       <h2 class="section-title reveal">Drone</h2>
       <div style="height: 3rem;"></div>
 
-      <div class="video-tabs reveal">
-        <div class="video-tab active" data-tab="0">Stabilisé</div>
-        <div class="video-tab" data-tab="1">FPV</div>
+      <div class="video-tabs reveal" id="drone-tabs">
+        <div class="drone-video-tab active" data-drone-tab="0">Stabilisé</div>
+        <div class="drone-video-tab" data-drone-tab="1">FPV</div>
       </div>
 
-      <div class="video-slides active" data-slide="0">
+      <div class="drone-slides active" data-drone-slide="0">
         <div class="video-main">
           <video muted loop autoplay playsinline>
             <source src="assets/videos/drone_ballon.mp4" type="video/mp4">
@@ -1561,7 +1599,7 @@
         </div>
       </div>
 
-      <div class="video-slides" data-slide="1">
+      <div class="drone-slides" data-drone-slide="1">
         <div class="video-main">
           <video muted loop playsinline>
             <source src="assets/videos/drone_fpv.mp4" type="video/mp4">
@@ -1571,11 +1609,6 @@
           <div class="video-caption-title">Drone FPV</div>
           <div class="video-caption-tag">First Person View</div>
         </div>
-      </div>
-
-      <div class="drone-badge reveal" style="margin-top: 2rem;">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L8 6H4l2 4-4 2 4 2-2 4h4l4 4 4-4h4l-2-4 4-2-4-2 2-4h-4z"/></svg>
-        Certifié DGAC — Exploitant enregistré
       </div>
     </div>
   </section>
@@ -1775,6 +1808,23 @@
         });
         tab.classList.add('active');
         const slide = section.querySelector(`.video-slides[data-slide="${idx}"]`);
+        slide.classList.add('active');
+        const vid = slide.querySelector('video');
+        if (vid) { vid.currentTime = 0; vid.play(); }
+      });
+    });
+
+    // ── Drone portfolio tabs ─────────────────────────────────────────
+    document.querySelectorAll('.drone-video-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const idx = parseInt(tab.dataset.droneTab);
+        document.querySelectorAll('.drone-video-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.drone-slides').forEach(s => {
+          s.classList.remove('active');
+          s.querySelectorAll('video').forEach(v => v.pause());
+        });
+        tab.classList.add('active');
+        const slide = document.querySelector(`.drone-slides[data-drone-slide="${idx}"]`);
         slide.classList.add('active');
         const vid = slide.querySelector('video');
         if (vid) { vid.currentTime = 0; vid.play(); }
