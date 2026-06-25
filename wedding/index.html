@@ -50,8 +50,11 @@
       display: flex; align-items: center; gap: 0.7rem;
       text-decoration: none;
     }
-    .nav-logo img { height: 40px; width: auto; filter: invert(0); transition: filter 0.4s; }
-    nav.scrolled .nav-logo img { filter: invert(1); }
+    .nav-logo img { height: 40px; width: auto; transition: opacity 0.3s; }
+    .nav-logo .logo-white { display: block; }
+    .nav-logo .logo-black { display: none; }
+    nav.scrolled .nav-logo .logo-white { display: none; }
+    nav.scrolled .nav-logo .logo-black { display: block; }
     .nav-logo-text {
       font-family: var(--ff-serif);
       font-size: 0.8rem; font-weight: 400;
@@ -499,7 +502,8 @@
   <!-- Nav -->
   <nav id="nav">
     <a href="#hero" class="nav-logo">
-      <img src="../assets/logo-white-rmbg.png" alt="Studio 888">
+      <img class="logo-white" src="../assets/logo-white-rmbg.png" alt="Studio 888">
+      <img class="logo-black" src="../assets/logo/logo_noir_rmbg.png" alt="Studio 888">
       <span class="nav-logo-text">Mariage</span>
     </a>
     <ul class="nav-links">
