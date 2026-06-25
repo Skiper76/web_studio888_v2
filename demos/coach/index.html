@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Move. Perform. Win. — Coach personnel Normandie</title>
+  <meta name="description" content="Coach personnel en Normandie. Programmes Starter, Performance et Elite. 120+ clients, 8 ans d'expérience. Séance découverte gratuite.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #141414;
+      --bg3: #1c1c1c;
+      --orange: #ff4500;
+      --orange-dark: #d63c00;
+      --orange-dim: rgba(255,69,0,0.4);
+      --fg: #f5f5f5;
+      --fg-dim: rgba(245,245,245,0.55);
+      --fg-faint: rgba(245,245,245,0.25);
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.13);
+      --ff-head: 'Oswald', sans-serif;
+      --ff-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--ff-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 68px;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-stripe { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), #ff8c00); }
+    .nav-logo { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: var(--ff-head); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg-dim); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-cta {
+      font-family: var(--ff-head); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; background: var(--orange); color: #fff;
+      padding: 0.6rem 1.4rem; transition: background 0.3s;
+    }
+    .nav-cta:hover { background: var(--orange-dark); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; min-height: 100vh; padding-top: 68px;
+      display: flex; flex-direction: column;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(100deg, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.78) 50%, rgba(13,13,13,0.4) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: 5rem 3rem 4rem; max-width: 700px; }
+    .hero-tag {
+      font-family: var(--ff-head); font-size: 0.62rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-tag::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--orange); }
+    .hero-title {
+      font-family: var(--ff-head); font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 700; text-transform: uppercase; color: var(--fg);
+      line-height: 0.92; letter-spacing: -0.01em; margin-bottom: 2rem;
+    }
+    .hero-title .line-2 { color: var(--orange); }
+    .hero-title .line-3 { -webkit-text-stroke: 1px rgba(245,245,245,0.4); color: transparent; }
+    .hero-desc {
+      font-size: 1rem; color: var(--fg-dim); line-height: 1.75; max-width: 420px; margin-bottom: 3rem;
+    }
+    .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .hero-stat { }
+    .hero-stat-n { font-family: var(--ff-head); font-size: 2.5rem; font-weight: 700; color: var(--orange); line-height: 1; }
+    .hero-stat-l { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg-faint); margin-top: 0.2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-orange {
+      font-family: var(--ff-head); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; background: var(--orange); color: #fff;
+      padding: 1rem 2.2rem; transition: background 0.3s; display: inline-block;
+    }
+    .btn-orange:hover { background: var(--orange-dark); }
+    .btn-outline {
+      font-family: var(--ff-head); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; border: 1px solid var(--border2); color: var(--fg);
+      padding: 1rem 2.2rem; transition: 0.3s; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--fg); background: rgba(255,255,255,0.05); }
+    .hero-scroll-indicator {
+      position: absolute; bottom: 2.5rem; right: 3rem; z-index: 1;
+      font-family: var(--ff-head); font-size: 0.55rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--fg-faint);
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      writing-mode: vertical-lr;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: 7rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--ff-head); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--orange); }
+    .section-title {
+      font-family: var(--ff-head); font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 700; text-transform: uppercase; line-height: 0.95; color: var(--fg);
+      margin-bottom: 1rem; letter-spacing: -0.01em;
+    }
+    .section-title .accent { color: var(--orange); }
+    .section-lead { font-size: 0.95rem; color: var(--fg-dim); max-width: 520px; line-height: 1.75; }
+    .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+    /* ─── PROGRAMMES ─── */
+    .programmes-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); margin-top: 4rem;
+    }
+    .programme-card {
+      background: var(--bg2); padding: 3rem 2.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: background 0.3s; position: relative; overflow: hidden;
+    }
+    .programme-card.featured { background: var(--bg3); }
+    .programme-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--orange), #ff8c00); transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+    }
+    .programme-card.featured::before { transform: scaleX(1); }
+    .programme-card:hover { background: var(--bg3); }
+    .programme-card:hover::before { transform: scaleX(1); }
+    .programme-badge {
+      display: inline-flex; font-family: var(--ff-head); font-size: 0.55rem;
+      letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.7rem;
+      width: fit-content;
+    }
+    .programme-badge.starter { border: 1px solid var(--border2); color: var(--fg-dim); }
+    .programme-badge.perf { background: var(--orange); color: #fff; }
+    .programme-badge.elite { border: 1px solid var(--orange-dim); color: var(--orange); }
+    .programme-name {
+      font-family: var(--ff-head); font-size: 1.8rem; font-weight: 700;
+      text-transform: uppercase; line-height: 1; letter-spacing: -0.01em;
+    }
+    .programme-tagline { font-size: 0.82rem; color: var(--fg-dim); line-height: 1.5; }
+    .programme-price {
+      font-family: var(--ff-head); font-size: 2.5rem; font-weight: 700; color: var(--orange); line-height: 1;
+    }
+    .programme-price span { font-size: 0.8rem; color: var(--fg-faint); font-weight: 300; margin-left: 0.3rem; }
+    .programme-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; border-top: 1px solid var(--border); padding-top: 1.2rem; }
+    .programme-features li { font-size: 0.82rem; color: var(--fg-dim); display: flex; gap: 0.7rem; align-items: baseline; }
+    .programme-features li::before { content: '→'; color: var(--orange); flex-shrink: 0; font-family: var(--ff-head); }
+    .programme-cta {
+      margin-top: auto; font-family: var(--ff-head); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; padding: 0.85rem 1.5rem;
+      text-align: center; transition: 0.3s; cursor: pointer; border: none;
+    }
+    .programme-cta.primary { background: var(--orange); color: #fff; }
+    .programme-cta.primary:hover { background: var(--orange-dark); }
+    .programme-cta.secondary { border: 1px solid var(--border2); color: var(--fg); background: none; }
+    .programme-cta.secondary:hover { background: rgba(255,255,255,0.06); border-color: var(--fg); }
+
+    /* ─── MÉTHODE ─── */
+    .methode-section { background: var(--bg2); padding: 7rem 3rem; }
+    .methode-inner { max-width: 1200px; margin: 0 auto; }
+    .methode-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border: 1px solid var(--border); margin-top: 4rem;
+    }
+    .methode-step { padding: 2.5rem 2rem; border-right: 1px solid var(--border); position: relative; }
+    .methode-step:last-child { border-right: none; }
+    .methode-n { font-family: var(--ff-head); font-size: 4rem; font-weight: 700; color: rgba(255,69,0,0.1); line-height: 1; margin-bottom: 1rem; }
+    .methode-step-title { font-family: var(--ff-head); font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg); margin-bottom: 0.6rem; }
+    .methode-step-desc { font-size: 0.82rem; color: var(--fg-dim); line-height: 1.65; }
+
+    /* ─── RÉSULTATS ─── */
+    .resultats-strip {
+      background: linear-gradient(135deg, var(--orange) 0%, #ff8c00 100%);
+      padding: 4rem 3rem;
+    }
+    .resultats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .resultat-item { text-align: center; padding: 1rem; border-right: 1px solid rgba(255,255,255,0.2); }
+    .resultat-item:last-child { border-right: none; }
+    .resultat-n { font-family: var(--ff-head); font-size: 3rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.3rem; }
+    .resultat-l { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+
+    /* ─── SÉANCE DÉCOUVERTE ─── */
+    .seance-section { background: var(--bg); padding: 7rem 3rem; }
+    .seance-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .seance-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .seance-text .section-lead { margin-bottom: 2.5rem; }
+    .seance-includes { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
+    .seance-include { display: flex; align-items: center; gap: 1rem; }
+    .seance-include-check { width: 32px; height: 32px; background: var(--orange); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .seance-include-text { font-size: 0.88rem; color: var(--fg-dim); }
+    .seance-include-text strong { color: var(--fg); font-weight: 500; display: block; font-size: 0.9rem; margin-bottom: 0.1rem; }
+    .seance-price { display: flex; align-items: baseline; gap: 0.8rem; margin: 2rem 0 1rem; }
+    .seance-price-n { font-family: var(--ff-head); font-size: 3rem; font-weight: 700; color: var(--orange); line-height: 1; }
+    .seance-price-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); }
+
+    /* ─── TEMOIGNAGES ─── */
+    .temoignages-section { background: var(--bg2); padding: 7rem 3rem; }
+    .temoignages-inner { max-width: 1200px; margin: 0 auto; }
+    .temoignages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+    .temoignage { background: var(--bg3); padding: 2rem; border: 1px solid var(--border); }
+    .temoignage-result { font-family: var(--ff-head); font-size: 1.5rem; font-weight: 700; color: var(--orange); margin-bottom: 0.8rem; }
+    .temoignage-text { font-size: 0.85rem; color: var(--fg-dim); line-height: 1.7; font-style: italic; margin-bottom: 1.5rem; }
+    .temoignage-author { font-family: var(--ff-head); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg); }
+    .temoignage-detail { font-size: 0.7rem; color: var(--fg-faint); margin-top: 0.2rem; }
+
+    /* ─── CONTACT ─── */
+    .contact-section { background: var(--bg); padding: 7rem 3rem; }
+    .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .contact-info p { font-size: 0.95rem; color: var(--fg-dim); line-height: 1.75; margin-bottom: 2rem; }
+    .contact-form { background: var(--bg2); border: 1px solid var(--border); padding: 2.5rem; }
+    .form-title { font-family: var(--ff-head); font-size: 1.3rem; font-weight: 600; text-transform: uppercase; color: var(--fg); margin-bottom: 0.4rem; }
+    .form-sub { font-size: 0.8rem; color: var(--fg-dim); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .form-label { font-family: var(--ff-head); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); }
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg3); border: 1px solid var(--border2); color: var(--fg);
+      padding: 0.75rem 1rem; font-family: var(--ff-body); font-size: 0.9rem;
+      transition: border-color 0.3s; width: 100%; outline: none;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--orange); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ff4500' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-submit { width: 100%; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #080808; border-top: 1px solid var(--border);
+      padding: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-logo { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg); margin-bottom: 0.8rem; }
+    .footer-logo span { color: var(--orange); }
+    .footer-desc { font-size: 0.82rem; color: var(--fg-faint); line-height: 1.7; }
+    .footer-col-title { font-family: var(--ff-head); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 1.2rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { font-size: 0.85rem; color: var(--fg-dim); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-contact-item { font-size: 0.85rem; color: var(--fg-dim); margin-bottom: 0.5rem; }
+    .footer-bottom {
+      grid-column: 1 / -1; border-top: 1px solid var(--border);
+      padding-top: 2rem; display: flex; justify-content: space-between;
+      font-size: 0.7rem; color: var(--fg-faint);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .section { padding: 4rem 1.5rem; }
+      .programmes-grid { grid-template-columns: 1fr; }
+      .methode-section { padding: 4rem 1.5rem; }
+      .methode-grid { grid-template-columns: 1fr 1fr; }
+      .resultats-inner { grid-template-columns: 1fr 1fr; }
+      .seance-section { padding: 4rem 1.5rem; }
+      .seance-inner { grid-template-columns: 1fr; }
+      .temoignages-section { padding: 4rem 1.5rem; }
+      .temoignages-grid { grid-template-columns: 1fr; }
+      .contact-section { padding: 4rem 1.5rem; }
+      .contact-inner { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .methode-grid { grid-template-columns: 1fr; }
+      .resultats-inner { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-stripe"></div>
+    <div class="nav-logo">Move<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#programmes">Programmes</a></li>
+      <li><a href="#methode">Méthode</a></li>
+      <li><a href="#temoignages">Résultats</a></li>
+      <li><a href="#seance">Séance découverte</a></li>
+    </ul>
+    <a href="#seance" class="nav-cta">Commencer maintenant</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Coach personnel · Normandie</div>
+      <h1 class="hero-title">
+        <div>Move.</div>
+        <div class="line-2">Perform.</div>
+        <div class="line-3">Win.</div>
+      </h1>
+      <p class="hero-desc">Transformez votre corps et votre performance avec un accompagnement personnalisé, des programmes sur mesure et une méthode éprouvée.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-n">120+</div>
+          <div class="hero-stat-l">Clients transformés</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">8 ans</div>
+          <div class="hero-stat-l">D'expérience</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">98%</div>
+          <div class="hero-stat-l">Clients satisfaits</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#seance" class="btn-orange">Séance découverte gratuite</a>
+        <a href="#programmes" class="btn-outline">Voir les programmes</a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">Défiler</div>
+  </section>
+
+  <!-- Résultats strip -->
+  <div class="resultats-strip">
+    <div class="resultats-inner">
+      <div class="resultat-item">
+        <div class="resultat-n">–12 kg</div>
+        <div class="resultat-l">Perte de poids moyenne</div>
+      </div>
+      <div class="resultat-item">
+        <div class="resultat-n">+35%</div>
+        <div class="resultat-l">Force gagnée en 3 mois</div>
+      </div>
+      <div class="resultat-item">
+        <div class="resultat-n">8 sem.</div>
+        <div class="resultat-l">Pour voir les premiers résultats</div>
+      </div>
+      <div class="resultat-item">
+        <div class="resultat-n">4.9/5</div>
+        <div class="resultat-l">Note moyenne clients</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Programmes -->
+  <section class="section" id="programmes">
+    <div class="section-eyebrow">Coaching personnalisé</div>
+    <h2 class="section-title">Choisissez votre<br><span class="accent">Programme</span></h2>
+    <p class="section-lead">Trois formules adaptées à votre niveau et vos objectifs — du débutant motivé au sportif qui veut aller au bout de lui-même.</p>
+
+    <div class="programmes-grid">
+
+      <!-- Starter -->
+      <div class="programme-card">
+        <div class="programme-badge starter">Starter</div>
+        <div class="programme-name">Starter</div>
+        <p class="programme-tagline">Parfait pour débuter ou reprendre après une pause. Fondations solides, progression garantie.</p>
+        <div class="programme-price">89 €<span>/ mois</span></div>
+        <ul class="programme-features">
+          <li>2 séances de coaching / semaine</li>
+          <li>Programme nutrition de base</li>
+          <li>Suivi hebdomadaire par message</li>
+          <li>Accès app de suivi des progrès</li>
+          <li>Bilan mensuel des résultats</li>
+        </ul>
+        <button class="programme-cta secondary" onclick="document.getElementById('seance').scrollIntoView({behavior:'smooth'})">Commencer →</button>
+      </div>
+
+      <!-- Performance -->
+      <div class="programme-card featured">
+        <div class="programme-badge perf">⭐ Plus populaire</div>
+        <div class="programme-name">Performance</div>
+        <p class="programme-tagline">Pour ceux qui veulent des résultats réels, rapides et durables. Le programme qui change des vies.</p>
+        <div class="programme-price">149 €<span>/ mois</span></div>
+        <ul class="programme-features">
+          <li>4 séances de coaching / semaine</li>
+          <li>Plan nutrition complet personnalisé</li>
+          <li>Suivi quotidien & disponibilité 7j/7</li>
+          <li>Accès app premium + vidéos exclusives</li>
+          <li>Bilan biméstriel complet</li>
+          <li>Ajustement du programme en temps réel</li>
+        </ul>
+        <button class="programme-cta primary" onclick="document.getElementById('seance').scrollIntoView({behavior:'smooth'})">Je veux performer →</button>
+      </div>
+
+      <!-- Elite -->
+      <div class="programme-card">
+        <div class="programme-badge elite">Elite</div>
+        <div class="programme-name">Elite</div>
+        <p class="programme-tagline">Accompagnement total. Pour les athlètes, compétiteurs et ceux qui refusent les compromis.</p>
+        <div class="programme-price">249 €<span>/ mois</span></div>
+        <ul class="programme-features">
+          <li>Séances illimitées</li>
+          <li>Nutrition & supplémentation avancée</li>
+          <li>Coach dédié disponible 24/7</li>
+          <li>Préparation compétition</li>
+          <li>Analyse vidéo des mouvements</li>
+          <li>Accès prioritaire aux nouvelles méthodes</li>
+        </ul>
+        <button class="programme-cta secondary" onclick="document.getElementById('seance').scrollIntoView({behavior:'smooth'})">Atteindre l'élite →</button>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Méthode -->
+  <div class="methode-section" id="methode">
+    <div class="methode-inner">
+      <div class="section-eyebrow">Comment ça fonctionne</div>
+      <h2 class="section-title">La Méthode</h2>
+      <div class="methode-grid">
+        <div class="methode-step">
+          <div class="methode-n">01</div>
+          <div class="methode-step-title">Bilan initial</div>
+          <p class="methode-step-desc">Évaluation complète de votre condition physique, de vos habitudes et de vos objectifs. On part de votre réalité, pas d'une fiche type.</p>
+        </div>
+        <div class="methode-step">
+          <div class="methode-n">02</div>
+          <div class="methode-step-title">Programme sur mesure</div>
+          <p class="methode-step-desc">Création d'un plan d'entraînement et nutritionnel 100% adapté à vous — vos contraintes, votre emploi du temps, vos goûts.</p>
+        </div>
+        <div class="methode-step">
+          <div class="methode-n">03</div>
+          <div class="methode-step-title">Coaching intensif</div>
+          <p class="methode-step-desc">Séances en présentiel ou en ligne, avec correction technique en temps réel. Chaque mouvement est exécuté parfaitement.</p>
+        </div>
+        <div class="methode-step">
+          <div class="methode-n">04</div>
+          <div class="methode-step-title">Résultats & évolution</div>
+          <p class="methode-step-desc">Mesures régulières, ajustements constants, célébration de chaque victoire. Vous avancez — et on le prouve avec des chiffres.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Séance découverte -->
+  <div class="seance-section" id="seance">
+    <div class="seance-inner">
+      <div class="seance-img">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=80" alt="Séance coaching" loading="lazy">
+      </div>
+      <div class="seance-text">
+        <div class="section-eyebrow">Première étape</div>
+        <h2 class="section-title">Séance<br><span class="accent">Découverte</span><br>Gratuite</h2>
+        <p class="section-lead">Rencontrez votre futur coach, évaluez votre niveau, définissez vos objectifs — sans engagement et sans frais. La transformation commence ici.</p>
+        <div class="seance-includes">
+          <div class="seance-include">
+            <div class="seance-include-check"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="seance-include-text"><strong>Bilan physique complet</strong>Mesures corporelles, test d'endurance et analyse posturale</div>
+          </div>
+          <div class="seance-include">
+            <div class="seance-include-check"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="seance-include-text"><strong>Définition des objectifs</strong>On établit ensemble un plan réaliste et motivant pour les 3 prochains mois</div>
+          </div>
+          <div class="seance-include">
+            <div class="seance-include-check"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="seance-include-text"><strong>Séance d'entraînement test</strong>1h de coaching avec votre futur programme pour sentir la méthode</div>
+          </div>
+        </div>
+        <div class="seance-price">
+          <div class="seance-price-n">Gratuit</div>
+          <div class="seance-price-label">Sans engagement · 1h30 de bilan</div>
+        </div>
+        <a href="#contact" class="btn-orange">Réserver ma séance gratuite →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Témoignages -->
+  <div class="temoignages-section" id="temoignages">
+    <div class="temoignages-inner">
+      <div class="section-eyebrow">Ils l'ont fait</div>
+      <h2 class="section-title">Leurs <span class="accent">Résultats</span></h2>
+      <div class="temoignages-grid">
+        <div class="temoignage">
+          <div class="temoignage-result">–14 kg en 4 mois</div>
+          <p class="temoignage-text">«&nbsp;Je n'aurais jamais cru pouvoir y arriver. La méthode est exigeante mais efficace — et le soutien constant fait toute la différence. Je ne reviendrai jamais en arrière.&nbsp;»</p>
+          <div class="temoignage-author">Sophie M.</div>
+          <div class="temoignage-detail">Programme Performance — 4 mois</div>
+        </div>
+        <div class="temoignage">
+          <div class="temoignage-result">+40% de force</div>
+          <p class="temoignage-text">«&nbsp;En tant qu'ancien sportif, je cherchais quelqu'un capable de me pousser vraiment. J'ai trouvé avec ce programme — les résultats au bout de 3 mois sont bluffants.&nbsp;»</p>
+          <div class="temoignage-author">Karim B.</div>
+          <div class="temoignage-detail">Programme Elite — 6 mois</div>
+        </div>
+        <div class="temoignage">
+          <div class="temoignage-result">Objectif marathon</div>
+          <p class="temoignage-text">«&nbsp;Du canap à finir mon premier marathon en 8 mois. Sans ce coaching, c'était impossible. La structure du programme et le suivi régulier m'ont tout donné.&nbsp;»</p>
+          <div class="temoignage-author">Claire D.</div>
+          <div class="temoignage-detail">Programme Starter puis Performance — 8 mois</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="section-eyebrow">Réserver</div>
+        <h2 class="section-title">Commençons<br><span class="accent">maintenant</span></h2>
+        <p>Remplissez ce formulaire pour réserver votre séance découverte gratuite ou poser toute question sur les programmes. Je vous rappelle sous 24h.</p>
+        <div style="margin-top:2rem">
+          <div style="font-family:var(--ff-head);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:0.5rem">Instagram</div>
+          <div style="font-size:0.9rem;color:var(--fg-dim)">@coach.normandie</div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <div style="font-family:var(--ff-head);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:0.5rem">Téléphone</div>
+          <div style="font-size:0.9rem;color:var(--fg-dim)">06 XX XX XX XX</div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-title">Séance découverte gratuite</div>
+        <div class="form-sub">Disponibilités confirmées sous 24h — séance offerte sans engagement</div>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prénom</label>
+              <input class="form-input" type="text" placeholder="Prénom">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom</label>
+              <input class="form-input" type="text" placeholder="Nom">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Téléphone</label>
+            <input class="form-input" type="tel" placeholder="06 XX XX XX XX">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Objectif principal</label>
+            <select class="form-select form-input">
+              <option>Perdre du poids</option>
+              <option>Prendre du muscle</option>
+              <option>Améliorer mes performances sportives</option>
+              <option>Remise en forme générale</option>
+              <option>Préparation compétition</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message (niveau, objectifs précis…)</label>
+            <textarea class="form-textarea" placeholder="Décrivez brièvement votre situation actuelle et ce que vous souhaitez accomplir…"></textarea>
+          </div>
+          <button type="submit" class="btn-orange form-submit">Réserver ma séance gratuite</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <div class="footer-logo">Move<span>.</span></div>
+      <div class="footer-desc">Coach personnel en Normandie. 8 ans d'expérience, 120+ clients transformés, méthode éprouvée.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <div class="footer-links">
+        <a href="#programmes">Programmes</a>
+        <a href="#methode">La méthode</a>
+        <a href="#temoignages">Résultats</a>
+        <a href="#seance">Séance découverte</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-contact-item">06 XX XX XX XX</div>
+      <div class="footer-contact-item">coach@move-normandie.fr</div>
+      <div class="footer-contact-item">Normandie &amp; visio partout en France</div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Move. Perform. Win. — Coach personnel Normandie</span>
+      <span>Site réalisé par Studio 888</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Votre demande est envoyée ! Je vous contacte sous 24h pour confirmer votre séance découverte.');
+    });
+  </script>
+</body>
+</html>

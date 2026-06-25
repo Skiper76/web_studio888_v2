@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maître Dupont & Associés — Cabinet d'avocats</title>
+  <meta name="description" content="Cabinet d'avocats Maître Dupont & Associés. Droit des affaires, droit de la famille, droit pénal. Prendre rendez-vous.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0c10;
+      --bg2: #0f1218;
+      --bg3: #161b24;
+      --gold: #c8aa64;
+      --gold-dim: rgba(200,170,100,0.45);
+      --gold-faint: rgba(200,170,100,0.12);
+      --fg: #e8e0d0;
+      --fg-dim: rgba(232,224,208,0.5);
+      --fg-faint: rgba(232,224,208,0.25);
+      --border: rgba(200,170,100,0.1);
+      --border2: rgba(200,170,100,0.2);
+      --ff-serif: 'Cormorant Garamond', serif;
+      --ff-body: 'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--ff-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(10,12,16,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; flex-direction: column; gap: 0.1rem;
+    }
+    .nav-brand-name {
+      font-family: var(--ff-serif); font-size: 1rem; letter-spacing: 0.08em;
+      color: var(--gold); font-weight: 400;
+    }
+    .nav-brand-sub { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fg-faint); }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-dim); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid var(--border2); color: var(--gold);
+      padding: 0.6rem 1.4rem; transition: 0.3s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; height: 100vh; min-height: 650px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,12,16,0.65) 0%, rgba(10,12,16,0.8) 60%, var(--bg) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: 0 2rem; max-width: 820px; }
+    .hero-rule { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 2rem; }
+    .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .hero-title {
+      font-family: var(--ff-serif); font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300; letter-spacing: 0.04em; color: var(--fg); line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-subtitle {
+      font-family: var(--ff-serif); font-style: italic; font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      color: var(--fg-dim); margin: 1.5rem 0 2.5rem; line-height: 1.8;
+    }
+    .hero-sep { width: 40px; height: 1px; background: var(--border2); margin: 0 auto 2.5rem; }
+    .hero-domains { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .hero-domain { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); }
+    .hero-domain::before { content: '·'; margin-right: 0.5rem; color: var(--gold); }
+    .btn-gold-outline {
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+      border: 1px solid var(--border2); color: var(--gold); padding: 1rem 2.5rem;
+      transition: 0.3s; display: inline-block;
+    }
+    .btn-gold-outline:hover { background: var(--gold); color: var(--bg); }
+    .btn-gold-solid {
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+      background: var(--gold); color: var(--bg); padding: 1rem 2.5rem;
+      transition: 0.3s; display: inline-block; margin-right: 1rem;
+    }
+    .btn-gold-solid:hover { background: #d4b872; }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: 7rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-center { text-align: center; }
+    .section-eyebrow {
+      font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-eyebrow.centered { justify-content: center; }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+    .section-eyebrow.centered::after { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+    .section-title {
+      font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300; line-height: 1.2; margin-bottom: 1rem; color: var(--fg);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-lead { font-family: var(--ff-serif); font-style: italic; font-size: 1.05rem; color: var(--fg-dim); max-width: 580px; line-height: 1.85; }
+    .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+    /* ─── EXPERTISES ─── */
+    .expertises-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); margin-top: 4rem;
+    }
+    .expertise-card {
+      background: var(--bg2); padding: 3.5rem 2.5rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      transition: background 0.4s; position: relative; overflow: hidden;
+    }
+    .expertise-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: var(--gold); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.5s;
+    }
+    .expertise-card:hover { background: var(--bg3); }
+    .expertise-card:hover::after { transform: scaleX(1); }
+    .expertise-num {
+      font-family: var(--ff-serif); font-size: 3.5rem; font-weight: 300;
+      color: var(--gold-faint); line-height: 1; letter-spacing: -0.02em;
+    }
+    .expertise-icon { margin-bottom: 0.5rem; }
+    .expertise-title {
+      font-family: var(--ff-serif); font-size: 1.6rem; font-weight: 400;
+      color: var(--fg); line-height: 1.2;
+    }
+    .expertise-desc {
+      font-family: var(--ff-serif); font-style: italic; font-size: 0.95rem;
+      color: var(--fg-dim); line-height: 1.8;
+    }
+    .expertise-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem; }
+    .expertise-list li { font-size: 0.8rem; color: var(--fg-faint); display: flex; align-items: baseline; gap: 0.6rem; }
+    .expertise-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+    .expertise-cta {
+      margin-top: auto; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 0.5rem; transition: gap 0.3s;
+    }
+    .expertise-card:hover .expertise-cta { gap: 0.8rem; }
+
+    /* ─── LE CABINET ─── */
+    .cabinet-section { background: var(--bg2); padding: 7rem 3rem; }
+    .cabinet-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .cabinet-img { position: relative; }
+    .cabinet-img img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border: 1px solid var(--border); }
+    .cabinet-img-label {
+      position: absolute; bottom: 1.5rem; right: 1.5rem;
+      background: rgba(10,12,16,0.9); border: 1px solid var(--border2);
+      padding: 1rem 1.5rem; text-align: right;
+    }
+    .cabinet-img-label-name { font-family: var(--ff-serif); font-size: 1rem; color: var(--fg); margin-bottom: 0.2rem; }
+    .cabinet-img-label-role { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); }
+    .cabinet-text p {
+      font-family: var(--ff-serif); font-size: 1.05rem; color: var(--fg-dim);
+      line-height: 1.95; margin-bottom: 1.5rem;
+    }
+    .cabinet-text p strong { color: var(--gold); font-weight: 600; }
+    .cabinet-quote {
+      border-left: 2px solid var(--gold); padding: 1.2rem 2rem; margin: 2rem 0;
+      background: var(--gold-faint);
+    }
+    .cabinet-quote p {
+      font-family: var(--ff-serif); font-style: italic; font-size: 1.1rem;
+      color: var(--fg); line-height: 1.7; margin: 0;
+    }
+    .cabinet-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .cabinet-stat { text-align: center; padding: 1.5rem; border: 1px solid var(--border); }
+    .cabinet-stat-n { font-family: var(--ff-serif); font-size: 2rem; color: var(--gold); line-height: 1; margin-bottom: 0.3rem; }
+    .cabinet-stat-l { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg-faint); }
+
+    /* ─── VALEURS ─── */
+    .valeurs-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border: 1px solid var(--border); margin-top: 4rem;
+    }
+    .valeur-item { padding: 2.5rem 2rem; border-right: 1px solid var(--border); text-align: center; }
+    .valeur-item:last-child { border-right: none; }
+    .valeur-icon { font-family: var(--ff-serif); font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
+    .valeur-title { font-family: var(--ff-serif); font-size: 1.1rem; margin-bottom: 0.6rem; }
+    .valeur-desc { font-size: 0.8rem; color: var(--fg-dim); line-height: 1.65; }
+
+    /* ─── CONTACT ─── */
+    .contact-section { background: var(--bg); padding: 7rem 3rem; }
+    .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-info p { font-family: var(--ff-serif); font-style: italic; font-size: 1.05rem; color: var(--fg-dim); line-height: 1.9; margin-bottom: 2rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .contact-detail { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .contact-detail-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+    .contact-detail-value { font-size: 0.9rem; color: var(--fg-dim); line-height: 1.6; }
+    .contact-detail-icon { width: 32px; height: 32px; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.2rem; }
+
+    .contact-form { background: var(--bg3); border: 1px solid var(--border); padding: 2.5rem; }
+    .contact-form-title { font-family: var(--ff-serif); font-size: 1.6rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .contact-form-sub { font-family: var(--ff-serif); font-style: italic; font-size: 0.88rem; color: var(--fg-dim); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .form-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); }
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg2); border: 1px solid var(--border2); color: var(--fg);
+      padding: 0.75rem 1rem; font-family: var(--ff-body); font-size: 0.9rem;
+      transition: border-color 0.3s; width: 100%; outline: none;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8aa64' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-submit { width: 100%; margin-top: 0.5rem; }
+    .form-note { font-size: 0.7rem; color: var(--fg-faint); margin-top: 0.8rem; text-align: center; font-style: italic; font-family: var(--ff-serif); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #060709; border-top: 1px solid var(--border);
+      padding: 3.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-brand-name { font-family: var(--ff-serif); font-size: 1.3rem; color: var(--gold); margin-bottom: 0.4rem; }
+    .footer-brand-sub { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 1rem; }
+    .footer-brand-desc { font-family: var(--ff-serif); font-style: italic; font-size: 0.88rem; color: var(--fg-dim); line-height: 1.7; }
+    .footer-col-title { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-links a { font-family: var(--ff-serif); font-size: 0.9rem; color: var(--fg-dim); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-address { font-family: var(--ff-serif); font-style: italic; font-size: 0.9rem; color: var(--fg-dim); line-height: 1.9; }
+    .footer-bottom {
+      grid-column: 1 / -1; border-top: 1px solid var(--border);
+      padding-top: 2rem; display: flex; justify-content: space-between;
+      font-size: 0.68rem; color: var(--fg-faint);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .section { padding: 4rem 1.5rem; }
+      .expertises-grid { grid-template-columns: 1fr; }
+      .cabinet-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .cabinet-section { padding: 4rem 1.5rem; }
+      .valeurs-grid { grid-template-columns: 1fr 1fr; }
+      .contact-section { padding: 4rem 1.5rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .cabinet-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .valeurs-grid { grid-template-columns: 1fr; }
+      .hero-domains { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-brand">
+      <div class="nav-brand-name">Maître Dupont &amp; Associés</div>
+      <div class="nav-brand-sub">Cabinet d'avocats</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#expertises">Expertises</a></li>
+      <li><a href="#cabinet">Le Cabinet</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Prendre rendez-vous</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-rule"></div>
+      <div class="hero-eyebrow">Cabinet d'avocats — Paris & Normandie</div>
+      <h1 class="hero-title">Maître Dupont<br><em>&amp; Associés</em></h1>
+      <p class="hero-subtitle">Un cabinet fondé sur la rigueur, la discrétion et l'engagement. Nous défendons vos intérêts avec la même exigence depuis plus de vingt ans.</p>
+      <div class="hero-sep"></div>
+      <div class="hero-domains">
+        <span class="hero-domain">Droit des affaires</span>
+        <span class="hero-domain">Droit de la famille</span>
+        <span class="hero-domain">Droit pénal</span>
+      </div>
+      <a href="#contact" class="btn-gold-solid">Prendre rendez-vous</a>
+      <a href="#expertises" class="btn-gold-outline">Nos expertises</a>
+    </div>
+  </section>
+
+  <!-- Expertises -->
+  <section class="section" id="expertises">
+    <div class="section-eyebrow">Domaines d'intervention</div>
+    <h2 class="section-title">Nos <em>Expertises</em></h2>
+    <p class="section-lead">Trois domaines de droit où notre cabinet dispose d'une expertise reconnue, au service de particuliers et d'entreprises.</p>
+
+    <div class="expertises-grid">
+
+      <!-- Droit des affaires -->
+      <div class="expertise-card">
+        <div class="expertise-num">01</div>
+        <div class="expertise-title">Droit des<br>Affaires</div>
+        <p class="expertise-desc">Nous accompagnons les entreprises à chaque étape de leur développement : création, croissance, transmission et contentieux commercial.</p>
+        <ul class="expertise-list">
+          <li>Création et structuration de sociétés</li>
+          <li>Rédaction et négociation de contrats</li>
+          <li>Fusions, acquisitions et cessions</li>
+          <li>Contentieux commercial et arbitrage</li>
+          <li>Propriété intellectuelle et marques</li>
+        </ul>
+        <a href="#contact" class="expertise-cta">Consultation →</a>
+      </div>
+
+      <!-- Droit de la famille -->
+      <div class="expertise-card">
+        <div class="expertise-num">02</div>
+        <div class="expertise-title">Droit de<br>la Famille</div>
+        <p class="expertise-desc">Dans les moments les plus délicats de votre vie, nous vous apportons clarté, soutien et une défense efficace de vos droits et de ceux de vos enfants.</p>
+        <ul class="expertise-list">
+          <li>Divorce et séparation amiable ou judiciaire</li>
+          <li>Garde et autorité parentale</li>
+          <li>Pension alimentaire et prestation compensatoire</li>
+          <li>Successions et héritages</li>
+          <li>Adoption et filiation</li>
+        </ul>
+        <a href="#contact" class="expertise-cta">Consultation →</a>
+      </div>
+
+      <!-- Droit pénal -->
+      <div class="expertise-card">
+        <div class="expertise-num">03</div>
+        <div class="expertise-title">Droit<br>Pénal</div>
+        <p class="expertise-desc">Mis en cause ou victime, vous bénéficiez d'une défense combative et d'une présence constante à vos côtés, à toutes les étapes de la procédure pénale.</p>
+        <ul class="expertise-list">
+          <li>Défense devant les juridictions pénales</li>
+          <li>Assistance en garde à vue</li>
+          <li>Infractions économiques et financières</li>
+          <li>Droit de la presse et réseaux sociaux</li>
+          <li>Aide aux victimes d'infractions</li>
+        </ul>
+        <a href="#contact" class="expertise-cta">Consultation →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Valeurs -->
+  <section class="section">
+    <div class="section-eyebrow centered">Notre philosophie</div>
+    <h2 class="section-title" style="text-align:center">Les valeurs<br>du cabinet</h2>
+    <div class="valeurs-grid">
+      <div class="valeur-item">
+        <div class="valeur-icon">I</div>
+        <div class="valeur-title">Indépendance</div>
+        <p class="valeur-desc">Notre cabinet est totalement indépendant, ce qui garantit une défense libre de tout conflit d'intérêts.</p>
+      </div>
+      <div class="valeur-item">
+        <div class="valeur-icon">R</div>
+        <div class="valeur-title">Rigueur</div>
+        <p class="valeur-desc">Chaque dossier est traité avec la même exigence intellectuelle et la même minutie dans l'analyse juridique.</p>
+      </div>
+      <div class="valeur-item">
+        <div class="valeur-icon">D</div>
+        <div class="valeur-title">Discrétion</div>
+        <p class="valeur-desc">La confidentialité absolue est au cœur de notre déontologie. Vos informations ne sortent jamais du cabinet.</p>
+      </div>
+      <div class="valeur-item">
+        <div class="valeur-icon">P</div>
+        <div class="valeur-title">Proximité</div>
+        <p class="valeur-desc">Nous vous accompagnons personnellement à chaque étape et restons disponibles pour répondre à vos questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Le Cabinet -->
+  <div class="cabinet-section" id="cabinet">
+    <div class="cabinet-inner">
+      <div class="cabinet-img">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=80" alt="Cabinet Dupont" loading="lazy">
+        <div class="cabinet-img-label">
+          <div class="cabinet-img-label-name">Maître Élise Dupont</div>
+          <div class="cabinet-img-label-role">Associée fondatrice</div>
+        </div>
+      </div>
+      <div class="cabinet-text">
+        <div class="section-eyebrow">Notre histoire</div>
+        <h2 class="section-title">Le <em>Cabinet</em></h2>
+        <p>Fondé en <strong>2003</strong> par Maître Élise Dupont, le cabinet s'est imposé comme une référence en Normandie et à Paris dans les domaines du droit des affaires, du droit de la famille et du droit pénal.</p>
+        <p>Notre équipe de <strong>cinq avocats associés</strong> partage une même conviction : le droit doit être accessible, compréhensible et au service de ceux qui en ont besoin. Nous privilégions la résolution amiable des conflits lorsqu'elle est possible, sans jamais renoncer à défendre vigoureusement nos clients devant les juridictions.</p>
+        <div class="cabinet-quote">
+          <p>« Notre rôle est d'être à vos côtés non seulement comme juristes, mais comme partenaires de confiance dans les moments qui comptent le plus. »</p>
+        </div>
+        <div class="cabinet-stats">
+          <div class="cabinet-stat">
+            <div class="cabinet-stat-n">20+</div>
+            <div class="cabinet-stat-l">Années d'expérience</div>
+          </div>
+          <div class="cabinet-stat">
+            <div class="cabinet-stat-n">5</div>
+            <div class="cabinet-stat-l">Avocats associés</div>
+          </div>
+          <div class="cabinet-stat">
+            <div class="cabinet-stat-n">98%</div>
+            <div class="cabinet-stat-l">Clients satisfaits</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="section-eyebrow">Nous contacter</div>
+        <h2 class="section-title">Prendre<br><em>Rendez-vous</em></h2>
+        <p>La première consultation est l'occasion de faire le point sur votre situation, d'évaluer vos options et de vous informer sur nos honoraires. Elle peut se tenir en cabinet, par téléphone ou en visioconférence.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg width="14" height="14" fill="none" stroke="#c8aa64" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .92h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div><div class="contact-detail-label">Téléphone</div><div class="contact-detail-value">01 23 45 67 89</div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg width="14" height="14" fill="none" stroke="#c8aa64" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-detail-label">Email</div><div class="contact-detail-value">contact@cabinet-dupont.fr</div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg width="14" height="14" fill="none" stroke="#c8aa64" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="contact-detail-label">Adresse</div><div class="contact-detail-value">24 rue de la République<br>76200 Dieppe — Normandie</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="contact-form-title">Demande de rendez-vous</div>
+        <div class="contact-form-sub">Première consultation confidentielle — réponse sous 48h ouvrées</div>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prénom</label>
+              <input class="form-input" type="text" placeholder="Prénom">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom</label>
+              <input class="form-input" type="text" placeholder="Nom">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Téléphone</label>
+              <input class="form-input" type="tel" placeholder="06 XX XX XX XX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input class="form-input" type="email" placeholder="votre@email.fr">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Domaine concerné</label>
+            <select class="form-select form-input">
+              <option value="">Sélectionner un domaine</option>
+              <option>Droit des affaires</option>
+              <option>Droit de la famille</option>
+              <option>Droit pénal</option>
+              <option>Autre demande</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description succincte de votre situation</label>
+            <textarea class="form-textarea" placeholder="Décrivez brièvement votre situation ou votre demande (toute information restera strictement confidentielle)…"></textarea>
+          </div>
+          <button type="submit" class="btn-gold-solid form-submit">Envoyer ma demande</button>
+          <div class="form-note">Toute information communiquée est strictement confidentielle et couverte par le secret professionnel.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <div class="footer-brand-name">Maître Dupont &amp; Associés</div>
+      <div class="footer-brand-sub">Cabinet d'avocats au Barreau de Rouen</div>
+      <div class="footer-brand-desc">Défense de vos droits avec rigueur, indépendance et discrétion depuis 2003.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Expertises</div>
+      <div class="footer-links">
+        <a href="#expertises">Droit des affaires</a>
+        <a href="#expertises">Droit de la famille</a>
+        <a href="#expertises">Droit pénal</a>
+        <a href="#cabinet">Le cabinet</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-address">
+        24 rue de la République<br>
+        76200 Dieppe, Normandie<br><br>
+        01 23 45 67 89<br>
+        contact@cabinet-dupont.fr<br><br>
+        Lun – Ven : 9h – 18h
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Maître Dupont &amp; Associés — Cabinet d'avocats</span>
+      <span>Site réalisé par Studio 888</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Votre demande de rendez-vous a bien été envoyée. Nous vous répondrons sous 48h ouvrées.');
+    });
+  </script>
+</body>
+</html>

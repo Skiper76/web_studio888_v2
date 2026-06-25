@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProPlomb — Plombier chauffagiste Normandie | Urgence 24h/7j</title>
+  <meta name="description" content="ProPlomb, plombier chauffagiste en Normandie. Urgence 24h/7j, dépannage, installation chaudière, rénovation salle de bain. Devis gratuit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f6f9;
+      --bg2: #ffffff;
+      --bg3: #e8edf5;
+      --navy: #1e3a5f;
+      --navy-dark: #152d4a;
+      --navy-light: #2d5a8e;
+      --red: #e8001d;
+      --red-dark: #c0001a;
+      --fg: #1a2332;
+      --fg-mid: #4a5568;
+      --fg-dim: #718096;
+      --border: rgba(30,58,95,0.1);
+      --border2: rgba(30,58,95,0.2);
+      --ff-head: 'Oswald', sans-serif;
+      --ff-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--ff-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--navy); padding: 0 3rem;
+      display: flex; align-items: center; justify-content: space-between; height: 70px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.8rem; }
+    .nav-logo-icon {
+      width: 40px; height: 40px; background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-text {
+      font-family: var(--ff-head); font-size: 1.3rem; font-weight: 700;
+      color: #fff; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .nav-logo-text span { color: var(--red); }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); transition: color 0.3s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-urgence {
+      background: var(--red); color: #fff; padding: 0.6rem 1.4rem;
+      font-family: var(--ff-head); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; transition: background 0.3s;
+    }
+    .nav-urgence:hover { background: var(--red-dark); }
+    .nav-urgence-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; min-height: 100vh; padding-top: 70px;
+      display: flex; flex-direction: column;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(110deg, rgba(30,58,95,0.92) 0%, rgba(30,58,95,0.75) 55%, rgba(30,58,95,0.4) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1; padding: 5rem 3rem 4rem;
+      max-width: 680px;
+    }
+    .urgence-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--red); color: #fff;
+      font-family: var(--ff-head); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 0.5rem 1.2rem; margin-bottom: 2rem;
+    }
+    .urgence-badge-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+    .hero-title {
+      font-family: var(--ff-head); font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 700; text-transform: uppercase; color: #fff;
+      line-height: 1; letter-spacing: -0.01em; margin-bottom: 1.5rem;
+    }
+    .hero-title .accent { color: var(--red); display: block; }
+    .hero-subtitle {
+      font-size: 1.05rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 3rem; max-width: 480px;
+    }
+    .hero-phone {
+      display: flex; align-items: center; gap: 1.2rem; margin-bottom: 2.5rem;
+    }
+    .hero-phone-label {
+      font-family: var(--ff-head); font-size: 0.62rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+    }
+    .hero-phone-number {
+      font-family: var(--ff-head); font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; color: #fff; letter-spacing: 0.02em; line-height: 1;
+      transition: color 0.3s;
+    }
+    .hero-phone-number:hover { color: var(--red); }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-red {
+      font-family: var(--ff-head); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; background: var(--red); color: #fff;
+      padding: 0.95rem 2rem; transition: background 0.3s; display: inline-block;
+    }
+    .btn-red:hover { background: var(--red-dark); }
+    .btn-white-outline {
+      font-family: var(--ff-head); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; border: 2px solid rgba(255,255,255,0.4); color: #fff;
+      padding: 0.95rem 2rem; transition: 0.3s; display: inline-block;
+    }
+    .btn-white-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    .hero-stats {
+      position: relative; z-index: 1;
+      margin-top: auto; background: var(--navy-dark);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 3px solid var(--red);
+    }
+    .hero-stat {
+      padding: 1.8rem 2rem; border-right: 1px solid rgba(255,255,255,0.08); text-align: center;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-n {
+      font-family: var(--ff-head); font-size: 2.2rem; font-weight: 700;
+      color: #fff; line-height: 1; margin-bottom: 0.3rem;
+    }
+    .hero-stat-n .red { color: var(--red); }
+    .hero-stat-l { font-size: 0.72rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--ff-head); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 2px; background: var(--red); }
+    .section-title {
+      font-family: var(--ff-head); font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; text-transform: uppercase; line-height: 1; color: var(--fg); margin-bottom: 1rem;
+    }
+    .section-title .accent { color: var(--navy); }
+    .section-lead { font-size: 1rem; color: var(--fg-mid); max-width: 580px; line-height: 1.75; }
+    .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+    /* ─── SERVICES ─── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 4rem;
+    }
+    .service-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem;
+      transition: box-shadow 0.3s, border-color 0.3s; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--red); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover { box-shadow: 0 8px 30px rgba(30,58,95,0.12); border-color: var(--border2); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px; background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon { background: var(--red); }
+    .service-card:hover .service-icon svg { stroke: #fff; }
+    .service-title {
+      font-family: var(--ff-head); font-size: 1.2rem; font-weight: 600;
+      text-transform: uppercase; color: var(--navy); letter-spacing: 0.05em;
+    }
+    .service-desc { font-size: 0.88rem; color: var(--fg-mid); line-height: 1.7; }
+    .service-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem; }
+    .service-list li { font-size: 0.82rem; color: var(--fg-dim); display: flex; align-items: baseline; gap: 0.6rem; }
+    .service-list li::before { content: '✓'; color: var(--red); font-weight: 600; flex-shrink: 0; }
+    .service-badge {
+      margin-top: auto; display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--ff-head); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--red); border: 1px solid rgba(232,0,29,0.25); padding: 0.4rem 0.8rem;
+      width: fit-content;
+    }
+
+    /* ─── URGENCE STRIP ─── */
+    .urgence-strip {
+      background: var(--red); padding: 2.5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    }
+    .urgence-strip-content { }
+    .urgence-strip-title {
+      font-family: var(--ff-head); font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 700; color: #fff; text-transform: uppercase; line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .urgence-strip-sub { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+    .urgence-strip-phone {
+      font-family: var(--ff-head); font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700; color: #fff; letter-spacing: 0.02em; white-space: nowrap;
+    }
+    .urgence-strip-phone:hover { text-decoration: underline; }
+    .btn-white {
+      font-family: var(--ff-head); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; background: #fff; color: var(--red);
+      padding: 0.95rem 2rem; transition: 0.3s; white-space: nowrap; display: inline-block;
+    }
+    .btn-white:hover { background: rgba(255,255,255,0.9); }
+
+    /* ─── DEVIS ─── */
+    .devis-section { background: var(--navy); padding: 7rem 3rem; }
+    .devis-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .devis-info .section-title { color: #fff; }
+    .devis-info .section-lead { color: rgba(255,255,255,0.65); }
+    .devis-avantages { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2.5rem; }
+    .devis-avantage { display: flex; align-items: flex-start; gap: 1rem; }
+    .devis-avantage-check {
+      width: 28px; height: 28px; background: var(--red); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; margin-top: 0.1rem;
+    }
+    .devis-avantage-text h4 { font-family: var(--ff-head); font-size: 0.9rem; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+    .devis-avantage-text p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    .devis-form { background: var(--bg2); padding: 2.5rem; }
+    .devis-form-title { font-family: var(--ff-head); font-size: 1.3rem; font-weight: 600; text-transform: uppercase; color: var(--navy); margin-bottom: 0.4rem; }
+    .devis-form-sub { font-size: 0.82rem; color: var(--fg-dim); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .form-label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); font-weight: 600; }
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg); border: 1.5px solid var(--border2); color: var(--fg);
+      padding: 0.75rem 1rem; font-family: var(--ff-body); font-size: 0.9rem;
+      transition: border-color 0.3s; width: 100%; outline: none;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--navy); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231e3a5f' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-submit { width: 100%; margin-top: 0.5rem; }
+    .form-note { font-size: 0.72rem; color: var(--fg-dim); margin-top: 0.8rem; text-align: center; }
+
+    /* ─── TEMOIGNAGES ─── */
+    .temoignages-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .temoignage-card { background: var(--bg2); border: 1px solid var(--border); padding: 2rem; }
+    .temoignage-stars { color: #f59e0b; font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+    .temoignage-text { font-size: 0.88rem; color: var(--fg-mid); line-height: 1.7; font-style: italic; margin-bottom: 1.5rem; }
+    .temoignage-author { display: flex; align-items: center; gap: 0.8rem; }
+    .temoignage-avatar { width: 40px; height: 40px; background: var(--bg3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-head); font-size: 0.9rem; color: var(--navy); font-weight: 600; }
+    .temoignage-name { font-weight: 600; font-size: 0.85rem; color: var(--fg); }
+    .temoignage-location { font-size: 0.72rem; color: var(--fg-dim); }
+
+    /* ─── ZONES ─── */
+    .zones-strip { background: var(--bg3); padding: 3rem; }
+    .zones-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+    .zones-label { font-family: var(--ff-head); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); white-space: nowrap; font-weight: 600; }
+    .zones-list { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .zone-tag {
+      font-family: var(--ff-head); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      background: var(--navy); color: #fff; padding: 0.4rem 0.9rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy-dark); padding: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-logo-box { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .footer-logo-icon { width: 36px; height: 36px; background: var(--red); display: flex; align-items: center; justify-content: center; }
+    .footer-logo-text { font-family: var(--ff-head); font-size: 1.2rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
+    .footer-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+    .footer-col-title { font-family: var(--ff-head); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.6); transition: color 0.3s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-phone { font-family: var(--ff-head); font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+    .footer-address { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.8; }
+    .footer-bottom {
+      grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 2rem; display: flex; justify-content: space-between;
+      font-size: 0.72rem; color: rgba(255,255,255,0.3);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .section { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .urgence-strip { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+      .devis-section { padding: 4rem 1.5rem; }
+      .devis-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .temoignages-grid { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="nav-logo-text">Pro<span>Plomb</span></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#devis">Devis gratuit</a></li>
+      <li><a href="#temoignages">Avis clients</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:0612345678" class="nav-urgence">
+      <div class="nav-urgence-dot"></div>
+      Urgence 24h/7j
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="urgence-badge">
+        <div class="urgence-badge-dot"></div>
+        Intervention rapide — Urgence 24h/7j
+      </div>
+      <h1 class="hero-title">
+        Plombier<br>
+        <span class="accent">Chauffagiste</span><br>
+        Normandie
+      </h1>
+      <p class="hero-subtitle">Dépannage rapide, installation de chaudières, rénovation salle de bain. Devis gratuit — intervention sous 2h en urgence.</p>
+      <div class="hero-phone">
+        <div>
+          <div class="hero-phone-label">Appelez maintenant</div>
+          <a href="tel:0612345678" class="hero-phone-number">06 12 34 56 78</a>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#devis" class="btn-red">Devis gratuit en ligne</a>
+        <a href="tel:0612345678" class="btn-white-outline">Appeler maintenant</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-n">15<span class="red">+</span></div>
+        <div class="hero-stat-l">Années d'expérience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">1200<span class="red">+</span></div>
+        <div class="hero-stat-l">Interventions / an</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n"><span class="red">2h</span></div>
+        <div class="hero-stat-l">Délai intervention urgence</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">4.9<span class="red">/5</span></div>
+        <div class="hero-stat-l">Note Google</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="section-eyebrow">Ce que nous faisons</div>
+    <h2 class="section-title">Nos <span class="accent">Services</span></h2>
+    <p class="section-lead">Intervention rapide sur toute la région normande. Artisan qualifié RGE, assurance décennale incluse sur tous les travaux.</p>
+
+    <div class="services-grid">
+
+      <!-- Dépannage -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="#1e3a5f" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="service-title">Dépannage d'urgence</div>
+        <div class="service-desc">Fuite d'eau, canalisation bouchée, panne de chauffe-eau — nous intervenons 7j/7, 24h/24 pour résoudre vos urgences rapidement.</div>
+        <ul class="service-list">
+          <li>Intervention sous 2h en urgence</li>
+          <li>Fuite et canalisation bouchée</li>
+          <li>Panne chauffe-eau</li>
+          <li>Disponible nuits et week-ends</li>
+        </ul>
+        <div class="service-badge">
+          <div style="width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 1.5s infinite"></div>
+          Urgence 24h/7j
+        </div>
+      </div>
+
+      <!-- Chaudière -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="#1e3a5f" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+        </div>
+        <div class="service-title">Chaudière & Chauffage</div>
+        <div class="service-desc">Installation, entretien et réparation de chaudières gaz, fioul et pompes à chaleur. Certifié RGE pour les aides à la rénovation énergétique.</div>
+        <ul class="service-list">
+          <li>Installation chaudière gaz / fioul</li>
+          <li>Pompe à chaleur (PAC)</li>
+          <li>Entretien annuel obligatoire</li>
+          <li>Certificat RGE — éligible MaPrimeRénov'</li>
+        </ul>
+        <div class="service-badge">Certifié RGE</div>
+      </div>
+
+      <!-- Salle de bain -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="#1e3a5f" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 010 2H4a1 1 0 010-2z"/><path d="M4 10V5a2 2 0 014 0v5"/><path d="M6 20l-1.35-4h14.7L18 20"/></svg>
+        </div>
+        <div class="service-title">Salle de bain complète</div>
+        <div class="service-desc">Rénovation complète de salle de bain : pose de carrelage, installation sanitaires, douche à l'italienne, baignoire balnéo. Devis sur mesure.</div>
+        <ul class="service-list">
+          <li>Rénovation clé en main</li>
+          <li>Douche à l'italienne</li>
+          <li>Pose carrelage et faïence</li>
+          <li>Accès PMR disponible</li>
+        </ul>
+        <div class="service-badge">Sur mesure</div>
+      </div>
+
+      <!-- Devis gratuit -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="#1e3a5f" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="service-title">Devis gratuit & sans engagement</div>
+        <div class="service-desc">Avant chaque intervention, nous établissons un devis détaillé et transparent — sans surprise sur la facture finale. Financement possible.</div>
+        <ul class="service-list">
+          <li>Devis 100% gratuit en 24h</li>
+          <li>Prix ferme et définitif</li>
+          <li>Financement en 10x sans frais</li>
+          <li>Facture claire et détaillée</li>
+        </ul>
+        <div class="service-badge">Gratuit &amp; sans engagement</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Urgence strip -->
+  <div class="urgence-strip">
+    <div class="urgence-strip-content">
+      <div class="urgence-strip-title">Une urgence ? Appelez maintenant.</div>
+      <div class="urgence-strip-sub">Disponible 24h/24 — 7j/7 — Intervention sous 2h sur toute la Normandie</div>
+    </div>
+    <a href="tel:0612345678" class="urgence-strip-phone">06 12 34 56 78</a>
+    <a href="#devis" class="btn-white">Devis gratuit</a>
+  </div>
+
+  <!-- Témoignages -->
+  <section class="section" id="temoignages">
+    <div class="section-eyebrow">Ils nous font confiance</div>
+    <h2 class="section-title">Avis <span class="accent">Clients</span></h2>
+    <p class="section-lead">Plus de 4,9/5 sur Google — la satisfaction de nos clients est notre priorité absolue.</p>
+
+    <div class="temoignages-grid">
+      <div class="temoignage-card">
+        <div class="temoignage-stars">★★★★★</div>
+        <p class="temoignage-text">«&nbsp;Intervention très rapide après une fuite importante. Le plombier était là en moins d'1h30. Travail soigné, tarif honnête. Je recommande vivement.&nbsp;»</p>
+        <div class="temoignage-author">
+          <div class="temoignage-avatar">MC</div>
+          <div><div class="temoignage-name">Marie-Claire B.</div><div class="temoignage-location">Le Havre</div></div>
+        </div>
+      </div>
+      <div class="temoignage-card">
+        <div class="temoignage-stars">★★★★★</div>
+        <p class="temoignage-text">«&nbsp;Excellente prestation pour l'installation de notre nouvelle chaudière. Équipe professionnelle, propre et efficace. Toutes les démarches MaPrimeRénov' gérées.&nbsp;»</p>
+        <div class="temoignage-author">
+          <div class="temoignage-avatar">JL</div>
+          <div><div class="temoignage-name">Jean-Luc M.</div><div class="temoignage-location">Fécamp</div></div>
+        </div>
+      </div>
+      <div class="temoignage-card">
+        <div class="temoignage-stars">★★★★★</div>
+        <p class="temoignage-text">«&nbsp;Notre salle de bain a été entièrement rénovée en 5 jours. Résultat parfait, dans les délais et le budget prévu. Merci à toute l'équipe ProPlomb !&nbsp;»</p>
+        <div class="temoignage-author">
+          <div class="temoignage-avatar">SV</div>
+          <div><div class="temoignage-name">Stéphanie V.</div><div class="temoignage-location">Rouen</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Zones d'intervention -->
+  <div class="zones-strip">
+    <div class="zones-inner">
+      <span class="zones-label">Zones d'intervention</span>
+      <div class="zones-list">
+        <span class="zone-tag">Fécamp</span>
+        <span class="zone-tag">Le Havre</span>
+        <span class="zone-tag">Rouen</span>
+        <span class="zone-tag">Dieppe</span>
+        <span class="zone-tag">Caen</span>
+        <span class="zone-tag">Évreux</span>
+        <span class="zone-tag">Cherbourg</span>
+        <span class="zone-tag">Seine-Maritime</span>
+        <span class="zone-tag">Calvados</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Devis gratuit -->
+  <div class="devis-section" id="devis">
+    <div class="devis-inner">
+      <div class="devis-info">
+        <div class="section-eyebrow" style="color:rgba(255,255,255,0.5)">Devis en ligne</div>
+        <h2 class="section-title" style="color:#fff">Devis <span style="color:var(--red)">Gratuit</span><br>en 24h</h2>
+        <p class="section-lead" style="color:rgba(255,255,255,0.6);margin-bottom:2rem">Décrivez votre projet ou votre panne. Nous vous contactons sous 24h avec un devis détaillé, gratuit et sans engagement.</p>
+        <div class="devis-avantages">
+          <div class="devis-avantage">
+            <div class="devis-avantage-check"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="devis-avantage-text"><h4>100% gratuit</h4><p>Le devis est entièrement gratuit, sans aucun engagement de votre part.</p></div>
+          </div>
+          <div class="devis-avantage">
+            <div class="devis-avantage-check"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="devis-avantage-text"><h4>Réponse en 24h</h4><p>Nous analysons votre demande et vous envoyons un devis détaillé sous 24h.</p></div>
+          </div>
+          <div class="devis-avantage">
+            <div class="devis-avantage-check"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="devis-avantage-text"><h4>Prix transparent</h4><p>Pas de mauvaises surprises : le prix du devis est le prix final de la facture.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="devis-form" id="contact">
+        <div class="devis-form-title">Demande de devis</div>
+        <div class="devis-form-sub">Remplissez ce formulaire — nous vous rappelons sous 24h</div>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prénom *</label>
+              <input class="form-input" type="text" placeholder="Jean">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom *</label>
+              <input class="form-input" type="text" placeholder="Dupont">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Téléphone *</label>
+              <input class="form-input" type="tel" placeholder="06 XX XX XX XX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Code postal</label>
+              <input class="form-input" type="text" placeholder="76400">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type d'intervention *</label>
+            <select class="form-select form-input">
+              <option value="">Choisir une prestation</option>
+              <option>Dépannage urgence</option>
+              <option>Installation chaudière</option>
+              <option>Entretien chaudière</option>
+              <option>Rénovation salle de bain</option>
+              <option>Fuite d'eau</option>
+              <option>Canalisation bouchée</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description du problème</label>
+            <textarea class="form-textarea" placeholder="Décrivez votre panne ou votre projet en quelques mots…"></textarea>
+          </div>
+          <button type="submit" class="btn-red form-submit">Envoyer ma demande de devis</button>
+          <div class="form-note">⚡ Réponse garantie sous 24h — Urgence : 06 12 34 56 78</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <div class="footer-logo-box">
+        <div class="footer-logo-icon"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="footer-logo-text">ProPlomb</div>
+      </div>
+      <div class="footer-desc">Plombier chauffagiste en Normandie depuis 2009. Certifié RGE, assurance décennale, devis gratuit.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <div class="footer-links">
+        <a href="#services">Dépannage urgence</a>
+        <a href="#services">Chaudière & Chauffage</a>
+        <a href="#services">Salle de bain</a>
+        <a href="#devis">Devis gratuit</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-phone">06 12 34 56 78</div>
+      <div class="footer-address">
+        contact@proplomb.fr<br><br>
+        Zone d'intervention :<br>
+        Seine-Maritime · Calvados<br>
+        Eure · Manche · Orne
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ProPlomb — Plombier chauffagiste Normandie</span>
+      <span>Site réalisé par Studio 888</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Votre demande de devis a bien été envoyée ! Nous vous contactons sous 24h.');
+    });
+  </script>
+</body>
+</html>

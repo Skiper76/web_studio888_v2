@@ -260,6 +260,7 @@
     }
     .gallery-item:hover img { transform: scale(1.04); filter: brightness(1); }
 
+    /* ── PROMO BANNER ───────────────────────────────────────────────── */
     /* ── PRICING ─────────────────────────────────────────────────────── */
     #pricing { background: var(--cream2); }
     .pricing-header { text-align: center; margin-bottom: 5rem; }
@@ -501,7 +502,7 @@
 
   <!-- Nav -->
   <nav id="nav">
-    <a href="#hero" class="nav-logo">
+    <a href="../" class="nav-logo">
       <img class="logo-white" src="../assets/logo-white-rmbg.png" alt="Studio 888">
       <img class="logo-black" src="../assets/logo/logo_noir_rmbg.png" alt="Studio 888">
       <span class="nav-logo-text">Mariage</span>
@@ -510,6 +511,7 @@
       <li><a href="#intro">À propos</a></li>
       <li><a href="#gallery">Galerie</a></li>
       <li><a href="#pricing">Tarifs</a></li>
+      <li><a href="../web.html">Web</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Demander un devis</a>
@@ -522,6 +524,7 @@
     <a href="#intro" class="mobile-link">À propos</a>
     <a href="#gallery" class="mobile-link">Galerie</a>
     <a href="#pricing" class="mobile-link">Tarifs</a>
+    <a href="../web.html" class="mobile-link">Web</a>
     <a href="#contact" class="mobile-link">Contact</a>
   </div>
 
@@ -613,6 +616,7 @@
         <button class="pricing-tab active" data-panel="photo">Photographie</button>
         <button class="pricing-tab" data-panel="video">Vidéographie</button>
         <button class="pricing-tab" data-panel="complet">Photo + Vidéo</button>
+        <button class="pricing-tab" data-panel="web">Site Internet</button>
       </div>
 
       <!-- Photo -->
@@ -743,9 +747,61 @@
         </div>
       </div>
 
+      <div class="pricing-panel" id="panel-web">
+        <div class="pricing-grid">
+          <div class="pricing-card reveal">
+            <div class="pricing-name">Site Invitation</div>
+            <div class="pricing-price">490€</div>
+            <div class="pricing-sub">Site dédié à votre mariage</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-features">
+              <div class="pricing-feature">Design personnalisé à votre thème</div>
+              <div class="pricing-feature">Formulaire RSVP en ligne</div>
+              <div class="pricing-feature">Plan d'accès & infos pratiques</div>
+              <div class="pricing-feature">Galerie photos</div>
+              <div class="pricing-feature">Compte à rebours</div>
+              <div class="pricing-feature">Compatible mobile</div>
+              <div class="pricing-feature">Hébergement 12 mois inclus</div>
+            </div>
+            <a href="../web.html" class="pricing-cta">En savoir plus</a>
+          </div>
+          <div class="pricing-card featured reveal">
+            <div class="pricing-badge">Populaire</div>
+            <div class="pricing-name">Site Vitrine</div>
+            <div class="pricing-price">890€</div>
+            <div class="pricing-sub">Portfolio & présentation pro</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-features">
+              <div class="pricing-feature">Design sur mesure</div>
+              <div class="pricing-feature">Galerie avec lightbox</div>
+              <div class="pricing-feature">Formulaire de contact</div>
+              <div class="pricing-feature">SEO optimisé</div>
+              <div class="pricing-feature">Animations & interactions</div>
+              <div class="pricing-feature">Compatible mobile & tablette</div>
+              <div class="pricing-feature">Déploiement inclus</div>
+            </div>
+            <a href="../web.html" class="pricing-cta">En savoir plus</a>
+          </div>
+          <div class="pricing-card reveal">
+            <div class="pricing-name">Sur Mesure</div>
+            <div class="pricing-price">Devis</div>
+            <div class="pricing-sub">Projet personnalisé</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-features">
+              <div class="pricing-feature">Analyse des besoins</div>
+              <div class="pricing-feature">Proposition technique</div>
+              <div class="pricing-feature">Application web si besoin</div>
+              <div class="pricing-feature">Maintenance & évolutions</div>
+              <div class="pricing-feature">Formation à la mise à jour</div>
+            </div>
+            <a href="mailto:ke.hermand76@gmail.com" class="pricing-cta">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+
       <div class="pricing-promo reveal">
         <div class="pricing-promo-title">Offre Spéciale</div>
-        <p class="pricing-promo-text">Réservez votre forfait avant le <strong>23 février 2025</strong> et bénéficiez de l'impression de <strong>20 photos Instax sur place offerte</strong> — un souvenir instantané pour vos invités.</p>
+        <p class="pricing-promo-text">Réservez votre forfait avant le <strong><span id="promo-date"></span></strong> et bénéficiez de l'impression de <strong>20 photos Instax sur place offerte</strong> — un souvenir instantané pour vos invités.</p>
       </div>
 
       <p class="pricing-note reveal">Tous les forfaits incluent une galerie en ligne sécurisée et un accompagnement personnalisé du premier contact jusqu'à la livraison.</p>
@@ -864,6 +920,22 @@
   <!-- Cal.com -->
   <script type="text/javascript">
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    // Date promo — 30 jours à venir, se renouvelle si expirée
+    (function() {
+      const KEY = 'promo_deadline_888';
+      let deadline = localStorage.getItem(KEY);
+      if (!deadline || new Date(deadline) < new Date()) {
+        const d = new Date();
+        d.setDate(d.getDate() + 30);
+        deadline = d.toISOString();
+        localStorage.setItem(KEY, deadline);
+      }
+      const target = new Date(deadline);
+      const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+      const el = document.getElementById('promo-date');
+      if (el) el.textContent = target.getDate() + ' ' + months[target.getMonth()] + ' ' + target.getFullYear();
+    })();
+
     Cal("init", "discuter-de-mon-projet", {origin:"https://app.cal.com"});
     Cal.config = Cal.config || {};
     Cal.config.forwardQueryParams = true;

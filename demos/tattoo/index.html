@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ink Studio — by Léa · Tatoueur Fineline & Blackwork</title>
+  <meta name="description" content="Ink Studio by Léa — tatoueur fineline, blackwork et botanique. Portfolio, flash disponibles, réservation en ligne.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050505;
+      --bg2: #0a0a0a;
+      --bg3: #111111;
+      --fg: rgba(240,240,240,0.92);
+      --fg-dim: rgba(240,240,240,0.45);
+      --fg-faint: rgba(240,240,240,0.2);
+      --border: rgba(255,255,255,0.06);
+      --border2: rgba(255,255,255,0.12);
+      --ff-serif: 'Cormorant Garamond', serif;
+      --ff-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--ff-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 1px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 3rem;
+      background: rgba(5,5,5,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--ff-serif); font-size: 1.1rem; letter-spacing: 0.08em; color: var(--fg); font-weight: 300; }
+    .nav-logo em { font-style: italic; color: var(--fg-dim); }
+    .nav-links { display: flex; align-items: center; gap: 3rem; list-style: none; }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-faint); transition: color 0.4s; font-weight: 300; }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      border: 1px solid var(--border2); color: var(--fg);
+      padding: 0.55rem 1.2rem; transition: 0.3s; font-weight: 300;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.06); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; height: 100vh; min-height: 650px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(5,5,5,0.7) 0%, rgba(5,5,5,0.85) 70%, var(--bg) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: 0 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+    .hero-logo {
+      width: 56px; height: 56px; border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-family: var(--ff-serif); font-size: clamp(2.5rem, 7vw, 6rem);
+      font-weight: 300; letter-spacing: 0.06em; color: var(--fg); line-height: 1;
+    }
+    .hero-name em { font-style: italic; color: var(--fg-dim); }
+    .hero-sep { width: 30px; height: 1px; background: var(--border2); }
+    .hero-byline { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--fg-faint); }
+    .hero-styles { display: flex; gap: 2.5rem; }
+    .hero-style { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-faint); }
+    .hero-cta-group { display: flex; gap: 1rem; margin-top: 1rem; }
+    .btn-white-outline {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      border: 1px solid var(--border2); color: var(--fg); padding: 0.85rem 2rem;
+      transition: 0.3s; font-weight: 300; display: inline-block;
+    }
+    .btn-white-outline:hover { background: rgba(255,255,255,0.06); }
+    .btn-minimal {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fg-faint); padding: 0.85rem 2rem;
+      transition: color 0.3s; font-weight: 300; display: inline-block;
+    }
+    .btn-minimal:hover { color: var(--fg); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--fg-faint); display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    }
+    .hero-scroll-line { width: 1px; height: 35px; background: var(--border2); }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: 7rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--fg-faint); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;
+      font-weight: 300;
+    }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--border2); }
+    .section-title {
+      font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300; line-height: 1.15; margin-bottom: 1rem; color: var(--fg);
+    }
+    .section-title em { font-style: italic; color: var(--fg-dim); }
+    .section-lead { font-family: var(--ff-serif); font-style: italic; font-size: 1.05rem; color: var(--fg-dim); max-width: 520px; line-height: 1.85; }
+    .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+    /* ─── STYLES ─── */
+    .styles-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); margin-top: 4rem;
+    }
+    .style-card { background: var(--bg2); overflow: hidden; position: relative; }
+    .style-img { aspect-ratio: 3/4; overflow: hidden; }
+    .style-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: grayscale(30%); }
+    .style-card:hover .style-img img { transform: scale(1.04); filter: grayscale(0%); }
+    .style-info { padding: 2rem 1.8rem; }
+    .style-name { font-family: var(--ff-serif); font-size: 1.4rem; font-weight: 300; margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+    .style-desc { font-family: var(--ff-serif); font-style: italic; font-size: 0.92rem; color: var(--fg-dim); line-height: 1.75; }
+    .style-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .style-tag { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid var(--border); color: var(--fg-faint); padding: 0.25rem 0.6rem; font-weight: 300; }
+
+    /* ─── PROCESSUS ─── */
+    .processus-section { background: var(--bg2); padding: 7rem 3rem; }
+    .processus-inner { max-width: 1200px; margin: 0 auto; }
+    .processus-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border: 1px solid var(--border); margin-top: 4rem;
+    }
+    .processus-step { padding: 2.5rem 2rem; border-right: 1px solid var(--border); }
+    .processus-step:last-child { border-right: none; }
+    .processus-n { font-family: var(--ff-serif); font-size: 3rem; font-weight: 300; color: var(--border2); line-height: 1; margin-bottom: 1rem; }
+    .processus-title { font-family: var(--ff-serif); font-size: 1.1rem; margin-bottom: 0.6rem; }
+    .processus-desc { font-size: 0.78rem; color: var(--fg-dim); line-height: 1.7; }
+
+    /* ─── FLASH ─── */
+    .flash-section { background: var(--bg); padding: 7rem 3rem; }
+    .flash-inner { max-width: 1200px; margin: 0 auto; }
+    .flash-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+    .flash-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border);
+    }
+    .flash-item { background: var(--bg2); aspect-ratio: 1; overflow: hidden; position: relative; cursor: pointer; }
+    .flash-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.4s; filter: grayscale(60%); }
+    .flash-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
+    .flash-overlay {
+      position: absolute; inset: 0; background: rgba(5,5,5,0); transition: background 0.4s;
+      display: flex; align-items: flex-end; padding: 1rem;
+    }
+    .flash-item:hover .flash-overlay { background: rgba(5,5,5,0.5); }
+    .flash-info { opacity: 0; transition: opacity 0.3s; }
+    .flash-item:hover .flash-info { opacity: 1; }
+    .flash-name { font-family: var(--ff-serif); font-size: 0.9rem; color: var(--fg); }
+    .flash-price { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg-dim); margin-top: 0.1rem; }
+    .flash-available {
+      position: absolute; top: 0.8rem; right: 0.8rem;
+      width: 8px; height: 8px; background: #22c55e; border-radius: 50%;
+    }
+    .flash-taken { background: rgba(255,255,255,0.2); }
+    .flash-taken .flash-available { background: rgba(255,255,255,0.2); }
+    .flash-taken img { filter: grayscale(100%); opacity: 0.4; }
+
+    /* ─── À PROPOS ─── */
+    .about-section { background: var(--bg2); padding: 7rem 3rem; }
+    .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about-img { position: relative; }
+    .about-img img { width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(20%); }
+    .about-img-label {
+      position: absolute; bottom: 2rem; left: -2rem;
+      border: 1px solid var(--border2); padding: 1.5rem 2rem; background: var(--bg2);
+    }
+    .about-img-label-n { font-family: var(--ff-serif); font-size: 2rem; font-weight: 300; color: var(--fg); line-height: 1; margin-bottom: 0.2rem; }
+    .about-img-label-l { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-faint); }
+    .about-text p { font-family: var(--ff-serif); font-size: 1.05rem; color: var(--fg-dim); line-height: 1.9; margin-bottom: 1.5rem; }
+    .about-text p strong { color: var(--fg); font-weight: 400; }
+    .about-quote {
+      border-left: 1px solid var(--border2); padding: 1rem 2rem; margin: 2rem 0;
+    }
+    .about-quote p { font-family: var(--ff-serif); font-style: italic; font-size: 1.1rem; color: var(--fg); line-height: 1.7; margin: 0; }
+
+    /* ─── BOOKING ─── */
+    .booking-section { background: var(--bg); padding: 7rem 3rem; }
+    .booking-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .booking-info p { font-family: var(--ff-serif); font-style: italic; font-size: 1.05rem; color: var(--fg-dim); line-height: 1.85; margin-bottom: 2rem; }
+    .booking-rules { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .booking-rule { display: flex; gap: 1rem; align-items: flex-start; }
+    .booking-rule-dot { width: 4px; height: 4px; background: var(--fg-faint); border-radius: 50%; flex-shrink: 0; margin-top: 0.6rem; }
+    .booking-rule-text { font-size: 0.82rem; color: var(--fg-faint); line-height: 1.6; }
+    .booking-rule-text strong { color: var(--fg-dim); font-weight: 400; }
+
+    .booking-form { background: var(--bg2); border: 1px solid var(--border); padding: 2.5rem; }
+    .booking-form-title { font-family: var(--ff-serif); font-size: 1.6rem; font-weight: 300; color: var(--fg); margin-bottom: 0.3rem; }
+    .booking-form-sub { font-family: var(--ff-serif); font-style: italic; font-size: 0.88rem; color: var(--fg-dim); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .form-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-faint); font-weight: 300; }
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg3); border: 1px solid var(--border); color: var(--fg);
+      padding: 0.75rem 1rem; font-family: var(--ff-body); font-size: 0.9rem; font-weight: 300;
+      transition: border-color 0.3s; width: 100%; outline: none;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--border2); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(240,240,240,0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-submit { width: 100%; margin-top: 0.5rem; }
+    .form-note { font-size: 0.68rem; color: var(--fg-faint); margin-top: 0.8rem; text-align: center; font-family: var(--ff-serif); font-style: italic; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-logo { font-family: var(--ff-serif); font-size: 1.3rem; font-weight: 300; color: var(--fg); margin-bottom: 0.4rem; }
+    .footer-logo em { font-style: italic; color: var(--fg-dim); }
+    .footer-desc { font-family: var(--ff-serif); font-style: italic; font-size: 0.88rem; color: var(--fg-faint); line-height: 1.7; }
+    .footer-col-title { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 1.2rem; font-weight: 300; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-links a { font-family: var(--ff-serif); font-size: 0.9rem; color: var(--fg-dim); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--fg); }
+    .footer-contact { font-family: var(--ff-serif); font-style: italic; font-size: 0.9rem; color: var(--fg-faint); line-height: 1.85; }
+    .footer-bottom {
+      grid-column: 1 / -1; border-top: 1px solid var(--border);
+      padding-top: 2rem; display: flex; justify-content: space-between;
+      font-size: 0.65rem; color: var(--fg-faint); font-weight: 300;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .section { padding: 4rem 1.5rem; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .processus-section { padding: 4rem 1.5rem; }
+      .processus-grid { grid-template-columns: 1fr 1fr; }
+      .flash-section { padding: 4rem 1.5rem; }
+      .flash-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-section { padding: 4rem 1.5rem; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-label { left: 0; }
+      .booking-section { padding: 4rem 1.5rem; }
+      .booking-inner { grid-template-columns: 1fr; gap: 3rem; }
+      footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .processus-grid { grid-template-columns: 1fr; }
+      .flash-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-logo">Ink Studio — <em>by Léa</em></div>
+    <ul class="nav-links">
+      <li><a href="#styles">Styles</a></li>
+      <li><a href="#flash">Flash</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#booking">Booking</a></li>
+    </ul>
+    <a href="#booking" class="nav-cta">Prendre rendez-vous</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,240,0.6)" stroke-width="1">
+          <path d="M12 2C8 7 4 9 4 13a8 8 0 0016 0c0-4-4-6-8-11z"/>
+          <path d="M12 8v8M9 11h6"/>
+        </svg>
+      </div>
+      <div class="hero-name">Ink Studio<br><em>by Léa</em></div>
+      <div class="hero-sep"></div>
+      <div class="hero-byline">Tatoueur — Normandie</div>
+      <div class="hero-styles">
+        <span class="hero-style">Fineline</span>
+        <span class="hero-style">Blackwork</span>
+        <span class="hero-style">Botanique</span>
+      </div>
+      <div class="hero-cta-group">
+        <a href="#booking" class="btn-white-outline">Réserver une séance</a>
+        <a href="#flash" class="btn-minimal">Voir les flash →</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      Découvrir
+    </div>
+  </section>
+
+  <!-- Styles -->
+  <section class="section" id="styles">
+    <div class="section-eyebrow">Savoir-faire</div>
+    <h2 class="section-title">Les <em>Styles</em></h2>
+    <p class="section-lead">Chaque tatouage est une pièce unique, pensée avec vous pour accompagner votre peau pour la vie.</p>
+
+    <div class="styles-grid">
+
+      <!-- Fineline -->
+      <div class="style-card">
+        <div class="style-img">
+          <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=600&auto=format&fit=crop&q=80" alt="Fineline" loading="lazy">
+        </div>
+        <div class="style-info">
+          <div class="style-name">Fineline</div>
+          <p class="style-desc">Des lignes d'une finesse extrême, des détails imperceptibles à l'œil nu. Le fineline est l'art de la délicatesse portée sur la peau — minimal, précis, intemporel.</p>
+          <div class="style-tags">
+            <span class="style-tag">Précision</span>
+            <span class="style-tag">Délicat</span>
+            <span class="style-tag">Intemporel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blackwork -->
+      <div class="style-card">
+        <div class="style-img">
+          <img src="https://images.unsplash.com/photo-1590246814883-55516d11daf0?w=600&auto=format&fit=crop&q=80" alt="Blackwork" loading="lazy">
+        </div>
+        <div class="style-info">
+          <div class="style-name">Blackwork</div>
+          <p class="style-desc">Encre noire pure, contrastes forts, compositions géométriques ou organiques. Le blackwork affirme une présence forte et un esthétisme assumé qui marque les esprits.</p>
+          <div class="style-tags">
+            <span class="style-tag">Contraste</span>
+            <span class="style-tag">Graphique</span>
+            <span class="style-tag">Affirmé</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botanique -->
+      <div class="style-card">
+        <div class="style-img">
+          <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=600&auto=format&fit=crop&q=80" alt="Botanique" loading="lazy">
+        </div>
+        <div class="style-info">
+          <div class="style-name">Botanique</div>
+          <p class="style-desc">Fleurs, feuillages, plantes sauvages — le tatouage botanique célèbre la beauté du vivant. Réaliste ou stylisé, il apporte une douceur naturelle et une féminité affirmée.</p>
+          <div class="style-tags">
+            <span class="style-tag">Naturel</span>
+            <span class="style-tag">Organique</span>
+            <span class="style-tag">Douceur</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Processus -->
+  <div class="processus-section">
+    <div class="processus-inner">
+      <div class="section-eyebrow">Déroulement</div>
+      <h2 class="section-title">Comment se<br>passe une <em>séance</em>&nbsp;?</h2>
+      <div class="processus-grid">
+        <div class="processus-step">
+          <div class="processus-n">01</div>
+          <div class="processus-title">Demande de réservation</div>
+          <p class="processus-desc">Remplissez le formulaire en décrivant votre projet — placement, taille, style souhaité. Joignez des références visuelles si vous en avez.</p>
+        </div>
+        <div class="processus-step">
+          <div class="processus-n">02</div>
+          <div class="processus-title">Échange & devis</div>
+          <p class="processus-desc">Je vous réponds sous 48h pour affiner le projet, vous proposer une esquisse et établir un devis. Un acompte de 30% confirme le rendez-vous.</p>
+        </div>
+        <div class="processus-step">
+          <div class="processus-n">03</div>
+          <div class="processus-title">La séance</div>
+          <p class="processus-desc">Le dessin final vous est présenté le jour J. On prend le temps nécessaire. Ambiance calme, musique douce, confort assuré pendant toute la séance.</p>
+        </div>
+        <div class="processus-step">
+          <div class="processus-n">04</div>
+          <div class="processus-title">Soin & suivi</div>
+          <p class="processus-desc">Instructions de cicatrisation détaillées, produit de soin offert. Je reste disponible par message pour toute question pendant la guérison.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flash disponibles -->
+  <div class="flash-section" id="flash">
+    <div class="flash-inner">
+      <div class="flash-intro">
+        <div>
+          <div class="section-eyebrow">Disponibles immédiatement</div>
+          <h2 class="section-title">Flash <em>disponibles</em></h2>
+        </div>
+        <p style="font-family:var(--ff-serif);font-style:italic;font-size:0.9rem;color:var(--fg-faint);max-width:280px;text-align:right">Les flash sont des motifs dessinés à l'avance, réalisables rapidement. Premier arrivé, premier servi.</p>
+      </div>
+      <div class="flash-grid">
+        <div class="flash-item">
+          <img src="https://images.unsplash.com/photo-1542856204-00101eb6def4?w=400&auto=format&fit=crop&q=80" alt="Flash 1" loading="lazy">
+          <div class="flash-available"></div>
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name">Branche de cerisier</div>
+              <div class="flash-price">Dès 80 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=400&auto=format&fit=crop&q=80" alt="Flash 2" loading="lazy">
+          <div class="flash-available"></div>
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name">Lune & étoiles</div>
+              <div class="flash-price">Dès 60 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-item flash-taken">
+          <img src="https://images.unsplash.com/photo-1590246814883-55516d11daf0?w=400&auto=format&fit=crop&q=80" alt="Flash 3 pris" loading="lazy">
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name" style="color:var(--fg-faint)">Réservé</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=400&auto=format&fit=crop&q=80" alt="Flash 4" loading="lazy">
+          <div class="flash-available"></div>
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name">Fougère sauvage</div>
+              <div class="flash-price">Dès 90 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <img src="https://images.unsplash.com/photo-1542856204-00101eb6def4?w=400&auto=format&fit=crop&q=80" alt="Flash 5" loading="lazy">
+          <div class="flash-available"></div>
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name">Serpent minimaliste</div>
+              <div class="flash-price">Dès 70 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=400&auto=format&fit=crop&q=80" alt="Flash 6" loading="lazy">
+          <div class="flash-available"></div>
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name">Rose noire</div>
+              <div class="flash-price">Dès 85 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-item flash-taken">
+          <img src="https://images.unsplash.com/photo-1590246814883-55516d11daf0?w=400&auto=format&fit=crop&q=80" alt="Flash 7 pris" loading="lazy">
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name" style="color:var(--fg-faint)">Réservé</div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=400&auto=format&fit=crop&q=80" alt="Flash 8" loading="lazy">
+          <div class="flash-available"></div>
+          <div class="flash-overlay">
+            <div class="flash-info">
+              <div class="flash-name">Papillon fineline</div>
+              <div class="flash-price">Dès 65 €</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- À propos -->
+  <div class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&auto=format&fit=crop&q=80" alt="Léa — Ink Studio" loading="lazy">
+        <div class="about-img-label">
+          <div class="about-img-label-n">5 ans</div>
+          <div class="about-img-label-l">D'expérience</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-eyebrow">À propos</div>
+        <h2 class="section-title">Léa — <em>tatoueur</em><br>à Fécamp</h2>
+        <p>Je m'appelle <strong>Léa</strong>, j'ai 28 ans et je tatoue depuis 5 ans dans mon studio à Fécamp, en Normandie. J'ai appris aux côtés d'artistes parisiens avant de revenir créer mon propre espace ici, au bord de la Manche.</p>
+        <p>Mon travail est tourné vers la <strong>délicatesse</strong> et la précision. Je me spécialise dans le fineline, le blackwork et les motifs botaniques — mais chaque projet est une conversation, et j'aime adapter mon trait à votre peau, votre personnalité, votre histoire.</p>
+        <div class="about-quote">
+          <p>« Un tatouage réussi, c'est celui que vous portez fièrement vingt ans plus tard. Je prends le temps qu'il faut pour que ce soit le cas. »</p>
+        </div>
+        <p>Je ne travaille que <strong>sur rendez-vous</strong>, avec un nombre limité de séances par semaine pour garantir une attention totale à chaque client.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking -->
+  <div class="booking-section" id="booking">
+    <div class="booking-inner">
+      <div class="booking-info">
+        <div class="section-eyebrow">Réservation</div>
+        <h2 class="section-title">Prendre<br><em>rendez-vous</em></h2>
+        <p>Je réponds à toutes les demandes sous 48h. Décrivez votre projet avec le plus de détails possible — placement, taille approximative, style et références visuelles.</p>
+        <div class="booking-rules">
+          <div class="booking-rule">
+            <div class="booking-rule-dot"></div>
+            <div class="booking-rule-text"><strong>Acompte de 30%</strong> requis pour confirmer le rendez-vous — déductible du prix final.</div>
+          </div>
+          <div class="booking-rule">
+            <div class="booking-rule-dot"></div>
+            <div class="booking-rule-text"><strong>Annulation</strong> possible jusqu'à 72h avant la séance. L'acompte est conservé en cas d'annulation tardive.</div>
+          </div>
+          <div class="booking-rule">
+            <div class="booking-rule-dot"></div>
+            <div class="booking-rule-text"><strong>Tarifs</strong> : minimum de séance 60 € · flash à partir de 60 € · projet personnalisé sur devis</div>
+          </div>
+          <div class="booking-rule">
+            <div class="booking-rule-dot"></div>
+            <div class="booking-rule-text"><strong>Mineurs</strong> : non tatouée sans présence et consentement d'un responsable légal.</div>
+          </div>
+        </div>
+        <div style="margin-top:2.5rem">
+          <div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:0.5rem">Instagram</div>
+          <div style="font-family:var(--ff-serif);font-style:italic;font-size:0.9rem;color:var(--fg-dim)">@inkstudio.lea</div>
+        </div>
+      </div>
+
+      <div class="booking-form">
+        <div class="booking-form-title">Demande de réservation</div>
+        <div class="booking-form-sub">Toute demande reçoit une réponse sous 48h</div>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prénom</label>
+              <input class="form-input" type="text" placeholder="Prénom">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom</label>
+              <input class="form-input" type="text" placeholder="Nom">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="votre@email.fr">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type de projet</label>
+            <select class="form-select form-input">
+              <option value="">Sélectionner</option>
+              <option>Flash disponible</option>
+              <option>Projet personnalisé fineline</option>
+              <option>Projet personnalisé blackwork</option>
+              <option>Projet personnalisé botanique</option>
+              <option>Je ne sais pas encore</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placement & taille approximative</label>
+            <input class="form-input" type="text" placeholder="Ex : poignet intérieur, environ 5cm">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description du projet</label>
+            <textarea class="form-textarea" placeholder="Décrivez votre idée, le style souhaité, l'ambiance souhaitée… Joignez des références par email après envoi."></textarea>
+          </div>
+          <button type="submit" class="btn-white-outline form-submit">Envoyer ma demande</button>
+          <div class="form-note">Je vous répondrai personnellement sous 48h pour affiner le projet ensemble.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <div class="footer-logo">Ink Studio — <em>by Léa</em></div>
+      <div class="footer-desc">Tatoueur fineline, blackwork et botanique à Fécamp, Normandie. Sur rendez-vous uniquement.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <div class="footer-links">
+        <a href="#styles">Styles</a>
+        <a href="#flash">Flash disponibles</a>
+        <a href="#about">À propos</a>
+        <a href="#booking">Réservation</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-contact">
+        Fécamp, Normandie<br>
+        (sur rendez-vous uniquement)<br><br>
+        Instagram : @inkstudio.lea<br>
+        contact@inkstudio-lea.fr
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Ink Studio — by Léa · Fécamp, Normandie</span>
+      <span>Site réalisé par Studio 888</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Votre demande a bien été envoyée ! Je vous répondrai sous 48h pour affiner le projet ensemble.');
+    });
+  </script>
+</body>
+</html>

@@ -292,9 +292,11 @@
       width: 100%; height: 100%;
       object-fit: cover;
       filter: brightness(0.55);
-      transition: filter 0.8s var(--ease);
+      opacity: 0;
+      transition: filter 0.8s var(--ease), opacity 1.4s var(--ease);
       cursor: pointer;
     }
+    #hero-video.ready { opacity: 1; }
     #hero.focused #hero-video { filter: brightness(0.85); }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -1748,6 +1750,10 @@
       heroVideoEl.load();
       heroVideoEl.play().catch(() => {});
     }
+
+    heroVideoEl.addEventListener('playing', () => {
+      heroVideoEl.classList.add('ready');
+    }, { once: true });
 
     window.addEventListener('load', () => {
       setTimeout(() => {

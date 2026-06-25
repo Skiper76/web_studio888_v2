@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Ardoise — Restaurant normand à Fécamp</title>
+  <meta name="description" content="L'Ardoise, restaurant normand à Fécamp. Cuisine traditionnelle, produits locaux, réservation en ligne.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0a06;
+      --bg2: #1a1007;
+      --bg3: #241508;
+      --gold: #e8c88a;
+      --gold-dim: rgba(232,200,138,0.45);
+      --fg: #f2ead8;
+      --fg-dim: rgba(242,234,216,0.55);
+      --border: rgba(232,200,138,0.12);
+      --border2: rgba(232,200,138,0.22);
+      --ff-serif: 'Cormorant Garamond', serif;
+      --ff-body: 'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--ff-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(15,10,6,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--ff-serif); font-size: 1.5rem; letter-spacing: 0.06em;
+      color: var(--gold); font-weight: 400;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--fg-dim); transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid var(--gold-dim); color: var(--gold);
+      padding: 0.6rem 1.4rem; transition: 0.3s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(15,10,6,0.45) 0%, rgba(15,10,6,0.72) 60%, var(--bg) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: 0 1.5rem; }
+    .hero-eyebrow {
+      font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem; opacity: 0.8;
+    }
+    .hero-title {
+      font-family: var(--ff-serif); font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 300; letter-spacing: 0.04em; color: var(--fg);
+      line-height: 1; margin-bottom: 0.8rem;
+    }
+    .hero-subtitle {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.3rem); color: var(--fg-dim); margin-bottom: 2.5rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-sep { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 2rem; }
+    .btn-gold {
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      background: var(--gold); color: var(--bg); padding: 1rem 2.5rem;
+      font-weight: 500; transition: 0.3s; display: inline-block;
+    }
+    .btn-gold:hover { background: var(--fg); color: var(--bg); }
+    .btn-outline {
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      border: 1px solid var(--border2); color: var(--gold); padding: 1rem 2.5rem;
+      font-weight: 400; transition: 0.3s; display: inline-block; margin-left: 1rem;
+    }
+    .btn-outline:hover { background: rgba(232,200,138,0.1); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold-dim); display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    }
+    .hero-scroll-line { width: 1px; height: 40px; background: var(--gold-dim); animation: scrollDown 1.8s ease-in-out infinite; }
+    @keyframes scrollDown { 0%,100%{transform:scaleY(1) translateY(0);opacity:1} 50%{transform:scaleY(0.5) translateY(10px);opacity:0.4} }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: 7rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
+    .section-title {
+      font-family: var(--ff-serif); font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300; line-height: 1.15; margin-bottom: 1rem; color: var(--fg);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-lead {
+      font-size: 0.95rem; color: var(--fg-dim); max-width: 540px; line-height: 1.8;
+    }
+    .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+    /* ─── INTRO ─── */
+    .intro-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+      margin-top: 4rem;
+    }
+    .intro-img { position: relative; }
+    .intro-img img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .intro-img-caption {
+      position: absolute; bottom: 1.2rem; left: 1.2rem;
+      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-dim); background: rgba(15,10,6,0.85); padding: 0.4rem 0.8rem;
+    }
+    .intro-text p {
+      font-family: var(--ff-serif); font-size: 1.05rem; color: var(--fg-dim);
+      line-height: 1.9; margin-bottom: 1.5rem;
+    }
+    .intro-text p strong { color: var(--gold); font-weight: 600; }
+    .intro-badges { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .badge {
+      font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+      border: 1px solid var(--border2); color: var(--gold); padding: 0.45rem 1rem;
+    }
+
+    /* ─── CARTE ─── */
+    .carte-section { background: var(--bg2); padding: 7rem 3rem; }
+    .carte-inner { max-width: 1200px; margin: 0 auto; }
+    .carte-categories { margin-top: 4rem; display: flex; flex-direction: column; gap: 4rem; }
+    .carte-category-title {
+      font-family: var(--ff-serif); font-style: italic; font-size: 1.3rem;
+      color: var(--gold); letter-spacing: 0.06em; margin-bottom: 2rem;
+      padding-bottom: 0.8rem; border-bottom: 1px solid var(--border);
+    }
+    .plats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      background: var(--border);
+    }
+    .plat-card {
+      background: var(--bg); padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      transition: background 0.3s;
+    }
+    .plat-card:hover { background: var(--bg3); }
+    .plat-img { aspect-ratio: 4/3; overflow: hidden; margin: -2rem -1.8rem 1rem; }
+    .plat-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .plat-card:hover .plat-img img { transform: scale(1.04); }
+    .plat-name {
+      font-family: var(--ff-serif); font-size: 1.15rem; font-weight: 400;
+      color: var(--fg); line-height: 1.2;
+    }
+    .plat-desc { font-size: 0.8rem; color: var(--fg-dim); line-height: 1.65; }
+    .plat-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .plat-price {
+      font-family: var(--ff-serif); font-size: 1.3rem; color: var(--gold); font-weight: 300;
+    }
+    .plat-tag {
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      border: 1px solid var(--border); color: var(--fg-dim); padding: 0.25rem 0.6rem;
+    }
+
+    /* ─── FORMULE DU JOUR ─── */
+    .formule-banner {
+      background: var(--bg3); border: 1px solid var(--border2);
+      padding: 3rem; margin-top: 4rem;
+      display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center;
+    }
+    .formule-label {
+      font-family: var(--ff-serif); font-style: italic; font-size: 2rem;
+      color: var(--gold); writing-mode: vertical-lr; transform: rotate(180deg);
+    }
+    .formule-content { }
+    .formule-title { font-family: var(--ff-serif); font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .formule-items { font-size: 0.85rem; color: var(--fg-dim); line-height: 1.8; }
+    .formule-items span { color: var(--gold-dim); margin-right: 0.5rem; }
+    .formule-price { font-family: var(--ff-serif); font-size: 2.5rem; color: var(--gold); font-weight: 300; text-align: center; }
+    .formule-price small { display: block; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-dim); font-family: var(--ff-body); }
+
+    /* ─── HORAIRES ─── */
+    .horaires-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border: 1px solid var(--border); margin-top: 4rem;
+    }
+    .horaire-item {
+      padding: 2rem 1.5rem; border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .horaire-item:last-child { border-right: none; }
+    .horaire-day { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .horaire-time { font-family: var(--ff-serif); font-size: 1.1rem; color: var(--fg); }
+    .horaire-closed { font-family: var(--ff-serif); font-style: italic; color: var(--fg-dim); font-size: 0.9rem; }
+
+    /* ─── RESERVATION ─── */
+    .resa-section { background: var(--bg); padding: 7rem 3rem; }
+    .resa-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .resa-info p {
+      font-family: var(--ff-serif); font-style: italic; font-size: 1.05rem;
+      color: var(--fg-dim); line-height: 1.9; margin-bottom: 2rem;
+    }
+    .resa-contact { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+    .resa-contact-item { display: flex; align-items: center; gap: 1rem; }
+    .resa-contact-icon { width: 36px; height: 36px; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .resa-contact-text { font-size: 0.85rem; color: var(--fg-dim); }
+    .resa-contact-text strong { display: block; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.15rem; font-weight: 400; }
+
+    .resa-form { background: var(--bg2); padding: 2.5rem; border: 1px solid var(--border); }
+    .form-title { font-family: var(--ff-serif); font-size: 1.4rem; margin-bottom: 2rem; color: var(--gold); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); }
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg); border: 1px solid var(--border2); color: var(--fg);
+      padding: 0.75rem 1rem; font-family: var(--ff-body); font-size: 0.9rem;
+      transition: border-color 0.3s; width: 100%; outline: none;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e8c88a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-submit { width: 100%; margin-top: 0.5rem; }
+
+    /* ─── GALERIE ─── */
+    .galerie-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 4rem;
+    }
+    .galerie-item { aspect-ratio: 1; overflow: hidden; }
+    .galerie-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .galerie-item:hover img { transform: scale(1.05); }
+    .galerie-item.large { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #070402; border-top: 1px solid var(--border);
+      padding: 3rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-brand .footer-logo { font-family: var(--ff-serif); font-size: 1.8rem; color: var(--gold); margin-bottom: 0.8rem; }
+    .footer-brand p { font-size: 0.82rem; color: var(--fg-dim); line-height: 1.7; }
+    .footer-col-title { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { font-size: 0.85rem; color: var(--fg-dim); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-address { font-size: 0.85rem; color: var(--fg-dim); line-height: 1.8; }
+    .footer-bottom {
+      grid-column: 1 / -1; border-top: 1px solid var(--border);
+      padding-top: 2rem; display: flex; justify-content: space-between;
+      font-size: 0.72rem; color: rgba(242,234,216,0.3);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .section { padding: 4rem 1.5rem; }
+      .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .plats-grid { grid-template-columns: 1fr; }
+      .formule-banner { grid-template-columns: 1fr; }
+      .formule-label { writing-mode: horizontal-tb; transform: none; }
+      .horaires-grid { grid-template-columns: 1fr 1fr; }
+      .resa-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+      .carte-section { padding: 4rem 1.5rem; }
+      .resa-section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-logo">L'Ardoise</div>
+    <ul class="nav-links">
+      <li><a href="#carte">La Carte</a></li>
+      <li><a href="#horaires">Horaires</a></li>
+      <li><a href="#reservation">Réservation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#reservation" class="nav-cta">Réserver une table</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Restaurant normand — Fécamp, Normandie</div>
+      <h1 class="hero-title">L'Ardoise</h1>
+      <div class="hero-sep"></div>
+      <p class="hero-subtitle">Cuisine du terroir normand, produits de saison, ambiance chaleureuse au cœur de Fécamp.</p>
+      <a href="#reservation" class="btn-gold">Réservez une table</a>
+      <a href="#carte" class="btn-outline">Découvrir la carte</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      Défiler
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="section" id="about">
+    <div class="section-eyebrow">Notre histoire</div>
+    <h2 class="section-title">Une cuisine <em>sincère</em>,<br>enracinée en Normandie</h2>
+    <div class="intro-grid">
+      <div class="intro-img">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80" alt="Plats L'Ardoise" loading="lazy">
+        <div class="intro-img-caption">Produits locaux — Fécamp</div>
+      </div>
+      <div class="intro-text">
+        <p>Nichée dans le centre historique de <strong>Fécamp</strong>, L'Ardoise est une table qui célèbre les saveurs authentiques de la Normandie. Notre chef sélectionne chaque matin les meilleurs produits auprès des producteurs locaux et des pêcheurs du port.</p>
+        <p>Depuis 2018, nous proposons une cuisine simple et généreuse, sans artifice — des recettes transmises de génération en génération, réinterprétées avec sensibilité. <strong>Poissons de la Manche</strong>, viandes normandes, fromages affinés localement : chaque assiette raconte une histoire.</p>
+        <p>La salle accueille jusqu'à 35 couverts dans une atmosphère intime, à la lueur des bougies, autour d'une grande ardoise qui change au rythme des saisons et des arrivages.</p>
+        <div class="intro-badges">
+          <span class="badge">Produits locaux</span>
+          <span class="badge">Fait maison</span>
+          <span class="badge">Poissons frais</span>
+          <span class="badge">Vins normands</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Carte -->
+  <div class="carte-section" id="carte">
+    <div class="carte-inner">
+      <div class="section-eyebrow">Gastronomie</div>
+      <h2 class="section-title">Notre <em>Carte</em></h2>
+      <p class="section-lead">Une sélection de plats élaborés avec les produits du terroir normand, renouvelée chaque semaine selon les arrivages.</p>
+
+      <div class="carte-categories">
+
+        <!-- Entrées -->
+        <div>
+          <div class="carte-category-title">Entrées</div>
+          <div class="plats-grid">
+            <div class="plat-card">
+              <div class="plat-img">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&auto=format&fit=crop&q=80" alt="Terrine de campagne" loading="lazy">
+              </div>
+              <div class="plat-name">Terrine de foie de volaille normande</div>
+              <div class="plat-desc">Foie de volaille du pays de Caux, Calvados, chutney de pommes, pain brioché toasté.</div>
+              <div class="plat-footer">
+                <div class="plat-price">12,50 €</div>
+                <span class="plat-tag">Maison</span>
+              </div>
+            </div>
+            <div class="plat-card">
+              <div class="plat-img">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&auto=format&fit=crop&q=80" alt="Velouté" loading="lazy">
+              </div>
+              <div class="plat-name">Velouté de coquilles Saint-Jacques</div>
+              <div class="plat-desc">Noix de Saint-Jacques de la baie de Seine, crème normande, huile de noisette, chapelure.</div>
+              <div class="plat-footer">
+                <div class="plat-price">15,00 €</div>
+                <span class="plat-tag">Saison</span>
+              </div>
+            </div>
+            <div class="plat-card">
+              <div class="plat-img">
+                <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&auto=format&fit=crop&q=80" alt="Salade normande" loading="lazy">
+              </div>
+              <div class="plat-name">Salade de homard bleu et pommes acidulées</div>
+              <div class="plat-desc">Homard breton, pommes Granny, mâche, vinaigrette aux algues, tuile au parmesan.</div>
+              <div class="plat-footer">
+                <div class="plat-price">19,00 €</div>
+                <span class="plat-tag">Signature</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plats -->
+        <div>
+          <div class="carte-category-title">Plats</div>
+          <div class="plats-grid">
+            <div class="plat-card">
+              <div class="plat-img">
+                <img src="https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=600&auto=format&fit=crop&q=80" alt="Sole meunière" loading="lazy">
+              </div>
+              <div class="plat-name">Sole meunière du port de Fécamp</div>
+              <div class="plat-desc">Sole entière de pêche locale, beurre noisette, citron, câpres, pommes vapeur persillées.</div>
+              <div class="plat-footer">
+                <div class="plat-price">28,00 €</div>
+                <span class="plat-tag">Pêche locale</span>
+              </div>
+            </div>
+            <div class="plat-card">
+              <div class="plat-img">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop&q=80" alt="Entrecôte normande" loading="lazy">
+              </div>
+              <div class="plat-name">Entrecôte de bœuf normand, sauce Camembert</div>
+              <div class="plat-desc">Bœuf de race Normande, sauce au Camembert fermier, frites maison, salade de saison.</div>
+              <div class="plat-footer">
+                <div class="plat-price">32,00 €</div>
+                <span class="plat-tag">Terroir</span>
+              </div>
+            </div>
+            <div class="plat-card">
+              <div class="plat-img">
+                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&auto=format&fit=crop&q=80" alt="Magret" loading="lazy">
+              </div>
+              <div class="plat-name">Canard à la normande, pommes et cidre</div>
+              <div class="plat-desc">Magret de canard poêlé, réduction de cidre brut, pommes caramélisées, purée de céleri.</div>
+              <div class="plat-footer">
+                <div class="plat-price">26,50 €</div>
+                <span class="plat-tag">Brasserie</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desserts -->
+        <div>
+          <div class="carte-category-title">Desserts</div>
+          <div class="plats-grid">
+            <div class="plat-card">
+              <div class="plat-name">Tarte Tatin normande</div>
+              <div class="plat-desc">Pommes du pays de Caux, caramel beurre salé, pâte feuilletée maison, crème fraîche épaisse.</div>
+              <div class="plat-footer"><div class="plat-price">9,00 €</div><span class="plat-tag">Maison</span></div>
+            </div>
+            <div class="plat-card">
+              <div class="plat-name">Crème brûlée au Calvados</div>
+              <div class="plat-desc">Crème vanille, eau-de-vie de pommes du Calvados, sucre caramélisé, madeleine maison.</div>
+              <div class="plat-footer"><div class="plat-price">8,00 €</div><span class="plat-tag">Classique</span></div>
+            </div>
+            <div class="plat-card">
+              <div class="plat-name">Plateau de fromages normands</div>
+              <div class="plat-desc">Camembert, Livarot, Pont-l'Évêque — affinés par Maître Fromager, pain de campagne grillé.</div>
+              <div class="plat-footer"><div class="plat-price">11,00 €</div><span class="plat-tag">Sélection</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Formule du jour -->
+      <div class="formule-banner">
+        <div class="formule-label">Menu</div>
+        <div class="formule-content">
+          <div class="formule-title">Formule du midi — du lundi au vendredi</div>
+          <div class="formule-items">
+            <div><span>—</span> Entrée + Plat <strong>ou</strong> Plat + Dessert</div>
+            <div><span>—</span> Entrée + Plat + Dessert</div>
+            <div><span>—</span> Verre de cidre ou eau inclus</div>
+            <div><span>—</span> Café ou thé offert</div>
+          </div>
+        </div>
+        <div class="formule-price">24 €<small>/ personne</small></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Horaires -->
+  <section class="section" id="horaires">
+    <div class="section-eyebrow">Informations pratiques</div>
+    <h2 class="section-title">Horaires <em>d'ouverture</em></h2>
+    <div class="horaires-grid">
+      <div class="horaire-item">
+        <div class="horaire-day">Lun — Mar</div>
+        <div class="horaire-closed">Fermé</div>
+      </div>
+      <div class="horaire-item">
+        <div class="horaire-day">Mer — Ven</div>
+        <div class="horaire-time">12h – 14h<br>19h – 22h</div>
+      </div>
+      <div class="horaire-item">
+        <div class="horaire-day">Samedi</div>
+        <div class="horaire-time">12h – 15h<br>19h – 22h30</div>
+      </div>
+      <div class="horaire-item">
+        <div class="horaire-day">Dimanche</div>
+        <div class="horaire-time">12h – 15h</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Réservation -->
+  <div class="resa-section" id="reservation">
+    <div class="resa-inner">
+      <div class="resa-info">
+        <div class="section-eyebrow">Réservation</div>
+        <h2 class="section-title">Réservez<br>votre <em>table</em></h2>
+        <p>Nous vous accueillons dans notre salle de 35 couverts pour un déjeuner ou un dîner en toute intimité. La réservation est recommandée, notamment le week-end.</p>
+        <p>Pour les groupes de plus de 8 personnes ou les événements privés, contactez-nous directement afin que nous puissions préparer votre venue au mieux.</p>
+        <div class="resa-contact">
+          <div class="resa-contact-item">
+            <div class="resa-contact-icon">
+              <svg width="16" height="16" fill="none" stroke="#e8c88a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .92h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="resa-contact-text">
+              <strong>Téléphone</strong>
+              02 35 10 XX XX
+            </div>
+          </div>
+          <div class="resa-contact-item">
+            <div class="resa-contact-icon">
+              <svg width="16" height="16" fill="none" stroke="#e8c88a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="resa-contact-text">
+              <strong>Email</strong>
+              contact@lardoise-fecamp.fr
+            </div>
+          </div>
+          <div class="resa-contact-item">
+            <div class="resa-contact-icon">
+              <svg width="16" height="16" fill="none" stroke="#e8c88a" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="resa-contact-text">
+              <strong>Adresse</strong>
+              12 rue Alexandre Le Grand, 76400 Fécamp
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resa-form" id="contact">
+        <div class="form-title">Réserver une table</div>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prénom</label>
+              <input class="form-input" type="text" placeholder="Marie">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom</label>
+              <input class="form-input" type="text" placeholder="Dupont">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Téléphone</label>
+              <input class="form-input" type="tel" placeholder="06 XX XX XX XX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input class="form-input" type="email" placeholder="marie@email.fr">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input class="form-input" type="date">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Heure</label>
+              <select class="form-select form-input">
+                <option>12h00</option>
+                <option>12h30</option>
+                <option>13h00</option>
+                <option>13h30</option>
+                <option>19h00</option>
+                <option>19h30</option>
+                <option>20h00</option>
+                <option>20h30</option>
+                <option>21h00</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nombre de couverts</label>
+            <select class="form-select form-input">
+              <option>1 personne</option>
+              <option>2 personnes</option>
+              <option>3 personnes</option>
+              <option>4 personnes</option>
+              <option>5 personnes</option>
+              <option>6 personnes</option>
+              <option>7 personnes</option>
+              <option>8 personnes ou plus</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message (allergies, occasion spéciale…)</label>
+            <textarea class="form-textarea" placeholder="Indiquez vos allergies ou toute information utile…"></textarea>
+          </div>
+          <button type="submit" class="btn-gold form-submit">Confirmer la réservation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-brand">
+      <div class="footer-logo">L'Ardoise</div>
+      <p>Restaurant normand à Fécamp depuis 2018. Cuisine du terroir, produits locaux, ambiance chaleureuse.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <div class="footer-links">
+        <a href="#about">Notre histoire</a>
+        <a href="#carte">La Carte</a>
+        <a href="#horaires">Horaires</a>
+        <a href="#reservation">Réservation</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-address">
+        12 rue Alexandre Le Grand<br>
+        76400 Fécamp<br><br>
+        02 35 10 XX XX<br>
+        contact@lardoise-fecamp.fr
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 L'Ardoise — Restaurant normand, Fécamp</span>
+      <span>Site réalisé par Studio 888</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 80 ? 'rgba(15,10,6,0.98)' : 'rgba(15,10,6,0.92)';
+    });
+
+    // Form submission
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Merci pour votre réservation ! Nous vous confirmons par email sous 2h.');
+    });
+  </script>
+</body>
+</html>
