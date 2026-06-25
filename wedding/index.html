@@ -47,13 +47,17 @@
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
-      font-family: var(--ff-serif);
-      font-size: 1.1rem; font-weight: 400;
-      letter-spacing: 0.06em;
-      color: var(--ink);
+      display: flex; align-items: center; gap: 0.7rem;
       text-decoration: none;
     }
-    .nav-logo span { color: var(--gold); }
+    .nav-logo img { height: 40px; width: auto; filter: invert(0); transition: filter 0.4s; }
+    nav.scrolled .nav-logo img { filter: invert(1); }
+    .nav-logo-text {
+      font-family: var(--ff-serif);
+      font-size: 0.8rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink); opacity: 0.7;
+    }
     .nav-links {
       display: flex; align-items: center; gap: 2.5rem;
       list-style: none;
@@ -475,7 +479,10 @@
 
   <!-- Nav -->
   <nav id="nav">
-    <a href="#hero" class="nav-logo">Studio<span> 888</span> — Mariage</a>
+    <a href="#hero" class="nav-logo">
+      <img src="../assets/logo-white-rmbg.png" alt="Studio 888">
+      <span class="nav-logo-text">Mariage</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#intro">À propos</a></li>
       <li><a href="#gallery">Galerie</a></li>
@@ -497,7 +504,7 @@
 
   <!-- Hero -->
   <section id="hero">
-    <img id="hero-img" src="../assets/images/wedding/DSCF9060.jpg" alt="Mariage Fécamp">
+    <img id="hero-img" src="../assets/images/wedding/DSCF9265.jpg" alt="Mariage Fécamp" style="object-position: center 30%;">
     <div class="hero-content">
       <div class="hero-script">Votre histoire,<br>racontée en images</div>
       <div class="hero-sub">Photographe & Vidéaste Mariage — Fécamp · Normandie</div>
