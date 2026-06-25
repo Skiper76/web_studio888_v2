@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sites Web — Studio 888 · Kevin Hermand</title>
+  <meta name="description" content="Création de sites web sur mesure : invitation mariage, site vitrine, portfolio. Studio 888 — Kevin Hermand, Normandie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #050505;
+      --bg-2:    #0e0e0e;
+      --bg-3:    #1a1a1a;
+      --fg:      #f0f0f0;
+      --fg-dim:  #555555;
+      --accent:  #ffffff;
+      --red:     #e8001d;
+      --silver:  #888888;
+      --border:  rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.14);
+      --ff-head: 'Oswald', sans-serif;
+      --ff-serif:'Cormorant Garamond', serif;
+      --ff-body: 'Inter', sans-serif;
+      --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--ff-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.5rem 3rem;
+      background: rgba(5,5,5,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; height: 52px; }
+    .nav-logo img { height: 52px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--fg-dim); position: relative; transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right;
+      transition: transform 0.3s var(--ease);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--fg); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
+    .nav-cta {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.3); padding: 0.6rem 1.4rem; transition: 0.3s;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.07); border-color: var(--accent); }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 1px; background: var(--fg); transition: 0.3s; }
+    .nav-mobile {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: var(--ff-head); font-size: clamp(2rem, 7vw, 4rem); letter-spacing: 0.05em; color: var(--fg-dim); transition: color 0.3s; }
+    .nav-mobile a:hover { color: var(--accent); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 160px 3rem 100px;
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+      font-family: var(--ff-head); font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .hero-eyebrow::before { content: ''; display: inline-block; width: 40px; height: 1px; background: var(--red); }
+    .hero-title {
+      font-family: var(--ff-head); font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 600; line-height: 0.95; letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .hero-title span { color: var(--red); }
+    .hero-subtitle {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: rgba(240,240,240,0.6);
+      margin-top: 1.5rem; line-height: 1.7; max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .btn-primary {
+      font-family: var(--ff-head); font-size: 0.72rem; letter-spacing: 0.18em;
+      text-transform: uppercase; background: var(--fg); color: var(--bg);
+      padding: 0.9rem 2rem; transition: 0.3s;
+    }
+    .btn-primary:hover { background: var(--red); color: #fff; }
+    .btn-secondary {
+      font-family: var(--ff-head); font-size: 0.72rem; letter-spacing: 0.18em;
+      text-transform: uppercase; border: 1px solid var(--border2); color: var(--fg);
+      padding: 0.9rem 2rem; transition: 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--fg); }
+
+    .hero-visual { position: relative; }
+    .hero-mockups {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .mockup-card {
+      background: var(--bg-3); border: 1px solid var(--border2);
+      border-radius: 8px; overflow: hidden; position: relative;
+      aspect-ratio: 9/14; transition: transform 0.4s var(--ease), box-shadow 0.4s;
+    }
+    .mockup-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .mockup-card:first-child { margin-top: 2rem; }
+    .mockup-screen {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+      display: flex; flex-direction: column;
+    }
+    .mockup-bar {
+      height: 28px; background: rgba(255,255,255,0.04);
+      display: flex; align-items: center; padding: 0 0.8rem; gap: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .mockup-dot:nth-child(1) { background: #ff5f57; }
+    .mockup-dot:nth-child(2) { background: #febc2e; }
+    .mockup-dot:nth-child(3) { background: #28c840; }
+    .mockup-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; gap: 0.6rem; }
+    .mockup-line { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; }
+    .mockup-line.w-80 { width: 80%; }
+    .mockup-line.w-60 { width: 60%; }
+    .mockup-line.w-40 { width: 40%; background: rgba(232,0,29,0.4); }
+    .mockup-img-placeholder {
+      width: 90%; aspect-ratio: 16/9;
+      background: rgba(255,255,255,0.05); border-radius: 4px;
+      margin-bottom: 0.5rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mockup-img-placeholder svg { opacity: 0.2; }
+    .mockup-label {
+      position: absolute; bottom: 0.8rem; left: 0; right: 0;
+      text-align: center; font-family: var(--ff-head); font-size: 0.55rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,240,240,0.4);
+    }
+
+    /* ─── SECTION GÉNÉRIQUE ─── */
+    .section { padding: 6rem 3rem; max-width: 1400px; margin: 0 auto; }
+    .section-full { padding: 6rem 3rem; }
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+      font-family: var(--ff-head); font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--silver);
+    }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--silver); }
+    .section-title {
+      font-family: var(--ff-head); font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 500; text-transform: uppercase; line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .section-title span { color: var(--red); }
+    .section-lead {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: 1.15rem; color: rgba(240,240,240,0.55); max-width: 600px; line-height: 1.8;
+    }
+    .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+    /* ─── OFFRES ─── */
+    .offers-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+    .offer-card {
+      background: var(--bg-2); padding: 3rem 2.5rem;
+      display: flex; flex-direction: column; gap: 1.5rem;
+      transition: background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .offer-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--red); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+    .offer-card:hover { background: var(--bg-3); }
+    .offer-card:hover::before { transform: scaleX(1); }
+    .offer-card.featured { background: var(--bg-3); }
+    .offer-card.featured::before { transform: scaleX(1); }
+    .offer-number {
+      font-family: var(--ff-head); font-size: 0.55rem; letter-spacing: 0.3em;
+      color: var(--red); text-transform: uppercase;
+    }
+    .offer-title {
+      font-family: var(--ff-head); font-size: 1.6rem; font-weight: 500;
+      text-transform: uppercase; line-height: 1;
+    }
+    .offer-desc {
+      font-family: var(--ff-serif); font-style: italic;
+      color: rgba(240,240,240,0.55); font-size: 1rem; line-height: 1.75;
+    }
+    .offer-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: auto; }
+    .offer-features li {
+      font-size: 0.82rem; color: rgba(240,240,240,0.65);
+      display: flex; align-items: baseline; gap: 0.7rem;
+    }
+    .offer-features li::before { content: '—'; color: var(--red); flex-shrink: 0; }
+    .offer-price {
+      font-family: var(--ff-head); font-size: 2rem; font-weight: 300;
+      border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 1rem;
+    }
+    .offer-price span { font-size: 0.8rem; color: var(--silver); font-weight: 300; margin-left: 0.3rem; }
+    .offer-cta {
+      font-family: var(--ff-head); font-size: 0.68rem; letter-spacing: 0.2em;
+      text-transform: uppercase; border: 1px solid var(--border2);
+      padding: 0.75rem 1.5rem; text-align: center; transition: 0.3s; color: var(--fg);
+    }
+    .offer-cta:hover { background: var(--red); border-color: var(--red); }
+
+    /* ─── PROCESS ─── */
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border: 1px solid var(--border); margin-top: 4rem;
+    }
+    .process-step {
+      padding: 2.5rem 2rem; border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-n {
+      font-family: var(--ff-head); font-size: 3.5rem; font-weight: 700;
+      color: rgba(255,255,255,0.22); line-height: 1; margin-bottom: 1rem;
+    }
+    .process-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+    .process-step-title {
+      font-family: var(--ff-head); font-size: 1rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.8rem;
+    }
+    .process-step-desc {
+      font-size: 0.83rem; color: rgba(240,240,240,0.5); line-height: 1.65;
+    }
+
+    /* ─── TECHNOS ─── */
+    .tech-strip {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 2.5rem 3rem; margin: 0;
+      display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;
+    }
+    .tech-label {
+      font-family: var(--ff-head); font-size: 0.58rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--silver); white-space: nowrap;
+    }
+    .tech-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .tech-tag {
+      font-family: var(--ff-head); font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; border: 1px solid var(--border2);
+      padding: 0.4rem 0.9rem; color: rgba(240,240,240,0.5); transition: 0.3s;
+    }
+    .tech-tag:hover { color: var(--fg); border-color: var(--fg); }
+
+    /* ─── EXEMPLES ─── */
+    .examples-intro { max-width: 1400px; margin: 0 auto; padding: 5rem 3rem 2rem; }
+    .examples-grid {
+      max-width: 1400px; margin: 0 auto;
+      padding: 2rem 3rem 6rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    }
+    .example-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      overflow: hidden; position: relative;
+      transition: border-color 0.3s;
+    }
+    .example-card:hover { border-color: var(--border2); }
+    .example-preview {
+      aspect-ratio: 16/10; overflow: hidden; position: relative;
+      background: var(--bg-3);
+    }
+    .example-preview-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-serif); font-style: italic;
+      color: rgba(240,240,240,0.2); font-size: 1.2rem;
+    }
+
+    /* Mockup "invitation mariage" */
+    .mock-wedding {
+      background: linear-gradient(135deg, #F5F0E8 0%, #EDE4D4 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.6rem; padding: 2rem;
+    }
+    .mock-wedding-title {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(1.2rem, 3vw, 2.2rem); color: #1C1A18; text-align: center; line-height: 1.3;
+    }
+    .mock-wedding-date {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.85rem;
+      letter-spacing: 0.2em; color: #B89A6A;
+    }
+    .mock-wedding-nav {
+      display: flex; gap: 1.5rem; font-family: var(--ff-body); font-size: 0.55rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: #4A4540;
+    }
+    .mock-wedding-sep { width: 40px; height: 1px; background: #B89A6A; }
+    .mock-wedding-img {
+      width: 80%; aspect-ratio: 16/9; background: rgba(28,26,24,0.12);
+      border-radius: 3px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Mockup "vitrine" */
+    .mock-vitrine {
+      background: var(--bg); display: flex; flex-direction: column; overflow: hidden;
+    }
+    .mock-vitrine-nav {
+      height: 32px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mock-vitrine-nav span {
+      font-size: 0.45rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(240,240,240,0.3);
+    }
+    .mock-vitrine-hero {
+      flex: 1; display: flex; flex-direction: column; align-items: flex-start;
+      justify-content: center; padding: 1.5rem; gap: 0.6rem;
+    }
+    .mock-vitrine-tag {
+      font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e8001d;
+    }
+    .mock-vitrine-h {
+      font-family: var(--ff-head); font-size: clamp(1.2rem, 3vw, 2rem);
+      text-transform: uppercase; line-height: 1;
+    }
+    .mock-vitrine-sub {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: 0.7rem; color: rgba(240,240,240,0.4);
+    }
+    .mock-vitrine-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 0.8rem; padding-top: 0;
+    }
+    .mock-vitrine-cell {
+      aspect-ratio: 1; background: rgba(255,255,255,0.04); border-radius: 2px;
+    }
+
+    .example-info { padding: 1.5rem 2rem; }
+    .example-type {
+      font-family: var(--ff-head); font-size: 0.55rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem;
+    }
+    .example-title {
+      font-family: var(--ff-head); font-size: 1.3rem; font-weight: 400;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .example-desc {
+      font-size: 0.83rem; color: rgba(240,240,240,0.5); line-height: 1.6;
+    }
+    .example-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .example-tag {
+      font-size: 0.68rem; border: 1px solid var(--border); padding: 0.25rem 0.7rem;
+      color: rgba(240,240,240,0.4); font-family: var(--ff-head); letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── CTA FINAL ─── */
+    .cta-section {
+      border-top: 1px solid var(--border);
+      padding: 7rem 3rem;
+      text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    }
+    .cta-title {
+      font-family: var(--ff-head); font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 600; text-transform: uppercase; line-height: 1;
+    }
+    .cta-title span { color: var(--red); }
+    .cta-sub {
+      font-family: var(--ff-serif); font-style: italic;
+      font-size: 1.15rem; color: rgba(240,240,240,0.5); max-width: 560px; line-height: 1.8;
+    }
+    .cta-email {
+      font-family: var(--ff-head); font-size: 0.85rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red); transition: 0.3s;
+    }
+    .cta-email:hover { letter-spacing: 0.3em; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.75rem; color: var(--fg-dim);
+    }
+    footer a { color: var(--fg-dim); transition: color 0.3s; }
+    footer a:hover { color: var(--fg); }
+    .footer-links { display: flex; gap: 2rem; }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0.5rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; gap: 3rem; padding: 120px 1.5rem 4rem; }
+      .hero-visual { order: -1; }
+      .section, .examples-intro, .examples-grid { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .section-full .tech-strip { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .offers-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .examples-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+    @media (max-width: 600px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo-white-rmbg.png" alt="Studio 888">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">À propos</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#photos">Photos</a></li>
+      <li><a href="mariage/">Mariage</a></li>
+      <li><a href="web.html" class="active">Web</a></li>
+      <li><a href="tarifs.html">Tarifs</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Contact</a>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="index.html#about" class="mobile-link">À propos</a>
+    <a href="index.html#services" class="mobile-link">Services</a>
+    <a href="index.html#photos" class="mobile-link">Photos</a>
+    <a href="mariage/" class="mobile-link">Mariage</a>
+    <a href="web.html" class="mobile-link">Web</a>
+    <a href="tarifs.html" class="mobile-link">Tarifs</a>
+    <a href="index.html#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <!-- Hero -->
+  <section>
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Studio 888 — Services numériques</div>
+        <h1 class="hero-title">Sites<br>Web<span>.</span></h1>
+        <p class="hero-subtitle">
+          Des sites sur mesure, pensés pour votre histoire. Invitation de mariage, site vitrine, portfolio — chaque projet est conçu avec la même exigence que vos photos.
+        </p>
+        <div class="hero-actions">
+          <a href="index.html#contact" class="btn-primary">Demander un devis</a>
+          <a href="#offres" class="btn-secondary">Voir les offres</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-mockups">
+          <!-- Mockup invitation mariage -->
+          <div class="mockup-card">
+            <div class="mockup-screen">
+              <div class="mockup-bar">
+                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+              </div>
+              <div class="mock-wedding">
+                <div class="mock-wedding-nav">À propos · Invitation · Lieu · RSVP</div>
+                <div class="mock-wedding-sep"></div>
+                <div class="mock-wedding-title">Sophie<br>&amp; Thomas</div>
+                <div class="mock-wedding-date">12 · 07 · 2025</div>
+                <div class="mock-wedding-img">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(28,26,24,0.3)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-label">Invitation mariage</div>
+          </div>
+          <!-- Mockup vitrine -->
+          <div class="mockup-card">
+            <div class="mockup-screen mock-vitrine">
+              <div class="mock-vitrine-nav">
+                <span>À propos</span><span>Services</span><span>Photos</span><span>Contact</span>
+              </div>
+              <div class="mock-vitrine-hero">
+                <div class="mock-vitrine-tag">Studio 888</div>
+                <div class="mock-vitrine-h">Portfolio.</div>
+                <div class="mock-vitrine-sub">Photographe · Normandie</div>
+              </div>
+              <div class="mock-vitrine-grid">
+                <div class="mock-vitrine-cell"></div>
+                <div class="mock-vitrine-cell"></div>
+                <div class="mock-vitrine-cell"></div>
+              </div>
+            </div>
+            <div class="mockup-label">Site vitrine</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Technologies -->
+  <div class="section-full">
+    <div class="tech-strip">
+      <span class="tech-label">Technologies</span>
+      <div class="tech-tags">
+        <span class="tech-tag">HTML / CSS</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">Next.js</span>
+        <span class="tech-tag">Responsive</span>
+        <span class="tech-tag">SEO</span>
+        <span class="tech-tag">Vercel</span>
+        <span class="tech-tag">Formulaire RSVP</span>
+        <span class="tech-tag">Galerie lightbox</span>
+        <span class="tech-tag">Google Maps</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offres -->
+  <section class="section" id="offres">
+    <div class="section-eyebrow">Nos formules</div>
+    <h2 class="section-title">Ce que je<br>peux créer<span>.</span></h2>
+    <p class="section-lead">Chaque site est unique, développé sur mesure — pas de template tout fait.</p>
+
+    <div class="offers-grid">
+      <!-- Invitation mariage -->
+      <div class="offer-card reveal">
+        <div class="offer-number">01 — Mariage</div>
+        <div class="offer-title">Site<br>invitation</div>
+        <p class="offer-desc">Un site élégant pour annoncer votre mariage, collecter les RSVP et partager les informations pratiques avec vos invités.</p>
+        <ul class="offer-features">
+          <li>Design personnalisé à votre thème</li>
+          <li>Formulaire RSVP en ligne</li>
+          <li>Plan d'accès & hébergement</li>
+          <li>Galerie photos</li>
+          <li>Compte à rebours</li>
+          <li>Compatible mobile</li>
+          <li>Hébergement 12 mois inclus</li>
+        </ul>
+        <div class="offer-price">À partir de 490 €<span>/ projet</span></div>
+        <a href="index.html#contact" class="offer-cta">Demander un devis</a>
+      </div>
+
+      <!-- Vitrine / portfolio -->
+      <div class="offer-card featured reveal reveal-delay-1">
+        <div class="offer-number">02 — Vitrine</div>
+        <div class="offer-title">Site<br>vitrine</div>
+        <p class="offer-desc">Un site professionnel pour présenter votre activité, vos services et votre portfolio. Conçu pour convertir les visiteurs en clients.</p>
+        <ul class="offer-features">
+          <li>Design sur mesure</li>
+          <li>Galerie & lightbox</li>
+          <li>Formulaire de contact</li>
+          <li>SEO optimisé</li>
+          <li>Animations & interactions</li>
+          <li>Compatible mobile & tablette</li>
+          <li>Déploiement inclus</li>
+        </ul>
+        <div class="offer-price">À partir de 890 €<span>/ projet</span></div>
+        <a href="index.html#contact" class="offer-cta">Demander un devis</a>
+      </div>
+
+      <!-- Devis personnalisé -->
+      <div class="offer-card reveal reveal-delay-2">
+        <div class="offer-number">03 — Sur mesure</div>
+        <div class="offer-title">Projet<br>personnalisé</div>
+        <p class="offer-desc">Vous avez un projet plus spécifique ? Application web, outil interactif, espace client ou landing page — discutons-en.</p>
+        <ul class="offer-features">
+          <li>Analyse des besoins</li>
+          <li>Proposition technique</li>
+          <li>Développement full-stack si besoin</li>
+          <li>Maintenance & évolutions</li>
+          <li>Formation à la mise à jour</li>
+        </ul>
+        <div class="offer-price">Sur devis</div>
+        <a href="index.html#contact" class="offer-cta">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Process -->
+  <section class="section">
+    <div class="section-eyebrow">Comment ça se passe</div>
+    <h2 class="section-title">Le processus<span>.</span></h2>
+
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="process-n">01</div>
+        <div class="process-step-title">Échange initial</div>
+        <p class="process-step-desc">On discute de votre projet, vos attentes, vos goûts et vos contraintes. Un appel ou un email suffit pour démarrer.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-n">02</div>
+        <div class="process-step-title">Proposition</div>
+        <p class="process-step-desc">Je vous envoie une maquette et un devis détaillé. Pas de surprise : tout est validé ensemble avant de commencer.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-n">03</div>
+        <div class="process-step-title">Développement</div>
+        <p class="process-step-desc">Je développe le site et vous partage une version de prévisualisation à chaque étape pour valider ensemble.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-n">04</div>
+        <div class="process-step-title">Mise en ligne</div>
+        <p class="process-step-desc">Votre site est déployé sur votre domaine. Je m'occupe de la configuration technique et de la livraison finale.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Exemples visuels -->
+  <div class="examples-intro reveal">
+    <div class="section-eyebrow">Exemples</div>
+    <h2 class="section-title">Types de sites<span>.</span></h2>
+    <p class="section-lead">Aperçu des styles et formats proposés — chaque réalisation est adaptée à votre identité.</p>
+  </div>
+
+  <div class="examples-grid">
+    <div class="example-card reveal">
+      <div class="example-preview">
+        <div class="example-preview-inner mock-wedding" style="padding: 3rem 2rem;">
+          <div class="mock-wedding-nav" style="font-size:0.6rem;">À propos · Invitation · Lieu · RSVP</div>
+          <div class="mock-wedding-sep"></div>
+          <div class="mock-wedding-title" style="font-size: 2.2rem;">Jane &amp; Arthur</div>
+          <div class="mock-wedding-date" style="font-size: 0.9rem; letter-spacing: 0.25em;">20 · 09 · 2025</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; color: #4A4540; font-size: 0.9rem; text-align: center; max-width: 300px; line-height: 1.6;">
+            Rejoignez-nous pour célébrer le plus beau jour de notre vie.
+          </div>
+        </div>
+      </div>
+      <div class="example-info">
+        <div class="example-type">Invitation mariage</div>
+        <div class="example-title">Site invitation & RSVP</div>
+        <p class="example-desc">Site élégant sur fond crème, typographie serif, formulaire RSVP intégré, plan d'accès et compte à rebours.</p>
+        <div class="example-tags">
+          <span class="example-tag">HTML/CSS</span>
+          <span class="example-tag">RSVP</span>
+          <span class="example-tag">Mobile</span>
+          <span class="example-tag">1 page</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-card reveal reveal-delay-1">
+      <div class="example-preview">
+        <div class="example-preview-inner mock-vitrine" style="height: 100%;">
+          <div class="mock-vitrine-nav" style="font-size:0.5rem;">
+            <span>À PROPOS</span><span>SERVICES</span><span>PHOTOS</span><span>VIDÉOS</span><span>CONTACT</span>
+          </div>
+          <div class="mock-vitrine-hero" style="padding: 2rem; gap: 0.8rem;">
+            <div class="mock-vitrine-tag" style="font-size: 0.55rem;">Studio 888 — Kevin Hermand</div>
+            <div class="mock-vitrine-h" style="font-size: 2.5rem; letter-spacing: -0.01em;">Portfolio<span style="color:#e8001d">.</span></div>
+            <div class="mock-vitrine-sub" style="font-size: 0.85rem;">Photographe · Vidéaste · Drone</div>
+            <div style="display:flex; gap: 0.5rem; margin-top: 0.5rem;">
+              <div style="background:#fff; color:#050505; font-family: 'Oswald', sans-serif; font-size: 0.55rem; letter-spacing: 0.12em; padding: 0.5rem 1rem; text-transform: uppercase;">Voir le portfolio</div>
+              <div style="border: 1px solid rgba(255,255,255,0.2); font-family: 'Oswald', sans-serif; font-size: 0.55rem; letter-spacing: 0.12em; padding: 0.5rem 1rem; text-transform: uppercase;">Contact</div>
+            </div>
+          </div>
+          <div class="mock-vitrine-grid">
+            <div class="mock-vitrine-cell" style="background:rgba(255,255,255,0.06)"></div>
+            <div class="mock-vitrine-cell" style="background:rgba(255,255,255,0.04)"></div>
+            <div class="mock-vitrine-cell" style="background:rgba(255,255,255,0.07)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="example-info">
+        <div class="example-type">Site vitrine</div>
+        <div class="example-title">Portfolio photographe</div>
+        <p class="example-desc">Dark theme, typographie Oswald, galerie avec lightbox, animations au scroll, vidéo hero en autoplay et formulaire de contact.</p>
+        <div class="example-tags">
+          <span class="example-tag">Design sombre</span>
+          <span class="example-tag">Galerie</span>
+          <span class="example-tag">SEO</span>
+          <span class="example-tag">Vidéo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <h2 class="cta-title">Votre projet<span>.</span><br>Notre prochaine<br>collaboration.</h2>
+    <p class="cta-sub">Parlez-moi de votre projet. Je reviens vers vous sous 48h avec une proposition et un devis gratuit.</p>
+    <a href="mailto:ke.hermand76@gmail.com" class="cta-email">ke.hermand76@gmail.com</a>
+    <a href="index.html#contact" class="btn-primary">Demander un devis gratuit</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2025 Studio 888 · Kevin Hermand</span>
+    <div class="footer-links">
+      <a href="index.html">Portfolio</a>
+      <a href="mariage/">Mariage</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60 ? 'rgba(5,5,5,0.98)' : 'rgba(5,5,5,0.92)';
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+    // Reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
