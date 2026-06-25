@@ -1320,9 +1320,7 @@
 
   <!-- Hero -->
   <section id="hero">
-    <video id="hero-video" muted loop playsinline poster="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/select-compress/DSCF0312.jpg" preload="none">
-      <source data-src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/trailer/Portfolio_trailer.mp4" type="video/mp4">
-    </video>
+    <video id="hero-video" muted playsinline poster="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/select-compress/DSCF0312.jpg" preload="none"></video>
     <div class="hero-overlay"></div>
 
     <div class="hero-social">
@@ -1766,20 +1764,47 @@
   </footer>
 
   <script>
-    // ── Loader + lazy-load vidéo hero ───────────────────────────────
+    // ── Loader + lazy-load vidéo hero (3 parties enchaînées) ─────────
     const heroVideoEl = document.getElementById('hero-video');
+    const R2 = 'https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/trailer/';
+    // Part 1 légère (30s) → démarrage quasi instantané ; les suivantes
+    // se préchargent en arrière-plan pendant la lecture de la précédente.
+    const heroParts = [
+      R2 + 'Portfolio_trailer_p1.mp4',
+      R2 + 'Portfolio_trailer_p2.mp4',
+      R2 + 'Portfolio_trailer_p3.mp4'
+    ];
+    let heroPartIndex = 0;
+    let heroReady = false;
+    const heroPrefetched = new Set();
 
-    function loadHeroVideo() {
-      const source = heroVideoEl.querySelector('source[data-src]');
-      if (!source || source.src) return;
-      source.src = source.dataset.src;
+    function prefetchNextPart() {
+      const next = (heroPartIndex + 1) % heroParts.length;
+      if (heroPrefetched.has(next)) return;
+      heroPrefetched.add(next);
+      fetch(heroParts[next]).catch(() => {});
+    }
+
+    function playHeroPart(i) {
+      heroPartIndex = i;
+      heroVideoEl.src = heroParts[i];
       heroVideoEl.load();
       heroVideoEl.play().catch(() => {});
     }
 
+    function loadHeroVideo() {
+      if (heroVideoEl.src) return;
+      playHeroPart(0);
+    }
+
     heroVideoEl.addEventListener('playing', () => {
-      heroVideoEl.classList.add('ready');
-    }, { once: true });
+      if (!heroReady) { heroReady = true; heroVideoEl.classList.add('ready'); }
+      prefetchNextPart();
+    });
+
+    heroVideoEl.addEventListener('ended', () => {
+      playHeroPart((heroPartIndex + 1) % heroParts.length);
+    });
 
     window.addEventListener('load', () => {
       setTimeout(() => {
