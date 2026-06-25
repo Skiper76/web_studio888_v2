@@ -930,6 +930,62 @@
       width: 100%; height: 100%;
       border: none;
     }
+
+    /* ─── SLIDER CINÉMATIQUE ────────────────────────────────────────── */
+    .cine-slider {
+      position: relative; overflow: hidden; background: #000;
+    }
+    .cine-track {
+      display: flex;
+      transition: transform 0.6s var(--ease);
+      will-change: transform;
+    }
+    .cine-slide {
+      flex: 0 0 100%;
+      aspect-ratio: 16/9;
+      position: relative;
+    }
+    .cine-slide video {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .cine-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 5;
+      width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(5,5,5,0.5);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: var(--fg); cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .cine-arrow:hover { background: var(--red); border-color: transparent; }
+    .cine-prev { left: 1.2rem; }
+    .cine-next { right: 1.2rem; }
+    .cine-counter {
+      position: absolute; bottom: 1.2rem; right: 1.2rem; z-index: 5;
+      font-family: var(--ff-head); font-size: 0.78rem; letter-spacing: 0.15em;
+      color: var(--fg);
+      background: rgba(5,5,5,0.5); backdrop-filter: blur(8px);
+      padding: 0.4rem 0.9rem;
+    }
+    .cine-counter span { color: var(--red); }
+    .cine-dots {
+      display: flex; gap: 0.5rem; justify-content: center; margin-top: 1.5rem;
+    }
+    .cine-dot {
+      width: 30px; height: 3px; padding: 0;
+      background: rgba(255,255,255,0.15);
+      border: none; cursor: pointer;
+      transition: background 0.3s;
+    }
+    .cine-dot.active { background: var(--accent); }
+    @media (max-width: 600px) {
+      .cine-arrow { width: 44px; height: 44px; }
+      .cine-prev { left: 0.6rem; }
+      .cine-next { right: 0.6rem; }
+    }
     .video-caption-bar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.5rem 0;
@@ -1338,7 +1394,7 @@
         <span class="tw-word" id="tw-word"></span><span class="tw-cursor"></span>
       </div>
       <p class="hero-sub reveal reveal-delay-2">
-        Photographe · Vidéaste · Pilote de drone
+        Photographe · Vidéaste · Pilote de drone · Développeur
       </p>
       <div class="hero-actions reveal reveal-delay-3">
         <a href="#photos" class="btn-primary">
@@ -1548,46 +1604,44 @@
       <h2 class="section-title reveal">Vidéos</h2>
       <div style="height: 3rem;"></div>
 
-      <div class="video-tabs reveal">
-        <div class="video-tab active" data-tab="0"
-          data-gear="Fujifilm X100VI"
-          data-desc="Rendu cinématique obtenu avec un filtre de diffusion anamorphique, simulation de film personnalisée et paramètres couleurs chauds — tons dorés, ombres légèrement teintées. Un setup compact pensé pour une esthétique immédiate, sans post-traitement lourd.">Cinématique</div>
-        <div class="video-tab" data-tab="1"
-          data-gear="Fujifilm X100VI · 240 fps"
-          data-desc="Ralenti capturé à 240 images par seconde. Chaque mouvement décomposé dans ses détails les plus fins — gouttes, gestes, matières. La vitesse révèle ce que l'œil nu ne perçoit pas.">Ralenti</div>
-        <div class="video-tab" data-tab="2"
-          data-gear="DJI Mini 4 Pro · Gimbal 3 axes"
-          data-desc="Stabilisation 3 axes pour des plans fluides même en déplacement. Idéal pour les travellings urbains, les suivis de sujet et les panoramiques aériens. Zéro tremblement, rendu professionnel.">Stabilisé</div>
+      <div class="video-info-bar reveal">
+        <div class="video-info-camera">Fujifilm X100VI</div>
+        <div class="video-info-desc">Rendu cinématique : filtre de diffusion, simulations de film maison et étalonnage chaud. Glissez pour parcourir les réalisations.</div>
       </div>
 
-      <div class="video-info-bar" id="video-info-bar">
-        <div class="video-info-camera" id="video-info-camera">Fujifilm X100VI</div>
-        <div class="video-info-desc" id="video-info-desc">Rendu cinématique obtenu avec un filtre de diffusion anamorphique, simulation de film personnalisée et paramètres couleurs chauds — tons dorés, ombres légèrement teintées. Un setup compact pensé pour une esthétique immédiate, sans post-traitement lourd.</div>
-      </div>
-
-      <div class="video-slides active" data-slide="0">
-        <div class="video-main">
-          <video muted loop autoplay playsinline>
-            <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/camera_cinematique.mp4" type="video/mp4">
-          </video>
+      <div class="cine-slider reveal" id="cine-slider">
+        <div class="cine-track" id="cine-track">
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/DSCF0722.mp4" type="video/mp4"></video>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/DSCF1369.mp4" type="video/mp4"></video>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/DSCF1433.mp4" type="video/mp4"></video>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/DSCF1817.mp4" type="video/mp4"></video>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/DSCF1851.mp4" type="video/mp4"></video>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/DSCF2171.mp4" type="video/mp4"></video>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/DSCF2471.mp4" type="video/mp4"></video>
+          </div>
         </div>
+        <button class="cine-arrow cine-prev" id="cine-prev" aria-label="Vidéo précédente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="cine-arrow cine-next" id="cine-next" aria-label="Vidéo suivante">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="cine-counter"><span id="cine-current">01</span> / 07</div>
       </div>
-
-      <div class="video-slides" data-slide="1">
-        <div class="video-main">
-          <video muted loop playsinline>
-            <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/camera_ralenti.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <div class="video-slides" data-slide="2">
-        <div class="video-main">
-          <video muted loop playsinline>
-            <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/camera_stabilise.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
+      <div class="cine-dots" id="cine-dots"></div>
 
       <div class="portfolio-more" style="margin-top:2.5rem">
         <a href="https://adobe.ly/4vvsN23" target="_blank" rel="noopener" class="btn-primary">
@@ -1882,37 +1936,58 @@
       });
     });
 
-    // ── Video tabs ──────────────────────────────────────────────────
-    function updateVideoSetup(tab) {
-      const bar = document.getElementById('video-info-bar');
-      const cam = document.getElementById('video-info-camera');
-      const desc = document.getElementById('video-info-desc');
-      if (!bar) return;
-      bar.style.opacity = '0';
-      setTimeout(() => {
-        if (tab.dataset.gear) cam.textContent = tab.dataset.gear;
-        if (tab.dataset.desc) desc.textContent = tab.dataset.desc;
-        bar.style.opacity = '1';
-      }, 200);
-    }
+    // ── Slider cinématique ──────────────────────────────────────────
+    (function() {
+      const track = document.getElementById('cine-track');
+      if (!track) return;
+      const slides = Array.from(track.children);
+      const total = slides.length;
+      const dotsWrap = document.getElementById('cine-dots');
+      const current = document.getElementById('cine-current');
+      let idx = 0;
 
-    document.querySelectorAll('.video-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const idx = parseInt(tab.dataset.tab);
-        const section = tab.closest('section');
-        section.querySelectorAll('.video-tab').forEach(t => t.classList.remove('active'));
-        section.querySelectorAll('.video-slides').forEach(s => {
-          s.classList.remove('active');
-          s.querySelectorAll('video').forEach(v => v.pause());
-        });
-        tab.classList.add('active');
-        updateVideoSetup(tab);
-        const slide = section.querySelector(`.video-slides[data-slide="${idx}"]`);
-        slide.classList.add('active');
-        const vid = slide.querySelector('video');
-        if (vid) { vid.currentTime = 0; vid.play(); }
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'cine-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Aller à la vidéo ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
       });
-    });
+      const dots = Array.from(dotsWrap.children);
+
+      function goTo(n) {
+        idx = (n + total) % total;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        if (current) current.textContent = String(idx + 1).padStart(2, '0');
+        slides.forEach((s, i) => {
+          const v = s.querySelector('video');
+          if (!v) return;
+          if (i === idx) { v.play().catch(() => {}); }
+          else { v.pause(); }
+        });
+      }
+
+      document.getElementById('cine-prev').addEventListener('click', () => goTo(idx - 1));
+      document.getElementById('cine-next').addEventListener('click', () => goTo(idx + 1));
+
+      // Lecture de la 1re vidéo dès qu'elle entre dans le viewport
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { goTo(0); io.disconnect(); }
+        });
+      }, { threshold: 0.35 });
+      io.observe(track);
+
+      // Swipe tactile
+      let startX = 0, dragging = false;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        if (!dragging) return; dragging = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? idx + 1 : idx - 1);
+      }, { passive: true });
+    })();
 
     // ── YouTube facade ───────────────────────────────────────────────
     document.querySelectorAll('.yt-facade').forEach(facade => {
