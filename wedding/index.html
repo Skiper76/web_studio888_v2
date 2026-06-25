@@ -115,6 +115,16 @@
       position: relative; text-align: center;
       color: white; padding: 0 2rem;
     }
+    .hero-ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-bottom: 1.5rem; opacity: 0.75;
+    }
+    .hero-ornament-line { width: 60px; height: 1px; background: rgba(255,255,255,0.6); }
+    .hero-ornament-diamond {
+      width: 5px; height: 5px;
+      background: rgba(255,255,255,0.7);
+      transform: rotate(45deg);
+    }
     .hero-script {
       font-family: var(--ff-script);
       font-size: clamp(3rem, 8vw, 6.5rem);
@@ -123,9 +133,18 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.15);
     }
     .hero-sub {
-      font-size: 0.75rem; letter-spacing: 0.3em;
-      text-transform: uppercase; opacity: 0.85;
-      margin-bottom: 2.5rem;
+      font-size: 0.72rem; letter-spacing: 0.3em;
+      text-transform: uppercase; opacity: 0.75;
+      margin-bottom: 2rem;
+    }
+    .hero-divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.8rem; margin-bottom: 2rem; opacity: 0.6;
+    }
+    .hero-divider-line { width: 40px; height: 1px; background: white; }
+    .hero-divider-text {
+      font-family: var(--ff-script); font-size: 1.4rem;
+      color: white; line-height: 1;
     }
     .hero-btn {
       display: inline-block;
@@ -504,9 +523,19 @@
 
   <!-- Hero -->
   <section id="hero">
-    <img id="hero-img" src="../assets/images/wedding/DSCF9265.jpg" alt="Mariage Fécamp" style="object-position: center 30%;">
+    <img id="hero-img" src="../assets/images/wedding/DSCF9060.jpg" alt="Mariage Fécamp" style="object-position: center 20%;">
     <div class="hero-content">
+      <div class="hero-ornament">
+        <div class="hero-ornament-line"></div>
+        <div class="hero-ornament-diamond"></div>
+        <div class="hero-ornament-line"></div>
+      </div>
       <div class="hero-script">Votre histoire,<br>racontée en images</div>
+      <div class="hero-divider">
+        <div class="hero-divider-line"></div>
+        <div class="hero-divider-text">&</div>
+        <div class="hero-divider-line"></div>
+      </div>
       <div class="hero-sub">Photographe & Vidéaste Mariage — Fécamp · Normandie</div>
       <a href="#gallery" class="hero-btn">Découvrir la galerie</a>
     </div>
