@@ -934,6 +934,7 @@
     /* ─── SLIDER CINÉMATIQUE ────────────────────────────────────────── */
     .cine-slider {
       position: relative; overflow: hidden; background: #000;
+      max-width: 880px; margin: 0 auto;
     }
     .cine-track {
       display: flex;
@@ -1123,6 +1124,25 @@
     .contact-line-value {
       font-size: 1rem;
       color: var(--fg);
+    }
+    .contact-line-value[data-copy] {
+      cursor: pointer;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .contact-line-value[data-copy]::after {
+      content: '⧉';
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .contact-line-value[data-copy]:hover {
+      color: var(--red);
+    }
+    .contact-line-value[data-copy]:hover::after {
+      opacity: 0.7;
     }
     .contact-visual {
       position: relative;
@@ -1735,7 +1755,7 @@
             </div>
             <div>
               <div class="contact-line-label">Téléphone</div>
-              <div class="contact-line-value">+33 7 62 15 18 73</div>
+              <div class="contact-line-value" data-copy="+33 7 62 15 18 73" title="Cliquer pour copier">+33 7 62 15 18 73</div>
             </div>
           </div>
           <div class="contact-line reveal reveal-delay-1">
@@ -1747,7 +1767,7 @@
             </div>
             <div>
               <div class="contact-line-label">Email</div>
-              <div class="contact-line-value">ke.hermand76@gmail.com</div>
+              <div class="contact-line-value" data-copy="ke.hermand76@gmail.com" title="Cliquer pour copier">ke.hermand76@gmail.com</div>
             </div>
           </div>
           <div class="contact-line reveal reveal-delay-2">
@@ -2172,6 +2192,18 @@
         showToast('Email copié dans le presse-papier ✓');
       }).catch(() => {
         showToast('ke.hermand76@gmail.com');
+      });
+    });
+
+    // ── Lignes de contact cliquables (copie presse-papier) ───────────
+    document.querySelectorAll('.contact-line-value[data-copy]').forEach(el => {
+      el.addEventListener('click', () => {
+        const value = el.dataset.copy;
+        navigator.clipboard.writeText(value).then(() => {
+          showToast('Copié dans le presse-papier ✓');
+        }).catch(() => {
+          showToast(value);
+        });
       });
     });
   </script>
