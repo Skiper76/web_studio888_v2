@@ -340,13 +340,14 @@
     .example-card:hover { background: var(--bg-3); }
     .example-card[data-hidden] { display: none; }
     .example-preview {
-      aspect-ratio: 4/3; overflow: hidden; position: relative; flex-shrink: 0;
+      height: 260px; overflow: hidden; position: relative; flex-shrink: 0;
       background: var(--bg-3);
     }
     .example-preview iframe {
       width: 1280px; height: 960px;
       transform: scale(0.3125); transform-origin: top left;
       pointer-events: none; border: none; display: block;
+      position: absolute; top: 0; left: 0;
     }
     .example-card { cursor: pointer; }
     .example-card::after {
