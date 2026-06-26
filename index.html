@@ -2175,24 +2175,40 @@
           }
         });
       }, { threshold: 0.4 });
+      // Active le son d'une carte (et coupe les autres)
+      function soundOn(card, v) {
+        cards.forEach(c => {
+          const ov = c.querySelector('video');
+          if (ov && ov !== v) ov.muted = true;
+          if (c !== card) c.classList.remove('sound');
+        });
+        v.muted = false;
+        v.play().catch(() => {});
+        card.classList.add('sound');
+      }
+      function soundOff(card, v) {
+        v.muted = true;
+        card.classList.remove('sound');
+      }
+
+      const isTouch = window.matchMedia('(hover: none)').matches;
+
       cards.forEach(card => {
         io.observe(card);
         const v = card.querySelector('video');
         if (!v) return;
-        // Son au survol : coupe les autres, active celle-ci
-        card.addEventListener('mouseenter', () => {
-          cards.forEach(c => {
-            const ov = c.querySelector('video');
-            if (ov && ov !== v) ov.muted = true;
-            c.classList.remove('sound');
-          });
-          v.muted = false;
-          v.play().catch(() => {});
-          card.classList.add('sound');
-        });
-        card.addEventListener('mouseleave', () => {
-          v.muted = true;
-          card.classList.remove('sound');
+
+        // Survol (desktop) : son tant que le curseur est sur la vidéo
+        if (!isTouch) {
+          card.addEventListener('mouseenter', () => soundOn(card, v));
+          card.addEventListener('mouseleave', () => soundOff(card, v));
+        }
+
+        // Clic / tap : bascule le son (essentiel sur mobile)
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.social-ig')) return; // laisse passer le lien Instagram
+          if (v.muted) soundOn(card, v);
+          else soundOff(card, v);
         });
       });
     })();
