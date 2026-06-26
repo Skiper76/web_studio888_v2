@@ -1715,7 +1715,7 @@
 
       <div class="drone-slides active" data-drone-slide="0">
         <div class="video-main">
-          <video muted loop autoplay playsinline>
+          <video muted loop playsinline preload="none">
             <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_ballon.mp4" type="video/mp4">
           </video>
         </div>
@@ -1727,8 +1727,8 @@
 
       <div class="drone-slides" data-drone-slide="1">
         <div class="video-main">
-          <video muted loop playsinline>
-            <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_fpv.mp4" type="video/mp4">
+          <video muted loop playsinline preload="none">
+            <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_hauteur.mp4" type="video/mp4">
           </video>
         </div>
         <div class="video-caption-bar">
@@ -1856,7 +1856,13 @@
       const next = (heroPartIndex + 1) % heroParts.length;
       if (heroPrefetched.has(next)) return;
       heroPrefetched.add(next);
-      fetch(heroParts[next]).catch(() => {});
+      // Préchargement via élément <video> détaché (pas de fetch → pas de CORS).
+      // Réchauffe le cache navigateur pour que la partie suivante soit prête.
+      const pre = document.createElement('video');
+      pre.muted = true;
+      pre.preload = 'auto';
+      pre.src = heroParts[next];
+      pre.load();
     }
 
     function playHeroPart(i) {
@@ -2039,9 +2045,25 @@
         const slide = document.querySelector(`.drone-slides[data-drone-slide="${idx}"]`);
         slide.classList.add('active');
         const vid = slide.querySelector('video');
-        if (vid) { vid.currentTime = 0; vid.play(); }
+        if (vid) { vid.currentTime = 0; vid.play().catch(() => {}); }
       });
     });
+
+    // Lecture de la vidéo drone active seulement quand la section est visible
+    (function() {
+      const sec = document.getElementById('drone-portfolio');
+      if (!sec) return;
+      let started = false;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          const v = sec.querySelector('.drone-slides.active video');
+          if (!v) return;
+          if (e.isIntersecting) { started = true; v.play().catch(() => {}); }
+          else if (started) { sec.querySelectorAll('video').forEach(x => x.pause()); }
+        });
+      }, { threshold: 0.2 });
+      io.observe(sec);
+    })();
 
     // ── Lightbox ────────────────────────────────────────────────────
     const lightbox   = document.getElementById('lightbox');
@@ -2173,10 +2195,12 @@
 
     // ── Email button ─────────────────────────────────────────────────
     const mailBtn = document.getElementById('mail-btn');
-    const mailToast = document.getElementById('mail-toast');
     let toastTimer;
 
     function showToast(msg) {
+      // lookup lazy : le #mail-toast est déclaré après ce script
+      const mailToast = document.getElementById('mail-toast');
+      if (!mailToast) return;
       mailToast.textContent = msg;
       mailToast.classList.add('show');
       clearTimeout(toastTimer);
