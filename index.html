@@ -1987,20 +1987,37 @@
       if (transitioning) return;
       transitioning = true;
       const incoming = 1 - activeLayer;
+      const outgoing = activeLayer;
       const nextPart = (currentPart + 1) % heroParts.length;
       const nextV    = prepLayer(incoming, nextPart);
       nextV.currentTime = 0;
-      nextV.play().catch(() => {});
-      heroLayers[incoming].classList.add('active');     // monte
-      heroLayers[activeLayer].classList.remove('active'); // descend
-      const outgoing = activeLayer;
-      activeLayer = incoming;
-      currentPart = nextPart;
-      setTimeout(() => {
-        heroLayers[outgoing].pause();
-        prepLayer(outgoing, (currentPart + 1) % heroParts.length); // partie d'après
-        transitioning = false;
-      }, FADE_MS);
+
+      // Ne lance le fondu QUE lorsque la vidéo entrante affiche réellement
+      // sa première image — évite le freeze sur une frame figée.
+      let faded = false;
+      const doFade = () => {
+        if (faded) return;
+        faded = true;
+        heroLayers[incoming].classList.add('active');       // monte
+        heroLayers[outgoing].classList.remove('active');    // descend
+        activeLayer = incoming;
+        currentPart = nextPart;
+        setTimeout(() => {
+          heroLayers[outgoing].pause();
+          prepLayer(outgoing, (currentPart + 1) % heroParts.length); // partie d'après
+          transitioning = false;
+        }, FADE_MS);
+      };
+
+      const playPromise = nextV.play();
+      if (nextV.requestVideoFrameCallback) {
+        nextV.requestVideoFrameCallback(() => doFade());
+      } else {
+        nextV.addEventListener('playing', doFade, { once: true });
+      }
+      // Filet de sécurité : si aucune frame n'arrive (codec/autoplay), bascule quand même.
+      if (playPromise && playPromise.catch) playPromise.catch(() => {});
+      setTimeout(doFade, 600);
     }
 
     heroLayers.forEach((v, idx) => {
