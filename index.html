@@ -252,6 +252,14 @@
     }
     .nav-cta:hover { background: rgba(255,255,255,0.07); border-color: var(--accent); }
 
+    /* Survol de la barre (au-dessus du hero) : la rend plus lisible */
+    nav:not(.scrolled):not(.hero-focused):hover {
+      background: rgba(5,5,5,0.55);
+      backdrop-filter: blur(10px);
+    }
+    nav:not(.scrolled):not(.hero-focused):hover .nav-links a { color: rgba(240,240,240,0.85); }
+    nav:not(.scrolled):not(.hero-focused):hover .nav-cta { border-color: rgba(255,255,255,0.5); }
+
     /* hamburger */
     .nav-hamburger {
       display: none; flex-direction: column; gap: 5px;
