@@ -289,17 +289,23 @@
       display: flex; align-items: center;
       overflow: hidden;
     }
-    #hero-video {
+    .hero-video-stack {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1.4s var(--ease);
+      cursor: pointer;
+    }
+    .hero-video-stack.ready { opacity: 1; }
+    .hero-video-layer {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       filter: brightness(0.55);
       opacity: 0;
-      transition: filter 0.8s var(--ease), opacity 1.4s var(--ease);
-      cursor: pointer;
+      transition: opacity 1s linear, filter 0.8s var(--ease);
     }
-    #hero-video.ready { opacity: 1; }
-    #hero.focused #hero-video { filter: brightness(0.85); }
+    .hero-video-layer.active { opacity: 1; }
+    #hero.focused .hero-video-layer { filter: brightness(0.85); }
     .hero-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(8,8,8,0.75) 0%, rgba(8,8,8,0.1) 60%, transparent 100%);
@@ -1457,7 +1463,10 @@
 
   <!-- Hero -->
   <section id="hero">
-    <video id="hero-video" muted playsinline poster="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/select-compress/DSCF0312.jpg" preload="none"></video>
+    <div class="hero-video-stack" id="hero-video-stack">
+      <video class="hero-video-layer" muted playsinline preload="auto" poster="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/select-compress/DSCF0312.jpg"></video>
+      <video class="hero-video-layer" muted playsinline preload="auto"></video>
+    </div>
     <div class="hero-overlay"></div>
 
     <div class="hero-social">
@@ -1932,59 +1941,82 @@
   </footer>
 
   <script>
-    // ── Loader + lazy-load vidéo hero (3 parties enchaînées) ─────────
-    const heroVideoEl = document.getElementById('hero-video');
+    // ── Vidéo hero : 3 parties enchaînées en crossfade (2 calques) ────
     const R2 = 'https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/trailer/';
-    // Part 1 légère (30s) → démarrage quasi instantané ; les suivantes
-    // se préchargent en arrière-plan pendant la lecture de la précédente.
     const heroParts = [
       R2 + 'Portfolio_trailer_p1_fixed.mp4',
       R2 + 'Portfolio_trailer_p2_fs.mp4',
       R2 + 'Portfolio_trailer_p3_fs.mp4'
     ];
-    let heroPartIndex = 0;
-    let heroReady = false;
-    const heroPrefetched = new Set();
+    const heroStack  = document.getElementById('hero-video-stack');
+    const heroLayers = Array.from(heroStack.querySelectorAll('.hero-video-layer'));
+    const FADE_LEAD  = 0.9;   // s avant la fin → démarre le fondu
+    const FADE_MS    = 1000;  // durée du fondu (= transition CSS)
 
-    function prefetchNextPart() {
-      const next = (heroPartIndex + 1) % heroParts.length;
-      if (heroPrefetched.has(next)) return;
-      heroPrefetched.add(next);
-      // Préchargement via élément <video> détaché (pas de fetch → pas de CORS).
-      // Réchauffe le cache navigateur pour que la partie suivante soit prête.
-      const pre = document.createElement('video');
-      pre.muted = true;
-      pre.preload = 'auto';
-      pre.src = heroParts[next];
-      pre.load();
+    let activeLayer   = 0;    // calque visible (0 / 1)
+    let currentPart   = 0;    // partie jouée sur le calque actif
+    let heroReady     = false;
+    let transitioning = false;
+
+    // Affecte une partie à un calque (sans recharger si déjà chargée).
+    function prepLayer(layerIdx, partIdx) {
+      const v = heroLayers[layerIdx];
+      if (v.dataset.part === String(partIdx)) return v;
+      v.dataset.part = String(partIdx);
+      v.src = heroParts[partIdx];
+      v.load();
+      return v;
     }
 
-    function playHeroPart(i) {
-      heroPartIndex = i;
-      heroVideoEl.src = heroParts[i];
-      heroVideoEl.load();
-      heroVideoEl.play().catch(() => {});
+    function startHero() {
+      activeLayer = 0; currentPart = 0;
+      const v = prepLayer(0, 0);
+      v.currentTime = 0;
+      v.play().catch(() => {});
     }
 
-    function loadHeroVideo() {
-      if (heroVideoEl.src) return;
-      playHeroPart(0);
+    // Quand le calque actif joue : révèle la pile + précharge la partie suivante.
+    function onActivePlaying() {
+      heroLayers[activeLayer].classList.add('active');
+      if (!heroReady) { heroReady = true; heroStack.classList.add('ready'); }
+      prepLayer(1 - activeLayer, (currentPart + 1) % heroParts.length);
     }
 
-    heroVideoEl.addEventListener('playing', () => {
-      if (!heroReady) { heroReady = true; heroVideoEl.classList.add('ready'); }
-      prefetchNextPart();
-    });
+    // Fondu enchaîné vers la partie suivante (déjà préchargée sur l'autre calque).
+    function crossfadeToNext() {
+      if (transitioning) return;
+      transitioning = true;
+      const incoming = 1 - activeLayer;
+      const nextPart = (currentPart + 1) % heroParts.length;
+      const nextV    = prepLayer(incoming, nextPart);
+      nextV.currentTime = 0;
+      nextV.play().catch(() => {});
+      heroLayers[incoming].classList.add('active');     // monte
+      heroLayers[activeLayer].classList.remove('active'); // descend
+      const outgoing = activeLayer;
+      activeLayer = incoming;
+      currentPart = nextPart;
+      setTimeout(() => {
+        heroLayers[outgoing].pause();
+        prepLayer(outgoing, (currentPart + 1) % heroParts.length); // partie d'après
+        transitioning = false;
+      }, FADE_MS);
+    }
 
-    heroVideoEl.addEventListener('ended', () => {
-      playHeroPart((heroPartIndex + 1) % heroParts.length);
+    heroLayers.forEach((v, idx) => {
+      v.addEventListener('playing', () => { if (idx === activeLayer) onActivePlaying(); });
+      v.addEventListener('timeupdate', () => {
+        if (idx !== activeLayer || transitioning) return;
+        if (v.duration && v.currentTime >= v.duration - FADE_LEAD) crossfadeToNext();
+      });
+      v.addEventListener('ended', () => { if (idx === activeLayer) crossfadeToNext(); });
     });
 
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('loader').classList.add('hidden');
         document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
-        loadHeroVideo();
+        startHero();
       }, 1500);
     });
 
@@ -2271,10 +2303,10 @@
 
     // ── Parallax hero (desktop only) ────────────────────────────────
     if (!isTouchDevice) {
-      const heroVideo = document.getElementById('hero-video');
+      const heroStackEl = document.getElementById('hero-video-stack');
       window.addEventListener('scroll', () => {
         if (window.scrollY < window.innerHeight) {
-          heroVideo.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+          heroStackEl.style.transform = `translateY(${window.scrollY * 0.3}px)`;
         }
       });
     }
