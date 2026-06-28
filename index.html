@@ -2056,10 +2056,16 @@
         </div>
       </div>
       <div class="footer-copy">
-        © 2026 Studio 888 — Kevin Hermand. Tous droits réservés. Site codé par Kevin Hermand.
+        © 2026 Studio 888 — Kevin Hermand. Tous droits réservés. Site codé par Kevin Hermand.<br>
+        <span style="opacity:0.6;font-size:0.85em;">Musique : « Lightless Dawn » — Kevin MacLeod (incompetech.com), licence <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">CC BY 4.0</a></span>
       </div>
     </div>
   </footer>
+
+  <!-- Musique d'ambiance jouée au survol des vidéos (sliders Vidéos + Drone) -->
+  <audio id="ambient-audio" loop preload="none">
+    <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/audio/ambient.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     // ── Vidéo hero : 3 parties enchaînées en crossfade (2 calques) ────
@@ -2299,6 +2305,39 @@
     }
     initVSlider('cine');
     initVSlider('drone');
+
+    // ── Musique d'ambiance au survol des vidéos (sliders Vidéos + Drone) ──
+    (function () {
+      const audio = document.getElementById('ambient-audio');
+      if (!audio || window.matchMedia('(hover: none)').matches) return;
+      const TARGET = 0.35;
+      audio.volume = 0;
+      let fadeTimer = null;
+      function fade(to) {
+        if (fadeTimer) clearInterval(fadeTimer);
+        const from = audio.volume, start = Date.now(), dur = 600;
+        fadeTimer = setInterval(function () {
+          const k = Math.min((Date.now() - start) / dur, 1);
+          audio.volume = Math.max(0, Math.min(1, from + (to - from) * k));
+          if (k >= 1) { clearInterval(fadeTimer); fadeTimer = null; if (to === 0) audio.pause(); }
+        }, 30);
+      }
+      const enter = () => { audio.play().then(() => fade(TARGET)).catch(() => {}); };
+      const leave = () => fade(0);
+      ['cine-track', 'drone-track'].forEach(id => {
+        const track = document.getElementById(id);
+        if (!track) return;
+        Array.from(track.children).forEach(slide => {
+          if (slide.hasAttribute('data-sound')) {
+            // Slide FPV : son propre de la vidéo → couper la musique d'ambiance
+            slide.addEventListener('mouseenter', () => { fade(0); });
+            return;
+          }
+          slide.addEventListener('mouseenter', enter);
+          slide.addEventListener('mouseleave', leave);
+        });
+      });
+    })();
 
     // ── YouTube facade ───────────────────────────────────────────────
     document.querySelectorAll('.yt-facade').forEach(facade => {
