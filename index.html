@@ -856,11 +856,20 @@
     .lb-next { right: 1rem; }
     @media (max-width: 900px) {
       #lightbox { flex-direction: column; }
-      .lb-main { padding: 3rem 1rem 1rem; flex: 1; }
+      /* image en haut, flèches centrées EN DESSOUS (plus de superposition) */
+      .lb-main {
+        padding: 3rem 1rem 0.5rem; flex: 1;
+        flex-wrap: wrap; align-content: center; justify-content: center;
+        gap: 1.5rem;
+      }
+      .lb-image-wrap { order: 0; flex-basis: 100%; }
       .lb-image-wrap img { max-height: 52vh; }
-      .lb-nav { top: calc(3rem + 26vh); transform: none; }
-      .lb-prev { left: 0.5rem; }
-      .lb-next { right: 0.5rem; }
+      .lb-nav {
+        position: static; transform: none; order: 1;
+        width: 50px; height: 50px; border-radius: 50%;
+        background: rgba(255,255,255,0.07); border-color: var(--border2);
+      }
+      .lb-nav:active { background: rgba(255,255,255,0.18); }
       .lb-sidebar { width: 100%; border-left: none; border-top: 1px solid var(--border);
         padding: 1.2rem 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 0.6rem 1.5rem; justify-content: flex-start; }
       .lb-desc, .lb-camera { width: 100%; }
@@ -978,6 +987,19 @@
       font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
       padding: 0.25rem 0.7rem; background: var(--red); color: #fff;
     }
+    .cine-slide[data-sound] { cursor: pointer; }
+    .vslide-sound {
+      position: absolute; top: 0.9rem; left: 0.9rem; z-index: 6;
+      width: 34px; height: 34px; display: flex;
+      align-items: center; justify-content: center;
+      background: rgba(5,5,5,0.5); backdrop-filter: blur(6px);
+      border-radius: 50%; color: #fff; pointer-events: none;
+      transition: background 0.3s;
+    }
+    .cine-slide .vslide-sound .icon-on { display: none; }
+    .cine-slide.sound .vslide-sound { background: var(--red); }
+    .cine-slide.sound .vslide-sound .icon-on { display: block; }
+    .cine-slide.sound .vslide-sound .icon-off { display: none; }
     .cine-arrow {
       position: absolute; top: 50%; transform: translateY(-50%);
       z-index: 5;
@@ -1396,8 +1418,9 @@
     }
 
     @media (max-width: 600px) {
-      /* Photo À propos : plus compacte sur téléphone */
-      .about-image { max-width: 70%; margin: 0 auto; }
+      /* Photo À propos : plus compacte + cadre décalé élégant sur téléphone */
+      .about-image { max-width: 82%; margin: 0 auto; }
+      .about-image::after { display: block; inset: 0.9rem -0.9rem -0.9rem 0.9rem; opacity: 0.45; }
       .hero-title {
         font-size: clamp(1.7rem, 7.5vw, 2.6rem);
         letter-spacing: 0.02em;
@@ -1797,9 +1820,13 @@
             <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_hauteur.mp4" type="video/mp4"></video>
             <div class="vslide-cap"><span class="vslide-tag">Stabilisé</span>Prise de hauteur</div>
           </div>
-          <div class="cine-slide">
-            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/Demo-FPV-2-60fps.mp4" type="video/mp4"></video>
-            <div class="vslide-cap"><span class="vslide-tag">FPV</span>Vol immersif</div>
+          <div class="cine-slide" data-sound>
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/Demo-FPV-2-60fps.mp4?v=2" type="video/mp4"></video>
+            <div class="vslide-sound" aria-hidden="true">
+              <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+            </div>
+            <div class="vslide-cap"><span class="vslide-tag">FPV</span>Vol immersif — survolez ou touchez pour le son</div>
           </div>
         </div>
         <button class="cine-arrow cine-prev" id="drone-prev" aria-label="Vidéo précédente">
@@ -2139,12 +2166,27 @@
           const v = s.querySelector('video');
           if (!v) return;
           if (i === idx) { v.play().catch(() => {}); }
-          else { v.pause(); }
+          else { v.pause(); v.muted = true; s.classList.remove('sound'); }
         });
       }
 
       document.getElementById(prefix + '-prev').addEventListener('click', () => goTo(idx - 1));
       document.getElementById(prefix + '-next').addEventListener('click', () => goTo(idx + 1));
+
+      // Son au survol / tap pour les slides marquées [data-sound]
+      const isTouch = window.matchMedia('(hover: none)').matches;
+      slides.forEach(slide => {
+        if (!slide.hasAttribute('data-sound')) return;
+        const v = slide.querySelector('video');
+        if (!v) return;
+        const on = () => { v.muted = false; v.play().catch(() => {}); slide.classList.add('sound'); };
+        const off = () => { v.muted = true; slide.classList.remove('sound'); };
+        if (!isTouch) {
+          slide.addEventListener('mouseenter', on);
+          slide.addEventListener('mouseleave', off);
+        }
+        slide.addEventListener('click', () => { v.muted ? on() : off(); });
+      });
 
       // Lecture de la vidéo active uniquement quand le slider est visible
       let started = false;
