@@ -966,6 +966,18 @@
       width: 100%; height: 100%;
       object-fit: cover; display: block;
     }
+    .vslide-cap {
+      position: absolute; left: 0; bottom: 0; z-index: 4;
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 1.6rem 1.2rem 1rem; width: 100%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      font-family: var(--ff-head); font-size: 0.8rem;
+      letter-spacing: 0.1em; color: #fff; pointer-events: none;
+    }
+    .vslide-tag {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; background: var(--red); color: #fff;
+    }
     .cine-arrow {
       position: absolute; top: 50%; transform: translateY(-50%);
       z-index: 5;
@@ -1150,18 +1162,6 @@
       margin-top: 2rem;
     }
     .drone-badge svg { width: 12px; height: 12px; fill: var(--accent); }
-    .drone-slides { display: none; }
-    .drone-slides.active { display: block; }
-    .drone-video-tab {
-      padding: 0.8rem 1.5rem;
-      font-size: 0.78rem; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--fg-dim); cursor: pointer;
-      border-bottom: 2px solid transparent; margin-bottom: -1px;
-      transition: color 0.3s, border-color 0.3s;
-    }
-    .drone-video-tab.active { color: var(--fg); border-bottom-color: var(--accent); }
-    .drone-video-tab:hover:not(.active) { color: var(--fg); }
 
     /* ─── CONTACT ───────────────────────────────────────────────────── */
     #contact { background: var(--bg-2); }
@@ -1545,7 +1545,7 @@
           <div style="height: 2rem;"></div>
           <p class="lead reveal">Derrière Studio 888, il y a une personne : Kevin Hermand.</p>
           <p class="lead reveal reveal-delay-1">Photographe, vidéaste et pilote de drone certifié DGAC, installé à Fécamp. J'aime les images qui racontent quelque chose — un instant vrai, une émotion qu'on n'avait pas vue venir. C'est ce que je cherche à chaque déclenchement.</p>
-          <p class="lead reveal reveal-delay-2">Ingénieur de formation, j'ai gardé le goût du travail bien fait. Mais ce qui me guide, c'est l'envie de bien vous accompagner, de la première discussion jusqu'à la livraison.</p>
+          <p class="lead reveal reveal-delay-2">Ingénieur de métier, je vis la photographie et la vidéo comme une vraie passion. C'est elle qui me pousse à donner le meilleur sur chacun de vos projets, sans jamais compter mon temps.</p>
           <div class="about-stats reveal reveal-delay-3">
             <div>
               <div class="stat-number">5+</div>
@@ -1785,34 +1785,30 @@
       <h2 class="section-title reveal">Drone</h2>
       <div style="height: 3rem;"></div>
 
-      <div class="video-tabs reveal" id="drone-tabs">
-        <div class="drone-video-tab active" data-drone-tab="0">Stabilisé</div>
-        <div class="drone-video-tab" data-drone-tab="1">FPV</div>
+      <div class="cine-slider reveal" id="drone-slider">
+        <div class="cine-track" id="drone-track">
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_ballon.mp4" type="video/mp4"></video>
+            <div class="vslide-cap"><span class="vslide-tag">Stabilisé</span>Vue aérienne</div>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_hauteur.mp4" type="video/mp4"></video>
+            <div class="vslide-cap"><span class="vslide-tag">Stabilisé</span>Prise de hauteur</div>
+          </div>
+          <div class="cine-slide">
+            <video muted loop playsinline preload="none"><source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/Demo-FPV-2-60fps.mp4" type="video/mp4"></video>
+            <div class="vslide-cap"><span class="vslide-tag">FPV</span>Vol immersif</div>
+          </div>
+        </div>
+        <button class="cine-arrow cine-prev" id="drone-prev" aria-label="Vidéo précédente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="cine-arrow cine-next" id="drone-next" aria-label="Vidéo suivante">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="cine-counter"><span id="drone-current">01</span> / 03</div>
       </div>
-
-      <div class="drone-slides active" data-drone-slide="0">
-        <div class="video-main">
-          <video muted loop playsinline preload="none">
-            <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_ballon.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-caption-bar">
-          <div class="video-caption-title">Drone stabilisé</div>
-          <div class="video-caption-tag">Vue Aérienne</div>
-        </div>
-      </div>
-
-      <div class="drone-slides" data-drone-slide="1">
-        <div class="video-main">
-          <video muted loop playsinline preload="none">
-            <source src="https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/videos/drone_hauteur.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-caption-bar">
-          <div class="video-caption-title">Drone FPV</div>
-          <div class="video-caption-tag">First Person View</div>
-        </div>
-      </div>
+      <div class="cine-dots" id="drone-dots"></div>
     </div>
   </section>
 
@@ -1952,9 +1948,9 @@
     // ── Vidéo hero : 3 parties enchaînées en crossfade (2 calques) ────
     const R2 = 'https://pub-397fb824d7fa411cb520f9f716dec06b.r2.dev/trailer/';
     const heroParts = [
-      R2 + 'Portfolio_trailer_p1_v3.mp4',
-      R2 + 'Portfolio_trailer_p2_fs.mp4',
-      R2 + 'Portfolio_trailer_p3_fs.mp4'
+      R2 + 'Portfolio_trailer_v2_p1.mp4',
+      R2 + 'Portfolio_trailer_v2_p2.mp4',
+      R2 + 'Portfolio_trailer_v2_p3.mp4'
     ];
     const heroStack  = document.getElementById('hero-video-stack');
     const heroLayers = Array.from(heroStack.querySelectorAll('.hero-video-layer'));
@@ -2113,14 +2109,14 @@
       });
     });
 
-    // ── Slider cinématique ──────────────────────────────────────────
-    (function() {
-      const track = document.getElementById('cine-track');
+    // ── Slider vidéo générique (cinématique + drone) ─────────────────
+    function initVSlider(prefix) {
+      const track = document.getElementById(prefix + '-track');
       if (!track) return;
       const slides = Array.from(track.children);
       const total = slides.length;
-      const dotsWrap = document.getElementById('cine-dots');
-      const current = document.getElementById('cine-current');
+      const dotsWrap = document.getElementById(prefix + '-dots');
+      const current = document.getElementById(prefix + '-current');
       let idx = 0;
 
       slides.forEach((_, i) => {
@@ -2145,8 +2141,8 @@
         });
       }
 
-      document.getElementById('cine-prev').addEventListener('click', () => goTo(idx - 1));
-      document.getElementById('cine-next').addEventListener('click', () => goTo(idx + 1));
+      document.getElementById(prefix + '-prev').addEventListener('click', () => goTo(idx - 1));
+      document.getElementById(prefix + '-next').addEventListener('click', () => goTo(idx + 1));
 
       // Lecture de la vidéo active uniquement quand le slider est visible
       let started = false;
@@ -2158,7 +2154,7 @@
           else if (started) { v.pause(); }
         });
       }, { threshold: 0.2 });
-      io.observe(document.getElementById('cine-slider'));
+      io.observe(document.getElementById(prefix + '-slider'));
 
       // Swipe tactile
       let startX = 0, dragging = false;
@@ -2168,7 +2164,9 @@
         const dx = e.changedTouches[0].clientX - startX;
         if (Math.abs(dx) > 40) goTo(dx < 0 ? idx + 1 : idx - 1);
       }, { passive: true });
-    })();
+    }
+    initVSlider('cine');
+    initVSlider('drone');
 
     // ── YouTube facade ───────────────────────────────────────────────
     document.querySelectorAll('.yt-facade').forEach(facade => {
@@ -2182,39 +2180,6 @@
         facade.appendChild(iframe);
       }, { once: true });
     });
-
-    // ── Drone portfolio tabs ─────────────────────────────────────────
-    document.querySelectorAll('.drone-video-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const idx = parseInt(tab.dataset.droneTab);
-        document.querySelectorAll('.drone-video-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.drone-slides').forEach(s => {
-          s.classList.remove('active');
-          s.querySelectorAll('video').forEach(v => v.pause());
-        });
-        tab.classList.add('active');
-        const slide = document.querySelector(`.drone-slides[data-drone-slide="${idx}"]`);
-        slide.classList.add('active');
-        const vid = slide.querySelector('video');
-        if (vid) { vid.currentTime = 0; vid.play().catch(() => {}); }
-      });
-    });
-
-    // Lecture de la vidéo drone active seulement quand la section est visible
-    (function() {
-      const sec = document.getElementById('drone-portfolio');
-      if (!sec) return;
-      let started = false;
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          const v = sec.querySelector('.drone-slides.active video');
-          if (!v) return;
-          if (e.isIntersecting) { started = true; v.play().catch(() => {}); }
-          else if (started) { sec.querySelectorAll('video').forEach(x => x.pause()); }
-        });
-      }, { threshold: 0.2 });
-      io.observe(sec);
-    })();
 
     // ── Social reels : lecture lazy + son au survol ──────────────────
     (function() {
