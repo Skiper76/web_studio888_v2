@@ -80,7 +80,7 @@
 
     /* ─── HERO ─── */
     .hero {
-      padding: 160px 3rem 100px;
+      padding: 160px 3rem 48px;
       max-width: 1400px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
     }
@@ -180,7 +180,7 @@
 
     /* ─── SECTION GÉNÉRIQUE ─── */
     .section { padding: 6rem 3rem; max-width: 1400px; margin: 0 auto; }
-    .section-full { padding: 6rem 3rem; }
+    .section-full { padding: 3rem 3rem; }
     .section-eyebrow {
       display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
       font-family: var(--ff-head); font-size: 0.6rem; letter-spacing: 0.25em;
@@ -501,10 +501,25 @@
       .nav-links, .nav-cta { display: none; }
       .nav-hamburger { display: flex; }
       .hero { grid-template-columns: 1fr; gap: 3rem; padding: 120px 1.5rem 4rem; }
-      .hero-visual { order: -1; }
+      .hero-visual { order: 2; }
+      /* Maquettes superposées, version compacte adaptée au mobile */
+      .hero-mockups { height: 300px; max-width: 360px; margin: 0 auto; }
+      .mockup-card { width: 82%; }
+      .mockup-card:last-child { top: 96px; }
+      /* Pas d'effets de survol au doigt sur mobile */
+      .mockup-card:first-child:hover,
+      .mockup-card:last-child:hover { transform: none; }
       .section, .examples-intro, .examples-grid { padding-left: 1.5rem; padding-right: 1.5rem; }
       .section-full .tech-strip { padding-left: 1.5rem; padding-right: 1.5rem; }
       .offers-grid { grid-template-columns: 1fr; }
+      /* Carte maintenance : empilée en une colonne au lieu de la grille 4 colonnes */
+      .offer-maintenance .offer-card {
+        grid-template-columns: 1fr; gap: 1.5rem; padding: 2.5rem 1.5rem;
+      }
+      .offer-maintenance .offer-features,
+      .offer-maintenance .offer-price-wrap,
+      .offer-maintenance .offer-actions { grid-column: auto; }
+      .offer-maintenance .offer-price-wrap { text-align: left; }
       .process-grid { grid-template-columns: 1fr 1fr; }
       .examples-grid { grid-template-columns: 1fr; }
       .cta-section { padding: 4rem 1.5rem; }
@@ -570,7 +585,6 @@
       <li><a href="index.html#photos">Photos</a></li>
       <li><a href="mariage/">Mariage</a></li>
       <li><a href="web.html" class="active">Web</a></li>
-      <li><a href="tarifs.html">Tarifs</a></li>
     </ul>
     <a href="index.html#contact" class="nav-cta">Contact</a>
     <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
@@ -582,7 +596,6 @@
     <a href="index.html#photos" class="mobile-link">Photos</a>
     <a href="mariage/" class="mobile-link">Mariage</a>
     <a href="web.html" class="mobile-link">Web</a>
-    <a href="tarifs.html" class="mobile-link">Tarifs</a>
     <a href="index.html#contact" class="mobile-link">Contact</a>
   </div>
 
@@ -643,8 +656,6 @@
       </div>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <!-- Technologies -->
   <div class="section-full">
@@ -917,7 +928,6 @@
     <div class="footer-links">
       <a href="index.html">Portfolio</a>
       <a href="mariage/">Mariage</a>
-      <a href="tarifs.html">Tarifs</a>
       <a href="index.html#contact">Contact</a>
     </div>
   </footer>
